@@ -2,7 +2,6 @@ package com.sigopt.net;
 
 import com.squareup.okhttp.*;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.net.URLEncoder;
@@ -12,7 +11,7 @@ public class Requester {
 
     public static final String CHARSET = "UTF-8";
     public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
-    static OkHttpClient client = new OkHttpClient();
+    public static OkHttpClient client = new OkHttpClient();
 
     public static class Response {
         public String body;

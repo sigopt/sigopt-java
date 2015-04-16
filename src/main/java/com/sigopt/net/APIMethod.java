@@ -2,6 +2,7 @@ package com.sigopt.net;
 
 import com.sigopt.Sigopt;
 import com.sigopt.exception.APIException;
+import com.sigopt.exception.AuthenticationException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class APIMethod {
     public String userToken;
     public String apiBase;
 
-    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, Object obj, String clientToken, String userToken, String apiBase) {
+    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, Object obj, String clientToken, String userToken, String apiBase) throws AuthenticationException {
         this.clientToken = (clientToken == null) ? Sigopt.clientToken : clientToken;
         this.userToken = (userToken == null) ? Sigopt.userToken : userToken;
         this.apiBase = (apiBase == null) ? Sigopt.apiBase : apiBase;
@@ -67,7 +68,7 @@ public class APIMethod {
         public Builder() {
         }
 
-        public APIMethod build() {
+        public APIMethod build() throws AuthenticationException {
             return new APIMethod(method, path, params, headers, instance, clientToken, userToken, apiBase);
         }
 

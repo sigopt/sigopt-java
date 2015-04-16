@@ -1,6 +1,7 @@
 package com.sigopt.net;
 
 import com.sigopt.Sigopt;
+import com.sigopt.exception.AuthenticationException;
 import com.squareup.okhttp.Request;
 
 import java.util.Base64;
@@ -10,15 +11,15 @@ import java.util.Iterator;
 
 public class HeadersBuilder {
 
-    public static Map<String, String> build(Map<String, String> headers) {
+    public static Map<String, String> build(Map<String, String> headers) throws AuthenticationException {
         return build(headers, null, null);
     }
 
-    public static Map<String, String> build(Map<String, String> headers, String apiKey) {
+    public static Map<String, String> build(Map<String, String> headers, String apiKey) throws AuthenticationException {
         return build(headers, apiKey, null);
     }
 
-    public static Map<String, String> build(Map<String, String> headers, String apiKey, String authKey) {
+    public static Map<String, String> build(Map<String, String> headers, String apiKey, String authKey) throws AuthenticationException {
         Map<String, String> ret = new HashMap<String, String>();
         ret = MapHelper.merge(ret, defaultHeaders());
 
@@ -26,6 +27,9 @@ public class HeadersBuilder {
             ret = MapHelper.merge(ret, customAuthHeader(authKey, apiKey));
         } else if(apiKey != null && !apiKey.isEmpty()) {
             ret = MapHelper.merge(ret, basicAuthHeader(apiKey));
+        }
+        if(headers != null) {
+            ret.putAll(headers);
         }
 
         return ret;
@@ -46,7 +50,11 @@ public class HeadersBuilder {
         return ret;
     }
 
-    public static Map<String, String> basicAuthHeader(String apiKey) {
+    public static Map<String, String> basicAuthHeader(String apiKey) throws AuthenticationException {
+        if(apiKey == null) {
+            throw new AuthenticationException("An API key is required but was never set. Please see " + Sigopt.DOCS_URL + " for more information.");
+        }
+
         Map<String, String> ret = new HashMap<String, String>();
         byte[] apiKeyBytes = String.format("%s:", apiKey).getBytes();
         String base64Key = Base64.getEncoder().encodeToString(apiKeyBytes);
