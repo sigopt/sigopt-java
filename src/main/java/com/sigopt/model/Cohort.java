@@ -46,7 +46,7 @@ public class Cohort extends APIObject {
         return suggestion;
     }
 
-    public Integer getSuccess() {
+    public Integer getSuccesses() {
         return successes;
     }
 

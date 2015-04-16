@@ -1,0 +1,66 @@
+{
+  "response": {
+    "experiment": {
+      "id": 1,
+      "metric": {
+        "name": "Revenue"
+      },
+      "name": "Ads Clickthrough Rate",
+      "parameters": [
+        {
+          "bounds": {
+            "max": 10,
+            "min": 0
+          },
+          "name": "timesShown",
+          "tunable": true,
+          "type": "int"
+        },
+        {
+          "categorical_values": [
+            {
+              "name": "true"
+            },
+            {
+              "name": "false"
+            }
+          ],
+          "name": "showBanner",
+          "tunable": true,
+          "type": "categorical"
+        }
+      ],
+      "type": "offline",
+      "cohorts": [
+        {
+          "allocation": 0.75,
+          "attempts": 900,
+          "id": 1,
+          "name": "control",
+          "state": "active",
+          "successes": 500,
+          "suggestion": {
+            "assignments": {
+              "screens_shown": 3,
+              "show_banner": "true"
+            }
+          }
+        },
+        {
+          "allocation": 0.25,
+          "attempts": 300,
+          "id": 2,
+          "name": "shortened_flow",
+          "state": "active",
+          "successes": 200,
+          "suggestion": {
+            "assignments": {
+              "screens_shown": 1,
+              "show_banner": "false"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

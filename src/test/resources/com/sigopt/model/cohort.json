@@ -1,0 +1,18 @@
+{
+  "response": {
+    "cohort": {
+      "allocation": 0.75,
+      "attempts": 900,
+      "id": 1,
+      "name": "control",
+      "state": "active",
+      "successes": 500,
+      "suggestion": {
+        "assignments": {
+          "screens_shown": 3,
+          "show_banner": "true"
+        }
+      }
+    }
+  }
+}
