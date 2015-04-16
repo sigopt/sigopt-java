@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -12,17 +13,19 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class ExperimentTest extends APIResourceTestBase {
+    String json;
+
     @BeforeClass
     public static void setUp() {
     }
 
     @Before
-    public void setUpMockData() {
+    public void setUpMockData() throws IOException {
+        json = resource("experiment.json");
     }
 
     @Test
     public void constructFromJson() throws Exception {
-        String json = resource("experiment.json");
         Experiment exp = APIResource.constructFromJson(json, Experiment.class);
 
         assertEquals("1", exp.getId());
