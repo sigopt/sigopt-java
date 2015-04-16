@@ -1,4 +1,4 @@
-# Sigopt Java Bindings [![Build Status](https://travis-ci.org/sigopt/sigopt-java.svg?branch=master)](https://travis-ci.org/sigopt/sigopt-java)
+# Sigopt Java Bindings
 
 You can sign up for a Sigopt experiment at https://sigopt.com.
 
