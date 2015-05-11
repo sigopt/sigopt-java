@@ -5,14 +5,12 @@ import com.sigopt.model.Experiment;
 import com.sigopt.model.Observation;
 
 public class Main {
-
     public static void main(String args[]) throws APIException {
-        Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-        Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+        Sigopt.userToken = "sample_user_token";
+        Sigopt.clientToken = "sample_client_token";
 
-        String experimentId = "438";
-        Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
-        Observation observation = experiment.bestObservation().call();
-        System.out.println(observation);
+        String experimentId = "1";
+        Experiment experiment = Experiment.retrieve(experimentId).call();
+        System.out.println(experiment);
     }
 }

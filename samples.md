@@ -31,16 +31,16 @@ Experiment e = new Experiment("id-here");
 The purpose of this is to facilitate with nested resource lookups. Eg:
 
 ```java
-Observation bestObs = new Experiment("432").bestObservation().call();
+Observation bestObs = new Experiment("1").bestObservation().call();
 ```
 
 ## Authentication
 
-Authentication is done by setting your user_token and client_token.
+Authentication is done by setting your user_token and/or client_token.
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 ```
 
 Once these are set they will be used for all API calls. Example code shows this being done for every sample, but only to create a completely functional and isolated sample. You do *not* need to set these every API call.
@@ -72,20 +72,20 @@ This makes it easy to add params before an API call is made without forcing deve
 #### Retrieve a client
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String clientId = "468";
+String clientId = "1";
 Client client = Client.retrieve(clientId).call();
 ```
 
 #### List all experiments for a client
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String clientId = "468";
+String clientId = "1";
 List<Experiment> experiments = new Client(clientId).experiments().call();
 ```
 
@@ -95,20 +95,20 @@ List<Experiment> experiments = new Client(clientId).experiments().call();
 #### Retrieve an Experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "435";
+String experimentId = "1";
 Experiment experiment = Experiment.retrieve(experimentId).call();
 ```
 
 #### Create an Experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String clientId = "468";
+String clientId = "1";
 
 Parameter parameter = new Parameter.Builder()
     .name("Price Per Month")
@@ -134,10 +134,10 @@ experiment = experiment.create(clientId).call();
 #### Create an offline_cohort Experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String clientId = "468";
+String clientId = "1";
 
 Parameter parameter1 = new Parameter.Builder()
     .name("Price Per Month")
@@ -196,23 +196,21 @@ experiment = experiment.create(clientId).call();
 
 #### Look up all Experiments
 
-*NOTE* - Ideally this wouldn't require the clientId.
-
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String clientId = "468";
+String clientId = "1";
 List<Experiment> experiments = Experiment.all(clientId).call();
 ```
 
 #### Update an Experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "442";
+String experimentId = "1";
 Experiment experiment = Experiment.retrieve(experimentId).call();
 
 experiment.getMetric().setName("new metric name");
@@ -223,10 +221,10 @@ experiment = experiment.save().call();
 #### Reset an Experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "435";
+String experimentId = "1";
 Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
 experiment.reset().call();
 ```
@@ -234,10 +232,10 @@ experiment.reset().call();
 #### Delete an Experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "435";
+String experimentId = "1";
 Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
 experiment.delete().call();
 ```
@@ -248,10 +246,10 @@ experiment.delete().call();
 #### List all Cohorts for an experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "438";
+String experimentId = "1";
 Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
 List<Cohort> cohorts = experiment.cohorts().call();
 // or if you want to match your existing docs:
@@ -261,10 +259,10 @@ List<Cohort> cohorts = experiment.cohorts().call();
 #### Create a Cohort
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "438";
+String experimentId = "1";
 Suggestion suggestion = new Suggestion.Builder()
     .addAssignment("Price Per Month", 55.0)
     .addAssignment("Experiments Per Month", 15)
@@ -287,10 +285,10 @@ Cohort created = Cohort.create(cohort, experimentId).call();
 #### Update a Cohort
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "438";
+String experimentId = "1";
 
 Cohort cohort = experiment.cohorts().call().get(0); // get the first cohort
 cohort.setName("new name");
@@ -309,10 +307,10 @@ Cohort updated = cohort.save(experimentId).call();
 #### Retrieve the best observation from an experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "438";
+String experimentId = "1";
 Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
 Observation observation = experiment.bestObservation().call();
 ```
@@ -320,10 +318,10 @@ Observation observation = experiment.bestObservation().call();
 #### Report an observation for an experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "442";
+String experimentId = "1";
 Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
 Observation observation = new Observation.Builder()
     .addAssignment("Price Per Month", 40)
@@ -340,10 +338,10 @@ experiment.report(observation).addParam("worker_id", workerId).call();
 This is identical to reporting one observation. Just pass in multiple and the lib handles everything else.
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "442";
+String experimentId = "1";
 Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
 Observation observation = new Observation.Builder()
     .addAssignment("Price Per Month", 45)
@@ -362,10 +360,10 @@ experiment.report(observation, observation2).call();
 #### Retrieve a Suggestion from an Experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "442";
+String experimentId = "1";
 Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
 Suggestion suggestion = experiment.suggestion().call();
 ```
@@ -373,10 +371,10 @@ Suggestion suggestion = experiment.suggestion().call();
 #### Retrieve multiple suggestions from an "on_demand" Experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "443";
+String experimentId = "1";
 Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
 List<Suggestion> suggestions = experiment.suggestions(5).call();
 ```
@@ -388,10 +386,10 @@ List<Suggestion> suggestions = experiment.suggestions(5).call();
 #### List all current workers for an Experiment
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "442";
+String experimentId = "1";
 Experiment experiment = new Experiment(experimentId);
 List<Worker> workers = experiment.workers().call();
 ```
@@ -401,10 +399,10 @@ List<Worker> workers = experiment.workers().call();
 This released a worker and frees up all suggestions it claimed to be taken by other workers.
 
 ```java
-Sigopt.userToken = "HTKWBSJQLLTAYHVMIXNLUMVGYEVNRELCGBJKJWDVJETVYNZX";
-Sigopt.clientToken = "KWQOLYOGALCIHCCZGDHBMIJAINBEPOICGBZVPWEHZBIHONIQ";
+Sigopt.userToken = "sample_user_token";
+Sigopt.clientToken = "sample_client_token";
 
-String experimentId = "442";
+String experimentId = "1";
 String workerId = "super-hard-worker";
 Experiment experiment = new Experiment(experimentId);
 
