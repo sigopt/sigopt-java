@@ -84,9 +84,13 @@ public class Experiment extends APIResource {
         return Experiment.create(this, clientId);
     }
 
+    public static APIMethodCaller<Experiment> update(Experiment experiment) {
+        return new APIMethodCaller<Experiment>("post", "/experiments/:id/update", experiment, Experiment.class)
+            .addParam("data", experiment);
+    }
+
     public APIMethodCaller<Experiment> save() {
-        return new APIMethodCaller<Experiment>("post", "/experiments/:id/update", this, Experiment.class)
-            .addParam("data", this);
+        return Experiment.update(this);
     }
 
     public APIMethodCaller<Void> reset() {

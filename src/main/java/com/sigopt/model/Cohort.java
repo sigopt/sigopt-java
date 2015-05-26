@@ -87,9 +87,12 @@ public class Cohort extends APIObject {
         return Cohort.update().addParam("experiment_id", experimentId);
     }
 
+    public static APIMethodCaller<Cohort> update(Cohort cohort, String experimentId) {
+        return Cohort.update(experimentId).addParam("data", cohort);
+    }
+
     public APIMethodCaller<Cohort> save(String experimentId) {
-        return Cohort.update(experimentId)
-            .addParam("data", this)
+        return Cohort.update(this, experimentId)
             .addParam("cohort_id", this.getId());
     }
 
