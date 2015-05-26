@@ -30,8 +30,12 @@ public class Worker extends APIResource {
         return this.suggestion;
     }
 
+    public static APIMethodCaller<Void> release() {
+        return new APIMethodCaller<Void>("post", "/experiments/:experiment_id/releaseworker", null);
+    }
+
     public APIMethodCaller<Void> release(String experimentId) {
-        return new APIMethodCaller<Void>("post", "/experiments/:experiment_id/releaseworker", null)
+        return Worker.release()
             .addParam("experiment_id", experimentId)
             .addParam("worker_id", this.getId());
     }

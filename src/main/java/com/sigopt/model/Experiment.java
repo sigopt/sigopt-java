@@ -142,11 +142,21 @@ public class Experiment extends APIResource {
         }
     }
 
+    @Deprecated
     public APIMethodCaller<Suggestion> suggestion() {
+        return this.suggest();
+    }
+
+    public APIMethodCaller<Suggestion> suggest() {
         return new APIMethodCaller<Suggestion>("post", "/experiments/:id/suggest", this, Suggestion.class);
     }
 
+    @Deprecated
     public APIMethodCaller<List<Suggestion>> suggestions(Integer count) {
+        return this.suggestMulti(count);
+    }
+
+    public APIMethodCaller<List<Suggestion>> suggestMulti(Integer count) {
         Type type = new TypeToken<List<Suggestion>>() {}.getType();
         return new APIMethodCaller<List<Suggestion>>("post", "/experiments/:id/suggestmulti", this, type).addParam("count", count);
     }
@@ -156,11 +166,13 @@ public class Experiment extends APIResource {
         return new APIMethodCaller<List<Worker>>("get", "/experiments/:id/workers", this, type);
     }
 
+    public APIMethodCaller<Void> releaseWorker() {
+        return Worker.release();
+    }
+
     public APIMethodCaller<Void> releaseWorker(String workerId) {
         return new Worker(workerId).release(this.getId());
     }
-
-
 
     public static class Builder {
         String id;
