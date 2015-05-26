@@ -63,20 +63,33 @@ public class Cohort extends APIObject {
         return this;
     }
 
-    public static APIMethodCaller<Cohort> create(Cohort cohort, String experimentId) {
-        return new APIMethodCaller<Cohort>("post", "/experiments/:experiment_id/createcohort", Cohort.class)
-            .addParam("data", cohort)
-            .addParam("experiment_id", experimentId);
+    public static APIMethodCaller<Cohort> create() {
+        return new APIMethodCaller<Cohort>("post", "/experiments/:experiment_id/createcohort", Cohort.class);
     }
 
-    public APIMethodCaller<Cohort> create(String experimentId) {
+    public static APIMethodCaller<Cohort> create(String experimentId) {
+        return Cohort.create().addParam("experiment_id", experimentId);
+    }
+
+    public static APIMethodCaller<Cohort> create(Cohort cohort, String experimentId) {
+        return Cohort.create(experimentId).addParam("data", cohort);
+    }
+
+    public APIMethodCaller<Cohort> insert(String experimentId) {
         return Cohort.create(this, experimentId);
     }
 
+    public static APIMethodCaller<Cohort> update() {
+        return new APIMethodCaller<Cohort>("post", "/experiments/:experiment_id/updatecohort", Cohort.class);
+    }
+
+    public static APIMethodCaller<Cohort> update(String experimentId) {
+        return Cohort.update().addParam("experiment_id", experimentId);
+    }
+
     public APIMethodCaller<Cohort> save(String experimentId) {
-        return new APIMethodCaller<Cohort>("post", "/experiments/:experiment_id/updatecohort", Cohort.class)
+        return Cohort.update(experimentId)
             .addParam("data", this)
-            .addParam("experiment_id", experimentId)
             .addParam("cohort_id", this.getId());
     }
 

@@ -74,14 +74,14 @@ public class Experiment extends APIResource {
 		return new APIMethodCaller<List<Experiment>>("get", "/clients/:client_id/experiments", type).addParam("client_id", clientId);
 	}
 
-	public APIMethodCaller<Experiment> create(String clientId) {
-		return Experiment.create(this, clientId);
-	}
-
 	public static APIMethodCaller<Experiment> create(Experiment e, String clientId) {
 		return new APIMethodCaller<Experiment>("post", "/experiments/create", Experiment.class)
 				.addParam("data", e)
 				.addParam("client_id", clientId);
+	}
+
+	public APIMethodCaller<Experiment> insert(String clientId) {
+		return Experiment.create(this, clientId);
 	}
 
 	public APIMethodCaller<Experiment> save() {
@@ -100,13 +100,22 @@ public class Experiment extends APIResource {
 	public APIMethodCaller<List<Cohort>> allocate() {
 		return cohorts();
 	}
+
 	public APIMethodCaller<List<Cohort>> cohorts() {
 		Type type = new TypeToken<List<Cohort>>() {}.getType();
 		return new APIMethodCaller<List<Cohort>>("get", "/experiments/:id/allocate", this, type);
 	}
 
+	public APIMethodCaller<Cohort> createCohort() {
+    return Cohort.create(this.getId());
+  }
+
 	public APIMethodCaller<Cohort> createCohort(Cohort cohort) {
 		return Cohort.create(cohort, this.getId());
+  }
+
+	public APIMethodCaller<Cohort> updateCohort() {
+		return Cohort.update(this.getId());
 	}
 
 	public APIMethodCaller<Cohort> updateCohort(Cohort cohort) {

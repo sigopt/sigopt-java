@@ -126,7 +126,7 @@ Experiment experiment = new Experiment.Builder()
     .parameters(params)
     .metric(metric)
     .build();
-experiment = experiment.create(clientId).call();
+experiment = experiment.insert(clientId).call();
 // Alternatively:
 // experiment = Experiment.create(experiment, clientId).call();
 ```
@@ -191,7 +191,7 @@ Experiment experiment = new Experiment.Builder()
         .metric(metric)
         .cohorts(cohorts)
     .build();
-experiment = experiment.create(clientId).call();
+experiment = experiment.insert(clientId).call();
 ```
 
 #### Look up all Experiments
@@ -278,7 +278,7 @@ Cohort cohort = new Cohort.Builder()
 
 Cohort created = Cohort.create(cohort, experimentId).call();
 // Alternatives:
-// Cohort created = cohort.create(experimentId).call();
+// Cohort created = cohort.insert(experimentId).call();
 // Cohort created = new Experiment(experimentId).createCohort(cohort).call();
 ```
 
