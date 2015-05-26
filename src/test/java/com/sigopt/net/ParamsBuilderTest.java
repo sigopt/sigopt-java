@@ -1,5 +1,6 @@
 package com.sigopt.net;
 
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.junit.Before;
@@ -12,16 +13,18 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ParamsBuilderTest {
-    Gson gson = new GsonBuilder().create();
+    Gson gson = new GsonBuilder()
+        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        .create();
     HashMap<String, Object> params;
 
     static class MockResource extends APIResource {
         String id;
         String superAwesomeName;
 
-        @APIPathKey(key="pub_field")
         public Integer pubField = 555;
 
         public MockResource(String id, String superAwesomeName) {
@@ -29,12 +32,10 @@ public class ParamsBuilderTest {
             this.superAwesomeName = superAwesomeName;
         }
 
-        @APIPathKey(key="id")
         public String getId() {
             return this.id;
         }
 
-        @APIPathKey(key="super_awesome_name")
         public String getSuperAwesomeName() {
             return this.superAwesomeName;
         }
@@ -89,4 +90,13 @@ public class ParamsBuilderTest {
         assertEquals(gson.toJson(multi), actual.get("multi_data"));
     }
 
+    @Test
+    public void buildWithJson() throws Exception {
+        MockResource mockResource = new MockResource("id-10", "some-name-here");
+        params.put("data", mockResource);
+        Map<String, Object> actual = ParamsBuilder.build(params, null, null);
+        String dataString = ((String) actual.get("data"));
+        assertTrue("pubField serialized as underscore case", dataString.indexOf("pub_field") >= 0);
+        assertTrue("superAwesomeName serialized as underscore case", dataString.indexOf("super_awesome_name") >= 0);
+    }
 }
