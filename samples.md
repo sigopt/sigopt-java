@@ -15,7 +15,7 @@ Parameter p2 = new Parameter.Builder()
     .name("fake-param")
     .type("double")
     .bounds(new Bounds(0.0, 10.0))
-	.build();
+    .build();
 ```
 
 The builders tend to be more practical in Java (since you rarely set every possibly attribute), but either works.
@@ -55,9 +55,9 @@ To proceed with the api call, simply use the `.call()` method on the `APIMethodC
 ```java
 // Assume experiment is already initialized with data
 Experiment.create(new Experiment(), "client_id")
-	.addHeader("Some Header", "custom-value")
-	.addParam("other_data", "some-other-param")
-	.call();
+    .addHeader("Some Header", "custom-value")
+    .addParam("other_data", "some-other-param")
+    .call();
 ```
 
 This makes it easy to add params before an API call is made without forcing developers to build maps for everything.
