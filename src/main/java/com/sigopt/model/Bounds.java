@@ -35,8 +35,18 @@ public class Bounds extends APIObject {
             return this;
         }
 
+        public Builder min(Integer min) {
+            this.min = (double) min;
+            return this;
+        }
+
         public Builder max(Double max) {
             this.max = max;
+            return this;
+        }
+
+        public Builder max(Integer max) {
+            this.max = (double) max;
             return this;
         }
     }
