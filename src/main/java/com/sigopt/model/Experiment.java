@@ -89,12 +89,12 @@ public class Experiment extends APIResource {
 			.addParam("data", this);
 	}
 
-	public APIMethodCaller reset() {
-		return new APIMethodCaller("post", "/experiments/:id/reset", this, null);
+	public APIMethodCaller<Void> reset() {
+		return new APIMethodCaller<Void>("post", "/experiments/:id/reset", this, null);
 	}
 
-	public APIMethodCaller delete() {
-		return new APIMethodCaller("post", "/experiments/:id/delete", this, null);
+	public APIMethodCaller<Void> delete() {
+		return new APIMethodCaller<Void>("post", "/experiments/:id/delete", this, null);
 	}
 
 	public APIMethodCaller<List<Cohort>> allocate() {
@@ -117,15 +117,15 @@ public class Experiment extends APIResource {
 		return new APIMethodCaller<Observation>("get", "/experiments/:id/bestobservation", this, Observation.class);
 	}
 
-	public APIMethodCaller report(Observation... observations) {
+	public APIMethodCaller<Void> report(Observation... observations) {
 		if(observations.length == 1) {
-			return new APIMethodCaller("post", "/experiments/:id/report", this, null).addParam("data", observations[0]);
+			return new APIMethodCaller<Void>("post", "/experiments/:id/report", this, null).addParam("data", observations[0]);
 		} else {
 			ReportMultidata.Builder builder = new ReportMultidata.Builder();
 			for(Observation obs : observations) {
 				builder.addObservation(obs);
 			}
-			return new APIMethodCaller("post", "/experiments/:id/reportmulti", this, null).addParam("multi_data", builder.build());
+			return new APIMethodCaller<Void>("post", "/experiments/:id/reportmulti", this, null).addParam("multi_data", builder.build());
 		}
 	}
 
@@ -143,7 +143,7 @@ public class Experiment extends APIResource {
 		return new APIMethodCaller<List<Worker>>("get", "/experiments/:id/workers", this, type);
 	}
 
-	public APIMethodCaller releaseWorker(String workerId) {
+	public APIMethodCaller<Void> releaseWorker(String workerId) {
 		return new Worker(workerId).release(this.getId());
 	}
 

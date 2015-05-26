@@ -90,7 +90,7 @@ public class Requester {
     static List<Object> arrayToList(Object array) {
         Class arrayKlass = array.getClass().getComponentType();
         if (arrayKlass.isPrimitive()) {
-            List ar = new ArrayList();
+            List<Object> ar = new ArrayList<Object>();
             int length = Array.getLength(array);
             for (int i = 0; i < length; i++) {
                 ar.add(Array.get(array, i));
@@ -137,7 +137,7 @@ public class Requester {
         if(obj.getClass().isArray() || obj instanceof Collection) {
             Collection<Object> list;
             if(obj instanceof Collection) {
-                list = (Collection)obj;
+                list = (Collection<Object>)obj;
             } else {
                 list = arrayToList(obj);
             }
