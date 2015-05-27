@@ -1,3 +1,14 @@
+=== 1.1.0 2015-04-16
+
+* Standardize some creation / updating method names. For creationg, the static form is
+Experiment.create() and the non-static form is experiment.insert(). Similarly,
+the static form for update is Experiment.update() and the non-static is
+experiment.save()
+
+* Fix serialization of camel-case object keys.
+
+* Add some argument-free versions of some method calls.
+
 === 1.0.0 2015-04-16
 
 * Initial release
