@@ -21,7 +21,7 @@ public class APIMethod {
     public String userToken;
     public String apiBase;
 
-    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, Object obj, String clientToken, String userToken, String apiBase) throws AuthenticationException {
+    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, Object obj, String clientToken, String userToken, String apiBase) throws AuthenticationException, APIException {
         this.clientToken = (clientToken == null) ? Sigopt.clientToken : clientToken;
         this.userToken = (userToken == null) ? Sigopt.userToken : userToken;
         this.apiBase = (apiBase == null) ? Sigopt.apiBase : apiBase;
@@ -68,7 +68,7 @@ public class APIMethod {
         public Builder() {
         }
 
-        public APIMethod build() throws AuthenticationException {
+        public APIMethod build() throws AuthenticationException, APIException {
             return new APIMethod(method, path, params, headers, instance, clientToken, userToken, apiBase);
         }
 

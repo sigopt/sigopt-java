@@ -7,9 +7,11 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.sigopt.exception.APIException;
+
 public class PathBuilder {
 
-    public static String build(String path, Object obj, Map<String, Object> params) {
+    public static String build(String path, Object obj, Map<String, Object> params) throws APIException {
         params = MapHelper.ensure(params);
 
         Pattern r = Pattern.compile(":([^\\/]*)");
@@ -24,7 +26,7 @@ public class PathBuilder {
         return path;
     }
 
-    public static String determineValue(String match, Object obj, Map<String, Object> params) {
+    public static String determineValue(String match, Object obj, Map<String, Object> params) throws APIException {
         String ret = null;
 
         if(obj != null) {
@@ -46,8 +48,12 @@ public class PathBuilder {
             }
         }
 
-        // TODO(jon): Make this throw an arg error when matches aren't found.
-        return params.get(match).toString();
+        Object param = params.get(match);
+        if (param == null) {
+            throw new APIException("Missing required parameter: " + match);
+        } else {
+            return param.toString();
+        }
     }
 
     public static Method findMethod(String match, Class klass) {
