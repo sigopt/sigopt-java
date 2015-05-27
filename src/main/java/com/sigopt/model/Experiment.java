@@ -74,19 +74,29 @@ public class Experiment extends APIResource {
         return new APIMethodCaller<List<Experiment>>("get", "/clients/:client_id/experiments", type).addParam("client_id", clientId);
     }
 
+    public static APIMethodCaller<Experiment> create() {
+        return new APIMethodCaller<Experiment>("post", "/experiments/create", Experiment.class);
+    }
+
+    public static APIMethodCaller<Experiment> create(String clientId) {
+        return Experiment.create().addParam("client_id", clientId);
+    }
+
     public static APIMethodCaller<Experiment> create(Experiment e, String clientId) {
-        return new APIMethodCaller<Experiment>("post", "/experiments/create", Experiment.class)
-                .addParam("data", e)
-                .addParam("client_id", clientId);
+        return Experiment.create(clientId).addParam("data", e);
     }
 
     public APIMethodCaller<Experiment> insert(String clientId) {
         return Experiment.create(this, clientId);
     }
 
+    public static APIMethodCaller<Experiment> update(String id) {
+        return new APIMethodCaller<Experiment>("post", "/experiments/:id/update", Experiment.class)
+            .addParam("id", id);
+    }
+
     public static APIMethodCaller<Experiment> update(Experiment experiment) {
-        return new APIMethodCaller<Experiment>("post", "/experiments/:id/update", experiment, Experiment.class)
-            .addParam("data", experiment);
+        return Experiment.update(experiment.id).addParam("data", experiment);
     }
 
     public APIMethodCaller<Experiment> save() {
@@ -130,16 +140,28 @@ public class Experiment extends APIResource {
         return new APIMethodCaller<Observation>("get", "/experiments/:id/bestobservation", this, Observation.class);
     }
 
+    public APIMethodCaller<Void> report() {
+        return new APIMethodCaller<Void>("post", "/experiments/:id/report", this, null);
+    }
+
     public APIMethodCaller<Void> report(Observation... observations) {
         if(observations.length == 1) {
-            return new APIMethodCaller<Void>("post", "/experiments/:id/report", this, null).addParam("data", observations[0]);
+            return this.report().addParam("data", observations[0]);
         } else {
             ReportMultidata.Builder builder = new ReportMultidata.Builder();
             for(Observation obs : observations) {
                 builder.addObservation(obs);
             }
-            return new APIMethodCaller<Void>("post", "/experiments/:id/reportmulti", this, null).addParam("multi_data", builder.build());
+            return this.reportMulti(builder.build());
         }
+    }
+
+    public APIMethodCaller<Void> reportMulti() {
+        return new APIMethodCaller<Void>("post", "/experiments/:id/reportmulti", this, null);
+    }
+
+    public APIMethodCaller<Void> reportMulti(ReportMultidata observation) {
+        return this.reportMulti().addParam("multi_data", observation);
     }
 
     @Deprecated
@@ -156,9 +178,13 @@ public class Experiment extends APIResource {
         return this.suggestMulti(count);
     }
 
-    public APIMethodCaller<List<Suggestion>> suggestMulti(Integer count) {
+    public APIMethodCaller<List<Suggestion>> suggestMulti() {
         Type type = new TypeToken<List<Suggestion>>() {}.getType();
-        return new APIMethodCaller<List<Suggestion>>("post", "/experiments/:id/suggestmulti", this, type).addParam("count", count);
+        return new APIMethodCaller<List<Suggestion>>("post", "/experiments/:id/suggestmulti", this, type);
+    }
+
+    public APIMethodCaller<List<Suggestion>> suggestMulti(Integer count) {
+        return this.suggestMulti().addParam("count", count);
     }
 
     public APIMethodCaller<List<Worker>> workers() {
@@ -167,11 +193,12 @@ public class Experiment extends APIResource {
     }
 
     public APIMethodCaller<Void> releaseWorker() {
-        return Worker.release();
+        return new APIMethodCaller<Void>("post", "/experiments/:experiment_id/releaseworker", Worker.class)
+            .addParam("experiment_id", this.getId());
     }
 
     public APIMethodCaller<Void> releaseWorker(String workerId) {
-        return new Worker(workerId).release(this.getId());
+        return this.releaseWorker().addParam("worker_id", workerId);
     }
 
     public static class Builder {
