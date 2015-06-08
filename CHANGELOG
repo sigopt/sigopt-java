@@ -1,4 +1,8 @@
-=== 1.1.0 2015-04-16
+=== 1.1.1 2015-06-08
+
+* Add a SuggestData Builder
+
+=== 1.1.0 2015-05-27
 
 * Standardize some creation / updating method names. For creationg, the static form is
 Experiment.create() and the non-static form is experiment.insert(). Similarly,

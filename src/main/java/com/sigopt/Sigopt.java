@@ -9,7 +9,7 @@ public abstract class Sigopt {
     public static final String AUTH_HEADER = null;
     public static final String CLIENT_AUTH_PARAM = "sample_client_token";
     public static final String USER_AUTH_PARAM = "sample_user_token";
-    public static final String VERSION = "1.1.0";
+    public static final String VERSION = "1.1.1";
     public static final String SUPPORT_EMAIL = "support@sigopt.com";
     public static final String DOCS_URL = "https://sigopt.com/docs/overview";
 
