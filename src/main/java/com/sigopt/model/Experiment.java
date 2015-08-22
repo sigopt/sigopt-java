@@ -140,6 +140,11 @@ public class Experiment extends APIResource {
         return new APIMethodCaller<Observation>("get", "/experiments/:id/bestobservation", this, Observation.class);
     }
 
+    public APIMethodCaller<Pagination<Observation>> history() {
+        Type type = new TypeToken<Pagination<Observation>>() {}.getType();
+        return new APIMethodCaller<Pagination<Observation>>("get", "/experiments/:id/history", this, type);
+    }
+
     public APIMethodCaller<Void> report() {
         return new APIMethodCaller<Void>("post", "/experiments/:id/report", this, null);
     }
