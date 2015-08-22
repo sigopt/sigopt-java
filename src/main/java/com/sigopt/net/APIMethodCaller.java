@@ -42,7 +42,7 @@ public class APIMethodCaller<T> {
                 return null;
             }
         } else if(typeOfT != null) {
-            return APIResource.constructListFromJson(apiMethod.response.body, typeOfT);
+            return APIResource.constructTypedFromJson(apiMethod.response.body, typeOfT);
         } else {
             return null;
         }

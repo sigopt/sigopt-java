@@ -18,7 +18,7 @@ public abstract class APIResource extends APIObject {
         return gson.fromJson(preProcessJson(json), klass);
     }
 
-    public static <T> T constructListFromJson(String json, Type typeOfT) {
+    public static <T> T constructTypedFromJson(String json, Type typeOfT) {
         return (T) gson.fromJson(preProcessJson(json), typeOfT);
     }
 

@@ -25,7 +25,7 @@ public class RolesTest extends APIResourceTestBase {
     public void constructFromJson() throws Exception {
         String json = resource("roles.json");
         Type type = new TypeToken<List<Role>>() {}.getType();
-        List<Role> roles = APIResource.constructListFromJson(json, type);
+        List<Role> roles = APIResource.constructTypedFromJson(json, type);
 
         assertEquals(1, roles.size());
 

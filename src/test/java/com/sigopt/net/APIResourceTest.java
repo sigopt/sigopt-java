@@ -110,7 +110,7 @@ public class APIResourceTest {
     @Test
     public void constructResourceListFromJson() throws Exception {
         Type type = new TypeToken<List<MockResource>>() {}.getType();
-        List<MockResource> actual = APIResource.constructListFromJson(mockResourceListJson, type);
+        List<MockResource> actual = APIResource.constructTypedFromJson(mockResourceListJson, type);
 
         MockResource mr = actual.get(0);
         assertEquals("id-value", mr.getId());

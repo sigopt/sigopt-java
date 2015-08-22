@@ -25,7 +25,7 @@ public class HistoryTest extends APIResourceTestBase {
     public void constructFromJson() throws Exception {
         String json = resource("history.json");
         Type type = new TypeToken<Pagination<Observation>>() {}.getType();
-        Pagination<Observation> observations = APIResource.constructListFromJson(json, type);
+        Pagination<Observation> observations = APIResource.constructTypedFromJson(json, type);
 
         assertEquals(1, observations.getCount());
         assertEquals("X", observations.getPaging().getBefore());
