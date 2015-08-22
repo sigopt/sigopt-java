@@ -1,0 +1,16 @@
+{
+  "response": {
+    "roles": [{
+      "role": "admin",
+      "user": {
+        "id": 1,
+        "name": "Patrick",
+        "email": "patrick@sigopt.com"
+      },
+      "client": {
+        "id": 1,
+        "name": "SigOpt"
+      }
+    }]
+  }
+}
