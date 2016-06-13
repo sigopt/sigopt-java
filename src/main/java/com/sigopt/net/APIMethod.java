@@ -13,6 +13,7 @@ public class APIMethod {
     public String path;
     public Map<String, Object> params = new HashMap<String, Object>();
     public Map<String, String> headers = new HashMap<String, String>();
+    public String data;
 
     public Requester.Response response;
     public APIException exception;
@@ -21,7 +22,7 @@ public class APIMethod {
     public String userToken;
     public String apiBase;
 
-    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, Object obj, String clientToken, String userToken, String apiBase) throws AuthenticationException, APIException {
+    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, Object obj, String clientToken, String userToken, String apiBase, String data) throws AuthenticationException, APIException {
         this.clientToken = (clientToken == null) ? Sigopt.clientToken : clientToken;
         this.userToken = (userToken == null) ? Sigopt.userToken : userToken;
         this.apiBase = (apiBase == null) ? Sigopt.apiBase : apiBase;
@@ -32,13 +33,14 @@ public class APIMethod {
         this.path = PathBuilder.build(path, obj, params);
         this.params = ParamsBuilder.build(params, this.clientToken, this.userToken);
         this.headers = HeadersBuilder.build(headers);
+        this.data = data;
     }
 
     public APIMethod execute() throws APIException {
         try {
-            this.response = Requester.request(this.method, url(), this.params, this.headers);
+            this.response = Requester.request(this.method, url(), this.params, this.headers, this.data);
         } catch(Exception e) {
-            // TODO(jon): Compose an API error here.
+            // TODO(patrick): Compose an API error here.
             this.exception = new APIException("An error occurred while connecting to the API.", this, e);
             throw this.exception;
         }
@@ -64,12 +66,13 @@ public class APIMethod {
         String clientToken;
         String userToken;
         String apiBase;
+        String data;
 
         public Builder() {
         }
 
         public APIMethod build() throws AuthenticationException, APIException {
-            return new APIMethod(method, path, params, headers, instance, clientToken, userToken, apiBase);
+            return new APIMethod(method, path, params, headers, instance, clientToken, userToken, apiBase, data);
         }
 
         public Builder method(String method) {
@@ -124,6 +127,10 @@ public class APIMethod {
             return this;
         }
 
+        public Builder data(String data) {
+            this.data = data;
+            return this;
+        }
     }
 
 }

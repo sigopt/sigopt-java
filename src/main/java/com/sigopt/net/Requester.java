@@ -23,15 +23,15 @@ public class Requester {
         }
     }
 
-    public static Response request(String method, String url, Map params, Map<String, String> headers) throws Exception {
-        com.squareup.okhttp.Response res = client.newCall(createRequest(method, url, params, headers)).execute();
+    public static Response request(String method, String url, Map params, Map<String, String> headers, String data) throws Exception {
+        com.squareup.okhttp.Response res = client.newCall(createRequest(method, url, params, headers, data)).execute();
         return new Response(res.body().string(), res.code());
     }
 
-    public static Request createRequest(String method, String url, Map params, Map<String, String> headers) throws Exception {
+    public static Request createRequest(String method, String url, Map params, Map<String, String> headers, String data) throws Exception {
         Request.Builder rb = new Request.Builder();
 
-        RequestBody reqBody = composeRequestBody(params);
+        RequestBody reqBody = RequestBody.create(MEDIA_TYPE_JSON, data);
         method = method.toLowerCase();
         if(method.equals("get")) {
             rb = rb.get();
@@ -63,19 +63,6 @@ public class Requester {
             url = url + "?" + urlSuffix;
         }
         return url;
-    }
-
-    static RequestBody composeRequestBody(Map params) {
-        if(params.size() == 0) {
-            return null;
-        }
-
-        FormEncodingBuilder formBodyBuilder = new FormEncodingBuilder();
-        List<KeyValue> list = mapToKeyValueList(params);
-        for(KeyValue kv : list) {
-            formBodyBuilder = formBodyBuilder.add(kv.key, kv.value);
-        }
-        return formBodyBuilder.build();
     }
 
     static String mapToUrlEncodedString(Map map) {
