@@ -24,11 +24,7 @@ public abstract class APIResource extends APIObject {
 
     static String preProcessJson(String json) {
         JsonElement jsonElement = jsonParser.parse(json);
-        for(Map.Entry<String, JsonElement> entry : jsonElement.getAsJsonObject().entrySet()) {
-            return entry.getValue().toString();
-        }
-        // This shouldn't happen.
-        return json;
+        return jsonElement.getAsJsonObject().toString();
     }
 
 }
