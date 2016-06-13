@@ -36,10 +36,9 @@ Observation bestObs = new Experiment("1").bestObservation().call();
 
 ## Authentication
 
-Authentication is done by setting your user_token and/or client_token.
+Authentication is done by setting your client_token.
 
 ```java
-Sigopt.userToken = "sample_user_token";
 Sigopt.clientToken = "sample_client_token";
 ```
 
@@ -63,7 +62,6 @@ Experiment.create(new Experiment(), "client_id")
 This makes it easy to add params before an API call is made without forcing developers to build maps for everything.
 
 
-
 ## Code Samples for API endpoints
 
 
@@ -72,7 +70,6 @@ This makes it easy to add params before an API call is made without forcing deve
 #### Retrieve a client
 
 ```java
-Sigopt.userToken = "sample_user_token";
 Sigopt.clientToken = "sample_client_token";
 
 String clientId = "1";
@@ -82,7 +79,6 @@ Client client = Client.retrieve(clientId).call();
 #### List all experiments for a client
 
 ```java
-Sigopt.userToken = "sample_user_token";
 Sigopt.clientToken = "sample_client_token";
 
 String clientId = "1";
@@ -95,7 +91,6 @@ List<Experiment> experiments = new Client(clientId).experiments().call();
 #### Retrieve an Experiment
 
 ```java
-Sigopt.userToken = "sample_user_token";
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
@@ -105,7 +100,6 @@ Experiment experiment = Experiment.retrieve(experimentId).call();
 #### Create an Experiment
 
 ```java
-Sigopt.userToken = "sample_user_token";
 Sigopt.clientToken = "sample_client_token";
 
 String clientId = "1";
@@ -131,83 +125,9 @@ experiment = experiment.insert(clientId).call();
 // experiment = Experiment.create(experiment, clientId).call();
 ```
 
-#### Create an offline_cohort Experiment
-
-```java
-Sigopt.userToken = "sample_user_token";
-Sigopt.clientToken = "sample_client_token";
-
-String clientId = "1";
-
-Parameter parameter1 = new Parameter.Builder()
-    .name("Price Per Month")
-    .type("double")
-    .bounds(new Bounds(10.0, 100.0))
-    .build();
-Parameter parameter2 = new Parameter.Builder()
-    .name("Experiments Per Month")
-    .type("int")
-    .bounds(new Bounds(10.0, 100.0))
-    .build();
-List<Parameter> params = new ArrayList<Parameter>();
-params.add(parameter1);
-params.add(parameter2);
-
-Suggestion suggestion1 = new Suggestion.Builder()
-    .addAssignment("Price Per Month", 55.5)
-    .addAssignment("Experiments Per Month", 20)
-    .build();
-Cohort cohort1 = new Cohort.Builder()
-    .name("First Cohort")
-    .suggestion(suggestion1)
-    .allocation(0.25)
-    .successes(5)
-    .attempts(10)
-    .state("active")
-    .build();
-
-Suggestion suggestion2 = new Suggestion.Builder()
-    .addAssignment("Price Per Month", 45.0)
-    .addAssignment("Experiments Per Month", 15)
-    .build();
-Cohort cohort2 = new Cohort.Builder()
-    .name("Second Cohort")
-    .suggestion(suggestion2)
-    .allocation(0.75)
-    .successes(100)
-    .attempts(105)
-    .state("active")
-    .build();
-List<Cohort> cohorts = new ArrayList<Cohort>();
-cohorts.add(cohort1);
-cohorts.add(cohort2);
-
-Metric metric = new Metric("Total Revenue");
-
-Experiment experiment = new Experiment.Builder()
-    .type("offline_cohort")
-        .name("Offline Cohort Experiment")
-        .parameters(params)
-        .metric(metric)
-        .cohorts(cohorts)
-    .build();
-experiment = experiment.insert(clientId).call();
-```
-
-#### Look up all Experiments
-
-```java
-Sigopt.userToken = "sample_user_token";
-Sigopt.clientToken = "sample_client_token";
-
-String clientId = "1";
-List<Experiment> experiments = Experiment.all(clientId).call();
-```
-
 #### Update an Experiment
 
 ```java
-Sigopt.userToken = "sample_user_token";
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
@@ -218,21 +138,9 @@ experiment.getParameters().get(0).setBounds(new Bounds(25.0, 5000.0));
 experiment = experiment.save().call();
 ```
 
-#### Reset an Experiment
-
-```java
-Sigopt.userToken = "sample_user_token";
-Sigopt.clientToken = "sample_client_token";
-
-String experimentId = "1";
-Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
-experiment.reset().call();
-```
-
 #### Delete an Experiment
 
 ```java
-Sigopt.userToken = "sample_user_token";
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
@@ -241,73 +149,11 @@ experiment.delete().call();
 ```
 
 
-### Cohorts
-
-#### List all Cohorts for an experiment
-
-```java
-Sigopt.userToken = "sample_user_token";
-Sigopt.clientToken = "sample_client_token";
-
-String experimentId = "1";
-Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
-List<Cohort> cohorts = experiment.cohorts().call();
-// or if you want to match your existing docs:
-// List<Cohort> cohorts = experiment.allocate().call();
-```
-
-#### Create a Cohort
-
-```java
-Sigopt.userToken = "sample_user_token";
-Sigopt.clientToken = "sample_client_token";
-
-String experimentId = "1";
-Suggestion suggestion = new Suggestion.Builder()
-    .addAssignment("Price Per Month", 55.0)
-    .addAssignment("Experiments Per Month", 15)
-    .build();
-Cohort cohort = new Cohort.Builder()
-    .name("Fifth Cohort")
-    .suggestion(suggestion)
-    .allocation(0.1)
-    .successes(18)
-    .attempts(25)
-    .state("active")
-    .build();
-
-Cohort created = Cohort.create(cohort, experimentId).call();
-// Alternatives:
-// Cohort created = cohort.insert(experimentId).call();
-// Cohort created = new Experiment(experimentId).createCohort(cohort).call();
-```
-
-#### Update a Cohort
-
-```java
-Sigopt.userToken = "sample_user_token";
-Sigopt.clientToken = "sample_client_token";
-
-String experimentId = "1";
-
-Cohort cohort = experiment.cohorts().call().get(0); // get the first cohort
-cohort.setName("new name");
-cohort.setState("inactive");
-Cohort updated = cohort.save(experimentId).call();
-
-// Alternatively
-// Experiment experiment = new Experiment(experimentId);
-// Cohort updated = experiment.updateCohort(cohort).call();
-```
-
-
-
 ### Observations
 
 #### Retrieve the best observation from an experiment
 
 ```java
-Sigopt.userToken = "sample_user_token";
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
@@ -318,7 +164,6 @@ Observation observation = experiment.bestObservation().call();
 #### Report an observation for an experiment
 
 ```java
-Sigopt.userToken = "sample_user_token";
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
@@ -338,7 +183,6 @@ experiment.report(observation).addParam("worker_id", workerId).call();
 This is identical to reporting one observation. Just pass in multiple and the lib handles everything else.
 
 ```java
-Sigopt.userToken = "sample_user_token";
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
@@ -360,57 +204,9 @@ experiment.report(observation, observation2).call();
 #### Retrieve a Suggestion from an Experiment
 
 ```java
-Sigopt.userToken = "sample_user_token";
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
 Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
 Suggestion suggestion = experiment.suggestion().call();
-```
-
-#### Retrieve multiple suggestions from an "on_demand" Experiment
-
-```java
-Sigopt.userToken = "sample_user_token";
-Sigopt.clientToken = "sample_client_token";
-
-String experimentId = "1";
-Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
-List<Suggestion> suggestions = experiment.suggestions(5).call();
-```
-
-
-### Workers
-
-
-#### List all current workers for an Experiment
-
-```java
-Sigopt.userToken = "sample_user_token";
-Sigopt.clientToken = "sample_client_token";
-
-String experimentId = "1";
-Experiment experiment = new Experiment(experimentId);
-List<Worker> workers = experiment.workers().call();
-```
-
-#### Delete a worker from an experiment
-
-This released a worker and frees up all suggestions it claimed to be taken by other workers.
-
-```java
-Sigopt.userToken = "sample_user_token";
-Sigopt.clientToken = "sample_client_token";
-
-String experimentId = "1";
-String workerId = "super-hard-worker";
-Experiment experiment = new Experiment(experimentId);
-
-// Make sure we have a worker to release
-Suggestion suggestion = experiment.suggestion()
-    .addParam("worker_id", workerId).call();
-
-List<Worker> workers = experiment.workers().call();
-Worker toRelease = workers.get(0);
-toRelease.release(experimentId).call();
 ```
