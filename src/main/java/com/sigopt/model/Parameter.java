@@ -10,18 +10,16 @@ public class Parameter extends APIObject {
     Bounds bounds;
     List<CategoricalValue> categoricalValues;
     String transformation;
-    Boolean tunable;
 
     public Parameter() {
     }
 
-    public Parameter(String name, String type, Bounds bounds, List<CategoricalValue> categoricalValues, String transformation, Boolean tunable) {
+    public Parameter(String name, String type, Bounds bounds, List<CategoricalValue> categoricalValues, String transformation) {
         this.name = name;
         this.type = type;
         this.bounds = bounds;
         this.categoricalValues = categoricalValues;
         this.transformation = transformation;
-        this.tunable = tunable;
     }
 
     public String getName() {
@@ -68,23 +66,18 @@ public class Parameter extends APIObject {
         return transformation;
     }
 
-    public Boolean isTunable() {
-        return tunable;
-    }
-
     public static class Builder {
         String name;
         String type;
         Bounds bounds;
         List<CategoricalValue> categoricalValues;
         String transformation;
-        Boolean tunable;
 
         public Builder() {
         }
 
         public Parameter build() {
-            return new Parameter(name, type, bounds, categoricalValues, transformation, tunable);
+            return new Parameter(name, type, bounds, categoricalValues, transformation);
         }
 
         public Builder name(String name) {
@@ -109,11 +102,6 @@ public class Parameter extends APIObject {
 
         public Builder transformation(String transformation) {
             this.transformation = transformation;
-            return this;
-        }
-
-        public Builder tunable(Boolean tunable) {
-            this.tunable = tunable;
             return this;
         }
     }
