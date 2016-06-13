@@ -32,6 +32,9 @@ public class Requester {
     public static Request createRequest(String method, String url, Map params, Map<String, String> headers, String data) throws Exception {
         Request.Builder rb = new Request.Builder();
 
+        if (data == null) {
+            data = "";
+        }
         RequestBody reqBody = RequestBody.create(MEDIA_TYPE_JSON, data);
         method = method.toLowerCase();
         if(method.equals("get")) {
