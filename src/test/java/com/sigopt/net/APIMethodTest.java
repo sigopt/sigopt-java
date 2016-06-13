@@ -27,7 +27,6 @@ import static org.junit.Assert.*;
 public class APIMethodTest {
     Map<String, Object> params;
     Map<String, String> headers;
-    Object obj;
     String clientToken;
     String apiBase;
 
@@ -40,7 +39,6 @@ public class APIMethodTest {
     public void setUpMockData() {
         params = new HashMap<String, Object>();
         headers = new HashMap<String, String>();
-        obj = new Object();
         clientToken = "new-client-token";
         apiBase = "new-api-base";
     }
@@ -61,7 +59,7 @@ public class APIMethodTest {
 
     @Test
     public void constructorWithOptionals() throws Exception {
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
+        APIMethod method = new APIMethod("get", "/path", params, headers, clientToken, apiBase, null, null);
 
         assertEquals(clientToken, method.clientToken);
         assertEquals(apiBase, method.apiBase);
@@ -81,7 +79,7 @@ public class APIMethodTest {
         PowerMockito.mockStatic(ParamsBuilder.class);
         PowerMockito.when(ParamsBuilder.build(Mockito.anyMapOf(String.class, Object.class))).thenReturn(expected);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
+        APIMethod method = new APIMethod("get", "/path", params, headers, clientToken, apiBase, null, null);
 
         assertTrue("Params should be a map.", method.params instanceof Map);
         assertEquals(expected, method.params);
@@ -95,7 +93,7 @@ public class APIMethodTest {
         PowerMockito.mockStatic(HeadersBuilder.class);
         PowerMockito.when(HeadersBuilder.build(Mockito.anyMapOf(String.class, String.class), Mockito.anyString())).thenReturn(expected);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
+        APIMethod method = new APIMethod("get", "/path", params, headers, clientToken, apiBase, null, null);
 
         assertTrue("Headers should be a map.", method.headers instanceof Map);
         assertEquals(expected, method.headers);
@@ -106,9 +104,9 @@ public class APIMethodTest {
         String expected = "/super/fake/path";
 
         PowerMockito.mockStatic(PathBuilder.class);
-        PowerMockito.when(PathBuilder.build(Mockito.anyString(), Mockito.any(), Mockito.anyMap())).thenReturn(expected);
+        PowerMockito.when(PathBuilder.build(Mockito.anyString(), Mockito.anyMap())).thenReturn(expected);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
+        APIMethod method = new APIMethod("get", "/path", params, headers,  clientToken, apiBase, null, null);
 
         assertEquals(expected, method.path);
     }
@@ -119,7 +117,7 @@ public class APIMethodTest {
         PowerMockito.mockStatic(Requester.class);
         PowerMockito.when(Requester.request(Mockito.anyString(), Mockito.anyString(), Mockito.anyMap(), Mockito.anyMap(), Mockito.anyString())).thenReturn(response);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
+        APIMethod method = new APIMethod("get", "/path", params, headers, clientToken, apiBase, null, null);
         method.execute();
 
         assertEquals(response, method.response);
@@ -131,7 +129,7 @@ public class APIMethodTest {
         PowerMockito.mockStatic(Requester.class);
         PowerMockito.when(Requester.request(Mockito.anyString(), Mockito.anyString(), Mockito.anyMap(), Mockito.anyMap(), Mockito.anyString())).thenReturn(response);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
+        APIMethod method = new APIMethod("get", "/path", params, headers, clientToken, apiBase, null, null);
 
         try {
             method.execute();

@@ -15,17 +15,11 @@ public class APIMethodCaller<T> {
         this(method, path, null);
     }
     public APIMethodCaller(String method, String path, Class<T> klass) {
-        this(method, path, null, klass);
-    }
-    public APIMethodCaller(String method, String path, Type typeOfT) {
-        this(method, path, null, typeOfT);
-    }
-    public APIMethodCaller(String method, String path, Object instance, Class<T> klass) {
-        this.apiMethodBuilder.method(method).path(path).instance(instance);
+        this.apiMethodBuilder.method(method).path(path);
         this.klass = klass;
     }
-    public APIMethodCaller(String method, String path, Object instance, Type typeOfT) {
-        this.apiMethodBuilder.method(method).path(path).instance(instance);
+    public APIMethodCaller(String method, String path, Type typeOfT) {
+        this.apiMethodBuilder.method(method).path(path);
         this.typeOfT = typeOfT;
     }
 
@@ -66,6 +60,11 @@ public class APIMethodCaller<T> {
 
     public APIMethodCaller<T> addParam(String key, Object value) {
         this.apiMethodBuilder.addParam(key, value);
+        return this;
+    }
+
+    public APIMethodCaller<T> addPathComponent(String key, String value) {
+        this.apiMethodBuilder.addPathComponent(key, value);
         return this;
     }
 

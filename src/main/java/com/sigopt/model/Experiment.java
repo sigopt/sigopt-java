@@ -2,7 +2,6 @@ package com.sigopt.model;
 
 import com.google.gson.reflect.TypeToken;
 import com.sigopt.net.APIMethodCaller;
-import com.sigopt.net.APIPathKey;
 import com.sigopt.net.APIResource;
 
 import java.lang.reflect.Type;
@@ -49,7 +48,6 @@ public class Experiment extends APIResource {
         this.type = type;
     }
 
-    @APIPathKey(key="id")
     public String getId() {
         return id;
     }
@@ -90,11 +88,15 @@ public class Experiment extends APIResource {
       return created;
     }
 
-    public static APIMethodCaller<Experiment> fetch(String id) {
-        return new APIMethodCaller<Experiment>("get", "/experiments/:id", Experiment.class).addParam("id", id);
+    public static APIMethodCaller<Experiment> fetch() {
+        return new APIMethodCaller<Experiment>("get", "/experiments/:id", Experiment.class);
     }
 
-    public static APIMethodCaller<List<Experiment>> fetch() {
+    public static APIMethodCaller<Experiment> fetch(String id) {
+        return Experiment.fetch().addPathComponent("id", id);
+    }
+
+    public static APIMethodCaller<List<Experiment>> list() {
         Type type = new TypeToken<List<Experiment>>() {}.getType();
         return new APIMethodCaller<List<Experiment>>("get", "/experiments", type);
     }
@@ -107,13 +109,20 @@ public class Experiment extends APIResource {
         return Experiment.create().data(e);
     }
 
+    public static APIMethodCaller<Experiment> update() {
+        return new APIMethodCaller<Experiment>("put", "/experiments/:id", Experiment.class);
+    }
+
     public static APIMethodCaller<Experiment> update(String id, Experiment e) {
-        return new APIMethodCaller<Experiment>("put", "/experiments/:id", e, Experiment.class)
-            .data(e);
+        return Experiment.update().addPathComponent("id", id).data(e);
+    }
+
+    public static APIMethodCaller<Experiment> delete() {
+        return new APIMethodCaller<Experiment>("delete", "/experiments/:id", Experiment.class);
     }
 
     public static APIMethodCaller<Experiment> delete(Experiment e) {
-        return new APIMethodCaller<Experiment>("delete", "/experiments/:id", e, Experiment.class);
+        return Experiment.delete().addPathComponent("id", e.id);
     }
 
     public static class Builder {

@@ -3,7 +3,6 @@ package com.sigopt.model;
 import com.google.gson.reflect.TypeToken;
 import com.sigopt.exception.APIException;
 import com.sigopt.net.APIMethodCaller;
-import com.sigopt.net.APIPathKey;
 import com.sigopt.net.APIResource;
 
 import java.lang.reflect.Type;
@@ -24,7 +23,6 @@ public class Client extends APIResource {
         this.name = name;
     }
 
-    @APIPathKey(key="id")
     public String getId() {
         return id;
     }
@@ -38,12 +36,13 @@ public class Client extends APIResource {
     }
 
     public static APIMethodCaller<Client> fetch(String id) {
-        return new APIMethodCaller<Client>("get", "/clients/:id", Client.class).addParam("id", id);
+        return new APIMethodCaller<Client>("get", "/clients/:id", Client.class).addPathComponent("id", id);
     }
 
     public APIMethodCaller<List<Experiment>> experiments() {
         Type type = new TypeToken<List<Experiment>>() {}.getType();
-        return new APIMethodCaller<List<Experiment>>("get", "/clients/:id/experiments", this, type);
+        return new APIMethodCaller<List<Experiment>>("get", "/clients/:id/experiments", type)
+            .addPathComponent("id", this.id);
     }
 
     public static class Builder {

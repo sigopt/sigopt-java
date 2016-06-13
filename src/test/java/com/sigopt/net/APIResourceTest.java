@@ -18,7 +18,6 @@ public class APIResourceTest {
         String id;
         String superAwesomeName;
 
-        @APIPathKey(key="pub_field")
         public Integer pubField = 555;
 
         public MockResource(String id, String superAwesomeName) {
@@ -26,12 +25,10 @@ public class APIResourceTest {
             this.superAwesomeName = superAwesomeName;
         }
 
-        @APIPathKey(key="id")
         public String getId() {
             return this.id;
         }
 
-        @APIPathKey(key="super_awesome_name")
         public String getSuperAwesomeName() {
             return this.superAwesomeName;
         }

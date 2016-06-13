@@ -12,6 +12,7 @@ public class APIMethod {
     public String method;
     public String path;
     public Map<String, Object> params = new HashMap<String, Object>();
+    public Map<String, String> pathComponents = new HashMap<String, String>();
     public Map<String, String> headers = new HashMap<String, String>();
     public String data;
 
@@ -21,14 +22,15 @@ public class APIMethod {
     public String clientToken;
     public String apiBase;
 
-    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, Object obj, String clientToken, String apiBase, String data) throws AuthenticationException, APIException {
+    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, String clientToken, String apiBase, String data, Map<String, String> pathComponents) throws AuthenticationException, APIException {
         this.clientToken = (clientToken == null) ? Sigopt.clientToken : clientToken;
         this.apiBase = (apiBase == null) ? Sigopt.apiBase : apiBase;
         params = MapHelper.ensure(params);
         headers = MapHelper.ensure(headers);
+        pathComponents = MapHelper.ensure(pathComponents);
 
         this.method = method.toLowerCase();
-        this.path = PathBuilder.build(path, obj, params);
+        this.path = PathBuilder.build(path, pathComponents);
         this.params = ParamsBuilder.build(params);
         this.headers = HeadersBuilder.build(headers, this.clientToken);
         this.data = data;
@@ -58,9 +60,9 @@ public class APIMethod {
     public static class Builder {
         String method;
         String path;
-        Object instance;
         Map<String, Object> params;
         Map<String, String> headers;
+        Map<String, String> pathComponents;
         String clientToken;
         String apiBase;
         String data;
@@ -69,7 +71,7 @@ public class APIMethod {
         }
 
         public APIMethod build() throws AuthenticationException, APIException {
-            return new APIMethod(method, path, params, headers, instance, clientToken, apiBase, data);
+            return new APIMethod(method, path, params, headers, clientToken, apiBase, data, pathComponents);
         }
 
         public Builder method(String method) {
@@ -82,11 +84,6 @@ public class APIMethod {
             return this;
         }
 
-        public Builder instance(Object instance) {
-            this.instance = instance;
-            return this;
-        }
-
         public Builder params(Map<String, Object> params) {
             this.params = params;
             return this;
@@ -95,6 +92,12 @@ public class APIMethod {
         public Builder addParam(String key, Object value) {
             this.params = MapHelper.ensure(this.params);
             this.params.put(key, value);
+            return this;
+        }
+
+        public Builder addPathComponent(String key, String value) {
+            this.pathComponents = MapHelper.ensure(this.pathComponents);
+            this.pathComponents.put(key, value);
             return this;
         }
 

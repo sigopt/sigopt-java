@@ -32,7 +32,6 @@ public class APIMethodCallerTest {
         String id;
         String superAwesomeName;
 
-        @APIPathKey(key="pub_field")
         public Integer pubField = 555;
 
         public MockResource(String id, String superAwesomeName) {
@@ -40,12 +39,10 @@ public class APIMethodCallerTest {
             this.superAwesomeName = superAwesomeName;
         }
 
-        @APIPathKey(key="id")
         public String getId() {
             return this.id;
         }
 
-        @APIPathKey(key="super_awesome_name")
         public String getSuperAwesomeName() {
             return this.superAwesomeName;
         }
@@ -58,9 +55,9 @@ public class APIMethodCallerTest {
 
     @Before
     public void setUpMockData() {
-        caller = new APIMethodCaller("get", "/path", null, MockResource.class);
+        caller = new APIMethodCaller("get", "/path", MockResource.class);
         Type type = new TypeToken<List<MockResource>>() {}.getType();
-        listCaller = new APIMethodCaller("post", "/path", null, type);
+        listCaller = new APIMethodCaller("post", "/path", type);
     }
 
     @Test
@@ -96,6 +93,4 @@ public class APIMethodCallerTest {
 
         assertEquals(expected, listCaller.call());
     }
-
-
 }
