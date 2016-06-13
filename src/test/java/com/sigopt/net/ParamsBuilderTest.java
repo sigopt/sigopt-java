@@ -51,31 +51,11 @@ public class ParamsBuilderTest {
         params.put("age", 100);
     }
 
-
-    @Test
-    public void buildWithClientToken() throws Exception {
-        Map<String, Object> actual = ParamsBuilder.build(params, "fake-c-token", null);
-        assertEquals("fake-c-token", actual.get("client_token"));
-    }
-
-    @Test
-    public void buildWithUserToken() throws Exception {
-        Map<String, Object> actual = ParamsBuilder.build(params, null, "fake-u-token");
-        assertEquals("fake-u-token", actual.get("user_token"));
-    }
-
-    @Test
-    public void buildWithBothTokens() throws Exception {
-        Map<String, Object> actual = ParamsBuilder.build(params, "fake-c-token", "fake-u-token");
-        assertEquals("fake-c-token", actual.get("client_token"));
-        assertEquals("fake-u-token", actual.get("user_token"));
-    }
-
     @Test
     public void buildWithData() throws Exception {
         MockResource mockResource = new MockResource("id-10", "some-name-here");
         params.put("data", mockResource);
-        Map<String, Object> actual = ParamsBuilder.build(params, null, null);
+        Map<String, Object> actual = ParamsBuilder.build(params);
         assertEquals(gson.toJson(mockResource), actual.get("data"));
     }
 
@@ -86,7 +66,7 @@ public class ParamsBuilderTest {
         multi.add(new MockResource("id-11", "some-other-name-here"));
 
         params.put("multi_data", multi);
-        Map<String, Object> actual = ParamsBuilder.build(params, null, null);
+        Map<String, Object> actual = ParamsBuilder.build(params);
         assertEquals(gson.toJson(multi), actual.get("multi_data"));
     }
 
@@ -94,7 +74,7 @@ public class ParamsBuilderTest {
     public void buildWithJson() throws Exception {
         MockResource mockResource = new MockResource("id-10", "some-name-here");
         params.put("data", mockResource);
-        Map<String, Object> actual = ParamsBuilder.build(params, null, null);
+        Map<String, Object> actual = ParamsBuilder.build(params);
         String dataString = ((String) actual.get("data"));
         assertTrue("pubField serialized as underscore case", dataString.indexOf("pub_field") >= 0);
         assertTrue("superAwesomeName serialized as underscore case", dataString.indexOf("super_awesome_name") >= 0);

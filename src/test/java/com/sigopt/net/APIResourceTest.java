@@ -13,7 +13,6 @@ import static org.junit.Assert.assertTrue;
 
 public class APIResourceTest {
     String mockResourceJson;
-    String mockResourceListJson;
 
     static class MockResource extends APIResource {
         String id;
@@ -49,18 +48,6 @@ public class APIResourceTest {
             "      \"super_awesome_name\": \"name-value\",\n" +
             "      \"pub_field\": 111\n" +
             "}";
-        mockResourceListJson = "[\n" +
-            "      {\n" +
-            "        \"id\": \"id-value\",\n" +
-            "        \"super_awesome_name\": \"name-value\",\n" +
-            "        \"pub_field\": 111\n" +
-            "      },{\n" +
-            "        \"id\": \"id-value-2\",\n" +
-            "        \"super_awesome_name\": \"name-value-2\",\n" +
-            "        \"pub_field\": 222\n" +
-            "      }\n" +
-            "\n" +
-            "]";
     }
 
     public String createMockResourceJson(String id, String superAwesomeName, Integer pubField) {
@@ -88,24 +75,6 @@ public class APIResourceTest {
         assertEquals("name-value", actual.getSuperAwesomeName());
         assertEquals((Integer)111, actual.pubField);
         assertTrue(actual instanceof MockResource);
-    }
-
-    @Test
-    public void constructResourceListFromJson() throws Exception {
-        Type type = new TypeToken<List<MockResource>>() {}.getType();
-        List<MockResource> actual = APIResource.constructTypedFromJson(mockResourceListJson, type);
-
-        MockResource mr = actual.get(0);
-        assertEquals("id-value", mr.getId());
-        assertEquals("name-value", mr.getSuperAwesomeName());
-        assertEquals((Integer)111, mr.pubField);
-        assertTrue(mr instanceof MockResource);
-
-        mr = actual.get(1);
-        assertEquals("id-value-2", mr.getId());
-        assertEquals("name-value-2", mr.getSuperAwesomeName());
-        assertEquals((Integer)222, mr.pubField);
-        assertTrue(mr instanceof MockResource);
     }
 
     @Test

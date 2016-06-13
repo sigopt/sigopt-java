@@ -38,10 +38,6 @@ public class ExperimentTest extends APIResourceTestBase {
 
         assertTrue("Metric is parsed when nested", exp.getMetric() instanceof Metric);
         assertNotNull(exp.getMetric());
-
-        assertTrue("Cohorts is parsed when nested", exp.getCohorts() instanceof List);
-        assertNotNull(exp.getCohorts());
-        assertTrue(exp.getCohorts().size() > 0);
     }
 
 }

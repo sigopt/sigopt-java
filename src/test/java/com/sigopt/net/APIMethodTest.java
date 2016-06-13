@@ -61,7 +61,7 @@ public class APIMethodTest {
 
     @Test
     public void constructorWithOptionals() throws Exception {
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
 
         assertEquals(clientToken, method.clientToken);
         assertEquals(apiBase, method.apiBase);
@@ -79,9 +79,9 @@ public class APIMethodTest {
         expected.put("dog", "dog-value");
 
         PowerMockito.mockStatic(ParamsBuilder.class);
-        PowerMockito.when(ParamsBuilder.build(Mockito.anyMapOf(String.class, Object.class), Mockito.anyString(), Mockito.anyString())).thenReturn(expected);
+        PowerMockito.when(ParamsBuilder.build(Mockito.anyMapOf(String.class, Object.class))).thenReturn(expected);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
 
         assertTrue("Params should be a map.", method.params instanceof Map);
         assertEquals(expected, method.params);
@@ -93,9 +93,9 @@ public class APIMethodTest {
         expected.put("dog", "dog-value");
 
         PowerMockito.mockStatic(HeadersBuilder.class);
-        PowerMockito.when(HeadersBuilder.build(Mockito.anyMapOf(String.class, String.class))).thenReturn(expected);
+        PowerMockito.when(HeadersBuilder.build(Mockito.anyMapOf(String.class, String.class), Mockito.anyString())).thenReturn(expected);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
 
         assertTrue("Headers should be a map.", method.headers instanceof Map);
         assertEquals(expected, method.headers);
@@ -108,7 +108,7 @@ public class APIMethodTest {
         PowerMockito.mockStatic(PathBuilder.class);
         PowerMockito.when(PathBuilder.build(Mockito.anyString(), Mockito.any(), Mockito.anyMap())).thenReturn(expected);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
 
         assertEquals(expected, method.path);
     }
@@ -117,9 +117,9 @@ public class APIMethodTest {
     public void execute() throws Exception {
         Requester.Response response = new Requester.Response("{\"fake\": \"body\"}", 200);
         PowerMockito.mockStatic(Requester.class);
-        PowerMockito.when(Requester.request(Mockito.anyString(), Mockito.anyString(), Mockito.anyMap(), Mockito.anyMap())).thenReturn(response);
+        PowerMockito.when(Requester.request(Mockito.anyString(), Mockito.anyString(), Mockito.anyMap(), Mockito.anyMap(), Mockito.anyString())).thenReturn(response);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
         method.execute();
 
         assertEquals(response, method.response);
@@ -129,9 +129,9 @@ public class APIMethodTest {
     public void executeWithErrorCode() throws Exception {
         Requester.Response response = new Requester.Response("{\"fake\": \"body\"}", 400);
         PowerMockito.mockStatic(Requester.class);
-        PowerMockito.when(Requester.request(Mockito.anyString(), Mockito.anyString(), Mockito.anyMap(), Mockito.anyMap())).thenReturn(response);
+        PowerMockito.when(Requester.request(Mockito.anyString(), Mockito.anyString(), Mockito.anyMap(), Mockito.anyMap(), Mockito.anyString())).thenReturn(response);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase, null);
 
         try {
             method.execute();

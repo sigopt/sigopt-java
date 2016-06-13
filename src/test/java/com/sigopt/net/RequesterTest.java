@@ -19,7 +19,7 @@ public class RequesterTest {
         nested.put("nestedmap", "nested-value");
         params.put("dog", "dog-value");
         params.put("nested", new HashMap[]{nested});
-        Request actual = Requester.createRequest("get", "https://www.test.com", params, new HashMap<String, String>());
+        Request actual = Requester.createRequest("get", "https://www.test.com", params, new HashMap<String, String>(), "");
 
         // Make sure we url encode params.
         String split[] = actual.url().toString().split("[?&]");
