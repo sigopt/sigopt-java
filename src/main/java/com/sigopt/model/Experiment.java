@@ -1,8 +1,10 @@
 package com.sigopt.model;
 
 import com.google.gson.reflect.TypeToken;
+import com.sigopt.net.APIObject;
 import com.sigopt.net.APIMethodCaller;
 import com.sigopt.net.APIResource;
+import com.sigopt.net.BoundObject;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -121,8 +123,68 @@ public class Experiment extends APIResource {
         return new APIMethodCaller<Experiment>("delete", "/experiments/:id", Experiment.class);
     }
 
-    public static APIMethodCaller<Experiment> delete(Experiment e) {
-        return Experiment.delete().addPathComponent("id", e.id);
+    public static APIMethodCaller<Experiment> delete(String id) {
+        return Experiment.delete().addPathComponent("id", id);
+    }
+
+    private static class Subresource<T extends APIObject> extends BoundObject {
+        String name;
+        Class<T> klass;
+
+        public Subresource(String prefix, String name, Class<T> klass) {
+            super(prefix);
+            this.name = name;
+            this.klass = klass;
+        }
+
+        public APIMethodCaller<T> fetch() {
+            return new APIMethodCaller<T>("get", this.prefix() + "/" + this.name + "/:id", klass);
+        }
+
+        public APIMethodCaller<T> fetch(String id) {
+            return this.fetch().addParam("id", id);
+        }
+
+        public APIMethodCaller<List<T>> list() {
+            Type type = new TypeToken<List<T>>() {}.getType();
+            return new APIMethodCaller<List<T>>("get", this.prefix() + "/" + this.name, type);
+        }
+
+        public APIMethodCaller<T> create() {
+            return new APIMethodCaller<T>("post", this.prefix() + "/" + this.name, klass);
+        }
+
+        public APIMethodCaller<T> create(T o) {
+            return this.create().data(o);
+        }
+
+        public APIMethodCaller<T> update() {
+            return new APIMethodCaller<T>("put", this.prefix() + "/" + this.name + "/:id", klass);
+        }
+
+        public APIMethodCaller<T> update(String id, T o) {
+            return this.create().addPathComponent("id", id).data(o);
+        }
+
+        public APIMethodCaller<Void> deleteList() {
+            return new APIMethodCaller<Void>("delete", this.prefix() + "/" + this.name, null);
+        }
+
+        public APIMethodCaller<Void> delete() {
+            return new APIMethodCaller<Void>("delete", this.prefix() + "/" + this.name + "/:id", null);
+        }
+
+        public APIMethodCaller<Void> delete(String id) {
+            return this.delete().addPathComponent("id", id);
+        }
+    }
+
+    public Subresource<Observation> observations() {
+        return new Subresource<Observation>("/experiments/" + this.id, "observations", Observation.class);
+    }
+
+    public Subresource<Suggestion> suggestions() {
+        return new Subresource<Suggestion>("/experiments/" + this.id, "suggestions", Suggestion.class);
     }
 
     public static class Builder {

@@ -4,6 +4,7 @@ import com.google.gson.reflect.TypeToken;
 import com.sigopt.exception.APIException;
 import com.sigopt.net.APIMethodCaller;
 import com.sigopt.net.APIResource;
+import com.sigopt.net.BoundObject;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -39,10 +40,23 @@ public class Client extends APIResource {
         return new APIMethodCaller<Client>("get", "/clients/:id", Client.class).addPathComponent("id", id);
     }
 
-    public APIMethodCaller<List<Experiment>> experiments() {
-        Type type = new TypeToken<List<Experiment>>() {}.getType();
-        return new APIMethodCaller<List<Experiment>>("get", "/clients/:id/experiments", type)
-            .addPathComponent("id", this.id);
+    private static class Experiments extends BoundObject {
+        public Experiments(String prefix) {
+            super(prefix);
+        }
+
+        public APIMethodCaller<List<Experiment>> list() {
+            Type type = new TypeToken<List<Experiment>>() {}.getType();
+            return new APIMethodCaller<List<Experiment>>("get", this.prefix() + "/experiments", type);
+        }
+
+        public APIMethodCaller<Experiment> create() {
+            return new APIMethodCaller<Experiment>("post", this.prefix() + "/experiments", Experiment.class);
+        }
+    }
+
+    public Experiments experiments() {
+        return new Experiments("/clients/" + this.id);
     }
 
     public static class Builder {

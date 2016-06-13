@@ -24,5 +24,4 @@ public class ClientTest extends APIResourceTestBase {
         assertEquals("1", client.getId());
         assertEquals("SigOpt", client.getName());
     }
-
 }
