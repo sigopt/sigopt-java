@@ -5,22 +5,40 @@ import com.sigopt.net.APIObject;
 import java.util.*;
 
 public class Observation extends APIObject {
-    Map<String, Object> assignments;
+    Boolean failed;
     Double value;
     Double valueStddev;
-    Boolean failed;
-    String cohortId;
+    Integer created;
+    Map<String, Object> assignments;
+    Map<String, String> metadata;
+    String experiment;
+    String id;
+    String suggestion;
 
-    public Observation(Map<String, Object> assignments, Double value, Double valueStddev, Boolean failed, String cohortId) {
-        this.assignments = assignments;
+    public Observation(
+        Boolean failed,
+        Double value,
+        Double valueStddev,
+        Integer created,
+        Map<String, Object> assignments,
+        Map<String, String> metadata,
+        String experiment,
+        String id,
+        String suggestion
+    ) {
+        this.failed = failed;
         this.value = value;
         this.valueStddev = valueStddev;
-        this.failed = failed;
-        this.cohortId = cohortId;
+        this.created = created;
+        this.assignments = assignments;
+        this.metadata = metadata;
+        this.experiment = experiment;
+        this.id = id;
+        this.suggestion = suggestion;
     }
 
-    public Map<String, Object> getAssignments() {
-        return assignments;
+    public Boolean isFailed() {
+        return failed;
     }
 
     public Double getValue() {
@@ -31,35 +49,60 @@ public class Observation extends APIObject {
         return valueStddev;
     }
 
-    public Boolean isFailed() {
-        return failed;
+    public Integer getCreated() {
+        return created;
     }
 
-    public String getCohortId() {
-        return cohortId;
+    public Map<String, Object> getAssignments() {
+        return assignments;
+    }
+
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public String getExperiment() {
+        return experiment;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getSuggestion() {
+        return suggestion;
     }
 
     public static class Builder {
-        Map<String, Object> assignments = new HashMap<String, Object>();
+        Boolean failed;
         Double value;
         Double valueStddev;
-        Boolean failed;
-        String cohortId;
+        Integer created;
+        Map<String, Object> assignments;
+        Map<String, String> metadata;
+        String experiment;
+        String id;
+        String suggestion;
 
         public Builder() {
         }
 
         public Observation build() {
-            return new Observation(assignments, value, valueStddev, failed, cohortId);
+            return new Observation(
+                failed,
+                value,
+                valueStddev,
+                created,
+                assignments,
+                metadata,
+                experiment,
+                id,
+                suggestion
+            );
         }
 
-        public Builder assignments(Map<String, Object> assignments) {
-            this.assignments = assignments;
-            return this;
-        }
-
-        public Builder addAssignment(String key, Object value) {
-            this.assignments.put(key, value);
+        public Builder failed(Boolean failed) {
+            this.failed = failed;
             return this;
         }
 
@@ -73,13 +116,33 @@ public class Observation extends APIObject {
             return this;
         }
 
-        public Builder failed(Boolean failed) {
-            this.failed = failed;
+        public Builder created(Integer created) {
+            this.created = created;
             return this;
         }
 
-        public Builder cohortId(String cohortId) {
-            this.cohortId = cohortId;
+        public Builder assignments(Map<String, Object> assignments) {
+            this.assignments = assignments;
+            return this;
+        }
+
+        public Builder metadata(Map<String, String> metadata) {
+            this.metadata = metadata;
+            return this;
+        }
+
+        public Builder experiment(String experiment) {
+            this.experiment = experiment;
+            return this;
+        }
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder suggestion(String suggestion) {
+            this.suggestion = suggestion;
             return this;
         }
     }
