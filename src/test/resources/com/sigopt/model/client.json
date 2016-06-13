@@ -1,8 +1,4 @@
 {
-  "response": {
-    "client": {
-      "id": 1,
-      "name": "SigOpt"
-    }
-  }
+  "id": 1,
+  "name": "SigOpt"
 }
