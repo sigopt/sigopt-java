@@ -1,6 +1,7 @@
 package com.sigopt.net;
 
 import com.squareup.okhttp.*;
+import org.apache.commons.codec.binary.Base64;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
@@ -50,7 +51,6 @@ public class Requester {
         for(Map.Entry<String, String> entry : headers.entrySet()) {
             rb = rb.header(entry.getKey(), entry.getValue());
         }
-
         Request req = rb.url(url).build();
         return req;
     }

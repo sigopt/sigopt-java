@@ -14,16 +14,8 @@ public class ParamsBuilder {
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .create();
 
-    public static Map<String, Object> build(Map<String, Object> params, String clientToken, String userToken) {
+    public static Map<String, Object> build(Map<String, Object> params) {
         Map<String, Object> ret = new HashMap<String, Object>();
-
-        // TODO(jon): Make this more generic.
-        if(clientToken != null) {
-            ret.put("client_token", clientToken);
-        }
-        if(userToken != null) {
-            ret.put("user_token", userToken);
-        }
 
         params = MapHelper.ensure(params);
         ret = MapHelper.merge(ret, params);

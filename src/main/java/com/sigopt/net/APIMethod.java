@@ -19,20 +19,18 @@ public class APIMethod {
     public APIException exception;
 
     public String clientToken;
-    public String userToken;
     public String apiBase;
 
-    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, Object obj, String clientToken, String userToken, String apiBase, String data) throws AuthenticationException, APIException {
+    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, Object obj, String clientToken, String apiBase, String data) throws AuthenticationException, APIException {
         this.clientToken = (clientToken == null) ? Sigopt.clientToken : clientToken;
-        this.userToken = (userToken == null) ? Sigopt.userToken : userToken;
         this.apiBase = (apiBase == null) ? Sigopt.apiBase : apiBase;
         params = MapHelper.ensure(params);
         headers = MapHelper.ensure(headers);
 
         this.method = method.toLowerCase();
         this.path = PathBuilder.build(path, obj, params);
-        this.params = ParamsBuilder.build(params, this.clientToken, this.userToken);
-        this.headers = HeadersBuilder.build(headers);
+        this.params = ParamsBuilder.build(params);
+        this.headers = HeadersBuilder.build(headers, this.clientToken);
         this.data = data;
     }
 
@@ -64,7 +62,6 @@ public class APIMethod {
         Map<String, Object> params;
         Map<String, String> headers;
         String clientToken;
-        String userToken;
         String apiBase;
         String data;
 
@@ -72,7 +69,7 @@ public class APIMethod {
         }
 
         public APIMethod build() throws AuthenticationException, APIException {
-            return new APIMethod(method, path, params, headers, instance, clientToken, userToken, apiBase, data);
+            return new APIMethod(method, path, params, headers, instance, clientToken, apiBase, data);
         }
 
         public Builder method(String method) {
@@ -114,11 +111,6 @@ public class APIMethod {
 
         public Builder clientToken(String clientToken) {
             this.clientToken = clientToken;
-            return this;
-        }
-
-        public Builder userToken(String userToken) {
-            this.userToken = userToken;
             return this;
         }
 
