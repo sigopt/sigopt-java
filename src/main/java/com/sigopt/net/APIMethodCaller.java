@@ -50,6 +50,10 @@ public class APIMethodCaller<T> {
         return apiMethod;
     }
 
+    public APIMethodCaller<T> data(APIObject data) {
+        return this.data(data.toJson());
+    }
+
     public APIMethodCaller<T> data(String data) {
         this.apiMethodBuilder.data(data);
         return this;

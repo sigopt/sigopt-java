@@ -104,13 +104,13 @@ public class Experiment extends APIResource {
     }
 
     public static APIMethodCaller<Experiment> create(Experiment e) {
-        return Experiment.create(clientId).addData(e);
+        return Experiment.create().data(e);
     }
 
     public static APIMethodCaller<Experiment> update(String id, Experiment e) {
         return new APIMethodCaller<Experiment>("put", "/experiments/:id", Experiment.class)
             .addParam("id", id)
-            .addData(e);
+            .data(e);
     }
 
     public APIMethodCaller<Experiment> delete() {

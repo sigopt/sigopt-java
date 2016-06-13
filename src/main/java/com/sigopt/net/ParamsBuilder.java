@@ -9,11 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParamsBuilder {
-    public static final Gson gson = new GsonBuilder()
-        .serializeNulls()
-        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-        .create();
-
     public static Map<String, Object> build(Map<String, Object> params) {
         Map<String, Object> ret = new HashMap<String, Object>();
 
@@ -21,8 +16,10 @@ public class ParamsBuilder {
         ret = MapHelper.merge(ret, params);
         for (Map.Entry<String, Object> entry: ret.entrySet()) {
             Object value = entry.getValue();
-            if (value instanceof Map || value instanceof Collection || value instanceof JsonSerializeable) {
-                entry.setValue(gson.toJson(value));
+            if (value instanceof Map || value instanceof Collection) {
+                entry.setValue(APIObject.GSON.toJson(value));
+            } else if (value instanceof APIObject) {
+                entry.setValue(((APIObject)value).toJson());
             }
         }
         return ret;
