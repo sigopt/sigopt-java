@@ -1,13 +1,11 @@
 package com.sigopt.net;
 
-
 import com.sigopt.exception.APIException;
 
 import java.lang.reflect.Type;
 import java.util.Map;
 
 public class APIMethodCaller<T> {
-
     APIMethod apiMethod;
     APIMethod.Builder apiMethodBuilder = new APIMethod.Builder();
     Class<T> klass;
@@ -52,6 +50,11 @@ public class APIMethodCaller<T> {
         return apiMethod;
     }
 
+    public APIMethodCaller<T> data(String data) {
+        this.apiMethodBuilder.data(data);
+        return this;
+    }
+
     public APIMethodCaller<T> params(Map<String, Object> params) {
         this.apiMethodBuilder.params(params);
         return this;
@@ -74,11 +77,6 @@ public class APIMethodCaller<T> {
 
     public APIMethodCaller<T> clientToken(String clientToken) {
         this.apiMethodBuilder.clientToken(clientToken);
-        return this;
-    }
-
-    public APIMethodCaller<T> userToken(String userToken) {
-        this.apiMethodBuilder.userToken(userToken);
         return this;
     }
 
