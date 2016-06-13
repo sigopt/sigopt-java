@@ -10,14 +10,12 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class Client extends APIResource {
+    Integer created;
     String id;
     String name;
 
-    public Client(String id) {
-        this.id = id;
-    }
-
-    public Client(String id, String name) {
+    public Client(Integer created, String id, String name) {
+        this.created = created;
         this.id = id;
         this.name = name;
     }
@@ -29,6 +27,10 @@ public class Client extends APIResource {
 
     public String getName() {
         return name;
+    }
+
+    public Integer getCreated() {
+        return created;
     }
 
     public static APIMethodCaller<Client> fetch(String id) {
@@ -43,12 +45,13 @@ public class Client extends APIResource {
     public static class Builder {
         String id;
         String name;
+        Integer created;
 
         public Builder() {
         }
 
         public Client build() {
-            return new Client(id, name);
+            return new Client(id, name, created);
         }
 
         public Builder id(String id) {
@@ -58,6 +61,11 @@ public class Client extends APIResource {
 
         public Builder name(String name) {
             this.name = name;
+            return this;
+        }
+
+        public Builder created(Integer created) {
+            this.created = created;
             return this;
         }
     }
