@@ -31,7 +31,7 @@ public class Client extends APIResource {
         return name;
     }
 
-    public static APIMethodCaller<Client> retrieve(String id) {
+    public static APIMethodCaller<Client> fetch(String id) {
         return new APIMethodCaller<Client>("get", "/clients/:id", Client.class).addParam("id", id);
     }
 

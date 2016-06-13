@@ -65,7 +65,7 @@ public class Experiment extends APIResource {
         return this;
     }
 
-    public static APIMethodCaller<Experiment> retrieve(String id) {
+    public static APIMethodCaller<Experiment> fetch(String id) {
         return new APIMethodCaller<Experiment>("get", "/experiments/:id", Experiment.class).addParam("id", id);
     }
 

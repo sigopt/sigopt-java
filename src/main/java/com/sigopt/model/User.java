@@ -40,7 +40,7 @@ public class User extends APIObject {
         return email;
     }
 
-    public static APIMethodCaller<User> retrieve(String id) {
+    public static APIMethodCaller<User> fetch(String id) {
         return new APIMethodCaller<User>("get", "/users/:id", User.class).addParam("id", id);
     }
 

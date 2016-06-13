@@ -9,7 +9,7 @@ public class Main {
         Sigopt.clientToken = "sample_client_token";
 
         String experimentId = "1";
-        Experiment experiment = Experiment.retrieve(experimentId).call();
+        Experiment experiment = Experiment.fetch(experimentId).call();
         System.out.println(experiment);
     }
 }

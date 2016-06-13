@@ -73,7 +73,7 @@ This makes it easy to add params before an API call is made without forcing deve
 Sigopt.clientToken = "sample_client_token";
 
 String clientId = "1";
-Client client = Client.retrieve(clientId).call();
+Client client = Client.fetch(clientId).call();
 ```
 
 #### List all experiments for a client
@@ -94,7 +94,7 @@ List<Experiment> experiments = new Client(clientId).experiments().call();
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
-Experiment experiment = Experiment.retrieve(experimentId).call();
+Experiment experiment = Experiment.fetch(experimentId).call();
 ```
 
 #### Create an Experiment
@@ -131,7 +131,7 @@ experiment = experiment.insert(clientId).call();
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
-Experiment experiment = Experiment.retrieve(experimentId).call();
+Experiment experiment = Experiment.fetch(experimentId).call();
 
 experiment.getMetric().setName("new metric name");
 experiment.getParameters().get(0).setBounds(new Bounds(25.0, 5000.0));
@@ -144,7 +144,7 @@ experiment = experiment.save().call();
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
-Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
+Experiment experiment = new Experiment(experimentId); // or fetch the experiment via api.
 experiment.delete().call();
 ```
 
@@ -157,7 +157,7 @@ experiment.delete().call();
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
-Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
+Experiment experiment = new Experiment(experimentId); // or fetch the experiment via api.
 Observation observation = experiment.bestObservation().call();
 ```
 
@@ -167,7 +167,7 @@ Observation observation = experiment.bestObservation().call();
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
-Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
+Experiment experiment = new Experiment(experimentId); // or fetch the experiment via api.
 Observation observation = new Observation.Builder()
     .addAssignment("Price Per Month", 40)
     .value(500.0)
@@ -186,7 +186,7 @@ This is identical to reporting one observation. Just pass in multiple and the li
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
-Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
+Experiment experiment = new Experiment(experimentId); // or fetch the experiment via api.
 Observation observation = new Observation.Builder()
     .addAssignment("Price Per Month", 45)
     .value(750.0)
@@ -207,6 +207,6 @@ experiment.report(observation, observation2).call();
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
-Experiment experiment = new Experiment(experimentId); // or retrieve the experiment via api.
+Experiment experiment = new Experiment(experimentId); // or fetch the experiment via api.
 Suggestion suggestion = experiment.suggestion().call();
 ```
