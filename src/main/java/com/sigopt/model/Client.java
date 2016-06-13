@@ -14,7 +14,11 @@ public class Client extends APIResource {
     String id;
     String name;
 
-    public Client(Integer created, String id, String name) {
+    public Client(String id) {
+      this.id = id;
+    }
+
+    protected Client(Integer created, String id, String name) {
         this.created = created;
         this.id = id;
         this.name = name;
@@ -51,7 +55,7 @@ public class Client extends APIResource {
         }
 
         public Client build() {
-            return new Client(id, name, created);
+            return new Client(created, id, name);
         }
 
         public Builder id(String id) {

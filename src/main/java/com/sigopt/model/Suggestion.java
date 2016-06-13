@@ -15,7 +15,11 @@ public class Suggestion extends APIResource {
     String id;
     String state;
 
-    public Suggestion(
+    public Suggestion(String id) {
+        this.id = id;
+    }
+
+    protected Suggestion(
         Integer created,
         Map<String, Object> assignments,
         Map<String, String> metadata,

@@ -25,7 +25,7 @@ public class Experiment extends APIResource {
         this.id = id;
     }
 
-    public Experiment(
+    protected Experiment(
         Integer created,
         List<Parameter> parameters,
         Map<String, String> metadata,

@@ -15,7 +15,11 @@ public class Observation extends APIObject {
     String id;
     String suggestion;
 
-    public Observation(
+    public Observation(String id) {
+        this.id = id;
+    }
+
+    protected Observation(
         Boolean failed,
         Double value,
         Double valueStddev,
