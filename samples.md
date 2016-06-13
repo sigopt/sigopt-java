@@ -2,13 +2,9 @@
 
 ## Models / Resources
 
-### All models have builders and constructors
+### All models have builders
 
-Every model has a constructor that expect all params, or if you want to only use some params you can use a builder. Eg:
-
-```java
-Parameter p1 = new Parameter("param1", "double", new Bounds(0.0, 10.0), new ArrayList<CategoricalValue>(), null, null);
-```
+To create a model, use the corresponding Builder class.
 
 ```java
 Parameter p2 = new Parameter.Builder()
@@ -18,25 +14,15 @@ Parameter p2 = new Parameter.Builder()
     .build();
 ```
 
-The builders tend to be more practical in Java (since you rarely set every possibly attribute), but either works.
-
-### All models with an ID have a constructor that just takes the id
-
-For example, you can create a new Experiment with the following:
+For classes with IDs, you can alternatively construct an instance with just the ID.
 
 ```java
 Experiment e = new Experiment("id-here");
 ```
 
-The purpose of this is to facilitate with nested resource lookups. Eg:
-
-```java
-Observation bestObs = new Experiment("1").bestObservation().call();
-```
-
 ## Authentication
 
-Authentication is done by setting your client_token.
+Authentication is done by setting your `client_token`.
 
 ```java
 Sigopt.clientToken = "sample_client_token";
@@ -53,7 +39,7 @@ To proceed with the api call, simply use the `.call()` method on the `APIMethodC
 
 ```java
 // Assume experiment is already initialized with data
-Experiment.create(new Experiment(), "client_id")
+Experiment.create(new Experiment())
     .addHeader("Some Header", "custom-value")
     .addParam("other_data", "some-other-param")
     .call();
@@ -82,7 +68,7 @@ Client client = Client.fetch(clientId).call();
 Sigopt.clientToken = "sample_client_token";
 
 String clientId = "1";
-List<Experiment> experiments = new Client(clientId).experiments().call();
+List<Experiment> experiments = new Client(clientId).experiments().list().call();
 ```
 
 
@@ -120,9 +106,7 @@ Experiment experiment = new Experiment.Builder()
     .parameters(params)
     .metric(metric)
     .build();
-experiment = experiment.insert(clientId).call();
-// Alternatively:
-// experiment = Experiment.create(experiment, clientId).call();
+experiment = Experiment.create(experiment).call();
 ```
 
 #### Update an Experiment
@@ -135,7 +119,7 @@ Experiment experiment = Experiment.fetch(experimentId).call();
 
 experiment.getMetric().setName("new metric name");
 experiment.getParameters().get(0).setBounds(new Bounds(25.0, 5000.0));
-experiment = experiment.save().call();
+experiment = Experiment.update(experiment.id, experiment).call();
 ```
 
 #### Delete an Experiment
@@ -144,24 +128,23 @@ experiment = experiment.save().call();
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
-Experiment experiment = new Experiment(experimentId); // or fetch the experiment via api.
-experiment.delete().call();
+Experiment.delete(experimentId).call();
 ```
 
 
 ### Observations
 
-#### Retrieve the best observation from an experiment
+#### Retrieve all observations from an experiment
 
 ```java
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
 Experiment experiment = new Experiment(experimentId); // or fetch the experiment via api.
-Observation observation = experiment.bestObservation().call();
+List<Observation> observation = experiment.observations().list().call();
 ```
 
-#### Report an observation for an experiment
+#### Create an observation for an experiment
 
 ```java
 Sigopt.clientToken = "sample_client_token";
@@ -172,41 +155,28 @@ Observation observation = new Observation.Builder()
     .addAssignment("Price Per Month", 40)
     .value(500.0)
     .build();
-experiment.report(observation).call();
-
-// You can also add things like worker_id like this:
-experiment.report(observation).addParam("worker_id", workerId).call();
-```
-
-#### Report multiple observations for an experiment
-
-This is identical to reporting one observation. Just pass in multiple and the lib handles everything else.
-
-```java
-Sigopt.clientToken = "sample_client_token";
-
-String experimentId = "1";
-Experiment experiment = new Experiment(experimentId); // or fetch the experiment via api.
-Observation observation = new Observation.Builder()
-    .addAssignment("Price Per Month", 45)
-    .value(750.0)
-    .build();
-Observation observation2 = new Observation.Builder()
-    .addAssignment("Price Per Month", 55)
-    .value(900.0)
-    .build();
-experiment.report(observation, observation2).call();
+experiment.observations().create(observation).call();
 ```
 
 
 ### Suggestions
 
-#### Retrieve a Suggestion from an Experiment
+#### Create a Suggestion for an Experiment
+
+#### Retrieve all observations from an experiment
 
 ```java
 Sigopt.clientToken = "sample_client_token";
 
 String experimentId = "1";
 Experiment experiment = new Experiment(experimentId); // or fetch the experiment via api.
-Suggestion suggestion = experiment.suggestion().call();
+List<Suggestion> suggestions = experiment.suggestions().list().call();
+```
+
+```java
+Sigopt.clientToken = "sample_client_token";
+
+String experimentId = "1";
+Experiment experiment = new Experiment(experimentId); // or fetch the experiment via api.
+Suggestion suggestion = experiment.suggestion().create().call();
 ```
