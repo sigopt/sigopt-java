@@ -40,7 +40,7 @@ public class Client extends APIResource {
         return new APIMethodCaller<Client>("get", "/clients/:id", Client.class).addPathComponent("id", id);
     }
 
-    private static class Experiments extends BoundObject {
+    public static class Experiments extends BoundObject {
         public Experiments(String prefix) {
             super(prefix);
         }

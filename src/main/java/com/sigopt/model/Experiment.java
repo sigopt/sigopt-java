@@ -115,8 +115,12 @@ public class Experiment extends APIResource {
         return new APIMethodCaller<Experiment>("put", "/experiments/:id", Experiment.class);
     }
 
+    public static APIMethodCaller<Experiment> update(String id) {
+        return Experiment.update().addPathComponent("id", id);
+    }
+
     public static APIMethodCaller<Experiment> update(String id, Experiment e) {
-        return Experiment.update().addPathComponent("id", id).data(e);
+        return Experiment.update(id).data(e);
     }
 
     public static APIMethodCaller<Experiment> delete() {
@@ -127,7 +131,7 @@ public class Experiment extends APIResource {
         return Experiment.delete().addPathComponent("id", id);
     }
 
-    private static class Subresource<T extends APIObject> extends BoundObject {
+    public static class Subresource<T extends APIObject> extends BoundObject {
         String name;
         Class<T> klass;
 
@@ -162,8 +166,12 @@ public class Experiment extends APIResource {
             return new APIMethodCaller<T>("put", this.prefix() + "/" + this.name + "/:id", klass);
         }
 
+        public APIMethodCaller<T> update(String id) {
+            return this.update().addPathComponent("id", id);
+        }
+
         public APIMethodCaller<T> update(String id, T o) {
-            return this.create().addPathComponent("id", id).data(o);
+            return this.update(id).data(o);
         }
 
         public APIMethodCaller<Void> deleteList() {
