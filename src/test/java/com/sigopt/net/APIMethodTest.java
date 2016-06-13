@@ -29,13 +29,11 @@ public class APIMethodTest {
     Map<String, String> headers;
     Object obj;
     String clientToken;
-    String userToken;
     String apiBase;
 
     @BeforeClass
     public static void setUp() {
         Sigopt.clientToken = "client-token";
-        Sigopt.userToken = "user-token";
     }
 
     @Before
@@ -44,7 +42,6 @@ public class APIMethodTest {
         headers = new HashMap<String, String>();
         obj = new Object();
         clientToken = "new-client-token";
-        userToken = "new-user-token";
         apiBase = "new-api-base";
     }
 
@@ -53,7 +50,6 @@ public class APIMethodTest {
         APIMethod method = new APIMethod("get", "/path", null, null, null, null, null, null);
 
         assertEquals("client-token", method.clientToken);
-        assertEquals("user-token", method.userToken);
         assertEquals(Sigopt.apiBase, method.apiBase);
         assertEquals("get", method.method);
         assertEquals("/path", method.path);
@@ -65,10 +61,9 @@ public class APIMethodTest {
 
     @Test
     public void constructorWithOptionals() throws Exception {
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, userToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
 
         assertEquals(clientToken, method.clientToken);
-        assertEquals(userToken, method.userToken);
         assertEquals(apiBase, method.apiBase);
         assertEquals("get", method.method);
         assertEquals("/path", method.path);
@@ -86,7 +81,7 @@ public class APIMethodTest {
         PowerMockito.mockStatic(ParamsBuilder.class);
         PowerMockito.when(ParamsBuilder.build(Mockito.anyMapOf(String.class, Object.class), Mockito.anyString(), Mockito.anyString())).thenReturn(expected);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, userToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
 
         assertTrue("Params should be a map.", method.params instanceof Map);
         assertEquals(expected, method.params);
@@ -100,7 +95,7 @@ public class APIMethodTest {
         PowerMockito.mockStatic(HeadersBuilder.class);
         PowerMockito.when(HeadersBuilder.build(Mockito.anyMapOf(String.class, String.class))).thenReturn(expected);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, userToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
 
         assertTrue("Headers should be a map.", method.headers instanceof Map);
         assertEquals(expected, method.headers);
@@ -113,7 +108,7 @@ public class APIMethodTest {
         PowerMockito.mockStatic(PathBuilder.class);
         PowerMockito.when(PathBuilder.build(Mockito.anyString(), Mockito.any(), Mockito.anyMap())).thenReturn(expected);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, userToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
 
         assertEquals(expected, method.path);
     }
@@ -124,7 +119,7 @@ public class APIMethodTest {
         PowerMockito.mockStatic(Requester.class);
         PowerMockito.when(Requester.request(Mockito.anyString(), Mockito.anyString(), Mockito.anyMap(), Mockito.anyMap())).thenReturn(response);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, userToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
         method.execute();
 
         assertEquals(response, method.response);
@@ -136,7 +131,7 @@ public class APIMethodTest {
         PowerMockito.mockStatic(Requester.class);
         PowerMockito.when(Requester.request(Mockito.anyString(), Mockito.anyString(), Mockito.anyMap(), Mockito.anyMap())).thenReturn(response);
 
-        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, userToken, apiBase);
+        APIMethod method = new APIMethod("get", "/path", params, headers, obj, clientToken, apiBase);
 
         try {
             method.execute();

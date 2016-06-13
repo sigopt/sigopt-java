@@ -54,7 +54,6 @@ public class APIMethodCallerTest {
     @BeforeClass
     public static void setUp() {
         Sigopt.clientToken = "client-token";
-        Sigopt.userToken = "user-token";
     }
 
     @Before

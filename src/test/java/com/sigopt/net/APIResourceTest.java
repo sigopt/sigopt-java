@@ -45,17 +45,11 @@ public class APIResourceTest {
     @Before
     public void setUpMockData() {
         mockResourceJson = "{\n" +
-            "  \"response\": {\n" +
-            "    \"mock_resource\": {\n" +
             "      \"id\": \"id-value\",\n" +
             "      \"super_awesome_name\": \"name-value\",\n" +
             "      \"pub_field\": 111\n" +
-            "    }\n" +
-            "  }\n" +
             "}";
-        mockResourceListJson = "{\n" +
-            "  \"response\": {\n" +
-            "    \"mock_resources\": [\n" +
+        mockResourceListJson = "[\n" +
             "      {\n" +
             "        \"id\": \"id-value\",\n" +
             "        \"super_awesome_name\": \"name-value\",\n" +
@@ -66,18 +60,7 @@ public class APIResourceTest {
             "        \"pub_field\": 222\n" +
             "      }\n" +
             "\n" +
-            "    ]\n" +
-            "  }\n" +
-            "}";
-    }
-
-    public String sigoptWrapJson(String key, String json) {
-        String ret = "{\n" +
-            "  \"response\": {\n" +
-            "    \"" + key + "\": " + json + "\n" +
-            "  }\n" +
-            "}\n";
-        return ret;
+            "]";
     }
 
     public String createMockResourceJson(String id, String superAwesomeName, Integer pubField) {
@@ -129,7 +112,7 @@ public class APIResourceTest {
     public void preProcessJson() throws Exception {
         String expected = createMockResourceJson("id-1", "name-1", 1).replaceAll("[ \n]+", "");
 
-        String actual = APIResource.preProcessJson(sigoptWrapJson("mock_resource", createMockResourceJson("id-1", "name-1", 1)));
+        String actual = APIResource.preProcessJson(createMockResourceJson("id-1", "name-1", 1));
         assertEquals(expected, actual.replaceAll("[ \n]+", ""));
     }
 
