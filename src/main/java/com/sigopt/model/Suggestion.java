@@ -8,31 +8,71 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Suggestion extends APIResource {
+    Integer created;
     Map<String, Object> assignments;
-    Double expectedImprovement;
+    Map<String, String> metadata;
+    String experiment;
+    String id;
+    String state;
 
-    public Suggestion(Map<String, Object> assignments, Double expectedImprovement) {
+    public Suggestion(
+        Integer created,
+        Map<String, Object> assignments,
+        Map<String, String> metadata,
+        String experiment,
+        String id,
+        String state
+    ) {
+        this.created = created;
         this.assignments = assignments;
-        this.expectedImprovement = expectedImprovement;
+        this.metadata = metadata;
+        this.experiment = experiment;
+        this.id = id;
+        this.state = state;
+    }
+
+    public Integer getCreated() {
+        return created;
     }
 
     public Map<String, Object> getAssignments() {
         return assignments;
     }
 
-    public Double getExpectedImprovement() {
-        return expectedImprovement;
+    public Map<String, String> getMetadata() {
+        return metadata;
+    }
+
+    public String getExperiment() {
+        return experiment;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getState() {
+        return state;
     }
 
     public static class Builder {
-        Map<String, Object> assignments = new HashMap<String, Object>();
-        Double expectedImprovement;
+        Integer created;
+        Map<String, Object> assignments;
+        Map<String, String> metadata;
+        String experiment;
+        String id;
+        String state;
 
         public Builder() {
         }
 
         public Suggestion build() {
-            return new Suggestion(assignments, expectedImprovement);
+            return new Suggestion(created, assignments, metadata, experiment, id, state);
+        }
+
+        public Builder created(Integer created) {
+            this.created = created;
+            return this;
         }
 
         public Builder assignments(Map<String, Object> assignments) {
@@ -40,13 +80,23 @@ public class Suggestion extends APIResource {
             return this;
         }
 
-        public Builder addAssignment(String key, Object value) {
-            this.assignments.put(key, value);
+        public Builder metadata(Map<String, String> metadata) {
+            this.metadata = metadata;
             return this;
         }
 
-        public Builder expectedImprovement(Double expectedImprovement) {
-            this.expectedImprovement = expectedImprovement;
+        public Builder experiment(String experiment) {
+            this.experiment = experiment;
+            return this;
+        }
+
+        public Builder id(String id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder state(String state) {
+            this.state = state;
             return this;
         }
     }
