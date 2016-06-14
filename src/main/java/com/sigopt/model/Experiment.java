@@ -98,9 +98,9 @@ public class Experiment extends APIResource {
         return Experiment.fetch().addPathComponent("id", id);
     }
 
-    public static APIMethodCaller<List<Experiment>> list() {
-        Type type = new TypeToken<List<Experiment>>() {}.getType();
-        return new APIMethodCaller<List<Experiment>>("get", "/experiments", type);
+    public static APIMethodCaller<Pagination<Experiment>> list() {
+        Type type = new TypeToken<Pagination<Experiment>>() {}.getType();
+        return new APIMethodCaller<Pagination<Experiment>>("get", "/experiments", type);
     }
 
     public static APIMethodCaller<Experiment> create() {
@@ -149,9 +149,9 @@ public class Experiment extends APIResource {
             return this.fetch().addParam("id", id);
         }
 
-        public APIMethodCaller<List<T>> list() {
-            Type type = new TypeToken<List<T>>() {}.getType();
-            return new APIMethodCaller<List<T>>("get", this.prefix() + "/" + this.name, type);
+        public APIMethodCaller<Pagination<T>> list() {
+            Type type = new TypeToken<Pagination<T>>() {}.getType();
+            return new APIMethodCaller<Pagination<T>>("get", this.prefix() + "/" + this.name, type);
         }
 
         public APIMethodCaller<T> create() {

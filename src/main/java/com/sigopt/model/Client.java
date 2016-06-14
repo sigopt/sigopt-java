@@ -7,7 +7,6 @@ import com.sigopt.net.APIResource;
 import com.sigopt.net.BoundObject;
 
 import java.lang.reflect.Type;
-import java.util.List;
 
 public class Client extends APIResource {
     Integer created;
@@ -45,9 +44,9 @@ public class Client extends APIResource {
             super(prefix);
         }
 
-        public APIMethodCaller<List<Experiment>> list() {
-            Type type = new TypeToken<List<Experiment>>() {}.getType();
-            return new APIMethodCaller<List<Experiment>>("get", this.prefix() + "/experiments", type);
+        public APIMethodCaller<Pagination<Experiment>> list() {
+            Type type = new TypeToken<Pagination<Experiment>>() {}.getType();
+            return new APIMethodCaller<Pagination<Experiment>>("get", this.prefix() + "/experiments", type);
         }
 
         public APIMethodCaller<Experiment> create() {
