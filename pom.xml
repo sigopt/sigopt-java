@@ -5,7 +5,22 @@
     <packaging>jar</packaging>
     <version>2.0.0</version>
     <name>sigopt-java</name>
-    <url>https://github.com/sigopt/sigopt-java</url>
+    <description>Sigopt Java Bindings</description>
+    <url>https://sigopt.com</url>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Patrick Hayes</name>
+            <email>patrick@sigopt.com</email>
+            <organization>SigOpt</organization>
+            <organizationUrl>https://sigopt.com</organizationUrl>
+        </developer>
+    </developers>
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -53,7 +68,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-    <description>Sigopt Java Bindings</description>
     <organization>
         <name>Sigopt</name>
         <url>https://sigopt.com</url>
