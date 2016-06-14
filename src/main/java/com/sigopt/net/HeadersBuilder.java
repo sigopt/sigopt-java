@@ -58,7 +58,7 @@ public class HeadersBuilder {
         Map<String, String> ret = new HashMap<String, String>();
         byte[] apiKeyBytes = String.format("%s:", apiKey).getBytes();
         String base64Key = Base64.getEncoder().encodeToString(apiKeyBytes);
-        ret.put("Authorization", base64Key);
+        ret.put("Authorization", "Basic " + base64Key);
         return ret;
     }
 
