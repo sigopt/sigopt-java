@@ -14,17 +14,11 @@ public abstract class APIResource extends APIObject {
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .create();
 
-    public static <T> T constructFromJson(String json, Class <T> klass) {
-        return gson.fromJson(preProcessJson(json), klass);
+    public static <T extends Object> T constructFromJson(String json, Class <T> klass) {
+        return gson.fromJson(json, klass);
     }
 
-    public static <T> T constructTypedFromJson(String json, Type typeOfT) {
-        return (T) gson.fromJson(preProcessJson(json), typeOfT);
+    public static <T extends Object> T constructTypedFromJson(String json, Type typeOfT) {
+        return (T) gson.fromJson(json, typeOfT);
     }
-
-    static String preProcessJson(String json) {
-        JsonElement jsonElement = jsonParser.parse(json);
-        return jsonElement.getAsJsonObject().toString();
-    }
-
 }

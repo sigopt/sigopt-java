@@ -73,13 +73,4 @@ public class APIResourceTest {
         assertEquals((Integer)111, actual.pubField);
         assertTrue(actual instanceof MockResource);
     }
-
-    @Test
-    public void preProcessJson() throws Exception {
-        String expected = createMockResourceJson("id-1", "name-1", 1).replaceAll("[ \n]+", "");
-
-        String actual = APIResource.preProcessJson(createMockResourceJson("id-1", "name-1", 1));
-        assertEquals(expected, actual.replaceAll("[ \n]+", ""));
-    }
-
 }
