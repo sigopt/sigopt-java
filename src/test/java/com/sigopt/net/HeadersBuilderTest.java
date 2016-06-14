@@ -80,8 +80,10 @@ public class HeadersBuilderTest {
 
     @Test
     public void basicAuthHeaderWithKey() throws Exception {
-        Map<String, String> actual = HeadersBuilder.basicAuthHeader("api-key");
-        String decoded = new String(Base64.getDecoder().decode(actual.get("Authorization")));
+        Map<String, String> headers = HeadersBuilder.basicAuthHeader("api-key");
+        String actual = headers.get("Authorization");
+        assertEquals("Basic ", actual.substring(0, 6));
+        String decoded = new String(Base64.getDecoder().decode(actual.substring(6)));
 
         assertEquals("api-key:", decoded);
     }
