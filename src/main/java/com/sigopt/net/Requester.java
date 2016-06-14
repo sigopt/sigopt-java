@@ -58,7 +58,7 @@ public class Requester {
         return req;
     }
 
-    static String composeUrlEncodedUrl(String url, Map params) {
+    static String composeUrlEncodedUrl(String url, Map<String, Object> params) {
         String urlSuffix = mapToUrlEncodedString(params);
         if(url.contains("?")) {
             url = url + "&" + urlSuffix;
@@ -68,28 +68,16 @@ public class Requester {
         return url;
     }
 
-    static String mapToUrlEncodedString(Map map) {
+    static String mapToUrlEncodedString(Map<String, Object> map) {
         StringBuilder ret = new StringBuilder();
         List<KeyValue> list = mapToKeyValueList(map);
+        if (list.isEmpty()) {
+            return "";
+        }
         for(KeyValue kv : list) {
             ret.append(kv.toString() + "&");
         }
         return ret.substring(0, ret.length() - 1);
-    }
-
-    static List<Object> arrayToList(Object array) {
-        Class arrayKlass = array.getClass().getComponentType();
-        if (arrayKlass.isPrimitive()) {
-            List<Object> ar = new ArrayList<Object>();
-            int length = Array.getLength(array);
-            for (int i = 0; i < length; i++) {
-                ar.add(Array.get(array, i));
-            }
-            return ar;
-        }
-        else {
-            return Arrays.asList((Object[]) array);
-        }
     }
 
     static class KeyValue {
@@ -114,37 +102,13 @@ public class Requester {
                 return str;
             }
         }
-
     }
 
-    static List<KeyValue> mapToKeyValueList(Object obj) {
-        return mapToKeyValueList(obj, "");
-    }
-
-    static List<KeyValue> mapToKeyValueList(Object obj, String prefix) {
+    static List<KeyValue> mapToKeyValueList(Map<String, Object> map) {
         List<KeyValue> ret = new ArrayList<KeyValue>();
-
-        if(obj.getClass().isArray() || obj instanceof Collection) {
-            Collection<Object> list;
-            if(obj instanceof Collection) {
-                list = (Collection<Object>)obj;
-            } else {
-                list = arrayToList(obj);
-            }
-            for(Object o : list) {
-                ret.addAll(mapToKeyValueList(o, prefix + "[]"));
-            }
-        } else if(obj instanceof Map) {
-            Map<Object, Object> map = (Map<Object, Object>)obj;
-            for(Map.Entry<Object, Object> entry : map.entrySet()) {
-                String newPrefix = prefix.length() == 0 ? entry.getKey().toString() : prefix + "[" + entry.getKey().toString() + "]";
-                ret.addAll(mapToKeyValueList(entry.getValue(), newPrefix));
-            }
-        } else {
-            ret.add(new KeyValue(prefix, obj.toString()));
+        for(Map.Entry<String, Object> entry : map.entrySet()) {
+            ret.add(new KeyValue(entry.getKey(), entry.getValue().toString()));
         }
-
         return ret;
     }
-
 }

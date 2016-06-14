@@ -15,15 +15,12 @@ public class RequesterTest {
     @Test
     public void createRequestGet() throws Exception {
         HashMap<String, Object> params = new HashMap<String, Object>();
-        HashMap<String, Object> nested = new HashMap<String, Object>();
-        nested.put("nestedmap", "nested-value");
         params.put("dog", "dog-value");
-        params.put("nested", new HashMap[]{nested});
         Request actual = Requester.createRequest("get", "https://www.test.com", params, new HashMap<String, String>(), "");
 
         // Make sure we url encode params.
         String split[] = actual.url().toString().split("[?&]");
-        String expected[] = new String[]{"dog=dog-value", "nested[][nestedmap]=nested-value"};
+        String expected[] = new String[]{"dog=dog-value"};
         for(String exp : expected) {
             boolean found = false;
             for (String act : split) {
