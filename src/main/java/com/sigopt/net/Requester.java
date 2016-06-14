@@ -24,12 +24,12 @@ public class Requester {
         }
     }
 
-    public static Response request(String method, String url, Map params, Map<String, String> headers, String data) throws Exception {
+    public static Response request(String method, String url, Map<String, Object> params, Map<String, String> headers, String data) throws Exception {
         com.squareup.okhttp.Response res = client.newCall(createRequest(method, url, params, headers, data)).execute();
         return new Response(res.body().string(), res.code());
     }
 
-    public static Request createRequest(String method, String url, Map params, Map<String, String> headers, String data) throws Exception {
+    public static Request createRequest(String method, String url, Map<String, Object> params, Map<String, String> headers, String data) throws Exception {
         Request.Builder rb = new Request.Builder();
 
         if (data == null) {
