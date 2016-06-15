@@ -9,3 +9,5 @@ jdk:
 sudo: false
 
 install: mvn install -Dgpg.skip=true
+
+script: mvn test
