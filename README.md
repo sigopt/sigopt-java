@@ -1,11 +1,11 @@
-# Sigopt Java Bindings
+# Sigopt Java API Client
 
 You can sign up for a Sigopt experiment at https://sigopt.com.
 
 Requirements
 ============
 
-Sigopt-java supports Android 2.3 and above. For Java, the minimum requirement is 1.7.
+Sigopt-java requires Java 1.8.
 
 Installation
 ============
@@ -77,6 +77,99 @@ You'll need to manually install the following JARs:
 * The Sigopt JAR from https://github.com/sigopt/sigopt-java/releases/latest
 * [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.4-release.zip>.
 * [OkHttp](http://square.github.io/okhttp/) from <https://search.maven.org/remote_content?g=com.squareup.okio&a=okio&v=LATEST>.
+
+Getting Started
+===============
+
+Sign up for an account at [https://sigopt.com](https://sigopt.com).
+In order to use the API, you'll need your API token from your [user profile](https://sigopt.com/user/profile).
+
+To call the API, instantiate a connection with your token.
+
+```java
+import com.sigopt.Sigopt;
+Sigopt.clientToken = "CLIENT_TOKEN";
+```
+
+## Issuing Requests
+Then, you can use the connection to issue API requests. An example creating an experiment and running the
+optimization loop:
+
+```java
+import java.util.Arrays;
+import com.sigopt.Experiment;
+Experiment experiment = (
+  Experiment.create(
+    new Experiment.Builder()
+      .name("New Experiment")
+      .parameters(Arrays.asList(
+        new Parameter.Builder()
+          .type("double")
+          .name("gamma")
+          .bounds(new Bounds.Builder()
+            .max(1.0)
+            .min(0.0001)
+            .build())
+          .build()))
+      .build())
+  .call()
+);
+
+Suggestion suggestion = experiment.suggestions().create().call();
+double value = evaluateMetric(suggestion);  // Implement this
+Observation observation = (
+  experiment.observations().create(
+    new Observation.Builder()
+      .suggestion(suggestion.getId())
+      .value(value)
+      .build())
+  .call()
+);
+```
+
+For more examples, consult the `samples.md` file in this repository.
+
+## Endpoints
+
+Endpoints are grouped by objects.
+For example, endpoints that interact with Experiments are under `Experiment`.
+Here are example endpoints, and their corresponding REST endpoint.
+
+```java
+Experiment.fetch(id)    // GET /experiments/id
+Experiment.list()       // GET /experiments
+Experiment.create()     // POST /experiments
+Experiment.update()     // PUT /experiments
+Experiment.delete(id)   // DELETE /experiments/id
+Experiment.deleteList() // DELETE /experiments/id
+```
+
+These methods will return an `APIMethodCaller`.
+You can add parameters to an `APIMethodCaller` with `.addParam("key", "value")`.
+You can also add JSON data to the body of the request with `.data(jsonBody)`.
+When you are ready to issue the API call, just call `.call()`.
+
+```java
+Experiment.list()
+  .addParam("state", "active")
+  .call();
+
+Experiment.create()
+  .data(new Experiment.Builder().name(...))
+  .call();
+```
+
+Just like in the resource urls, `suggestions` and `observations` are under `experiments`.
+Access these objects with `(new Experiment(ID)).suggestions` and `(new Experiment(ID)).observations`.
+
+```java
+(new Experiment(id)).suggestions().fetch(sugg_id)   // GET /experiments/id/suggestions/sugg_id
+(new Experiment(id)).suggestions().list()           // GET /experiments/id/suggestions
+(new Experiment(id)).suggestions().create()         // POST /experiments/id/suggestions
+(new Experiment(id)).suggestions().update()         // PUT /experiments/id/suggestions
+(new Experiment(id)).suggestions().delete(sugg_id)  // DELETE /experiments/id/suggestions/sugg_id
+(new Experiment(id)).suggestions().deleteList()     // DELETE /experiments/id/suggestions
+```
 
 Testing
 =======
