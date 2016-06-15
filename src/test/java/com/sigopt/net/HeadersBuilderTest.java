@@ -7,9 +7,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.codec.binary.Base64;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -83,7 +84,7 @@ public class HeadersBuilderTest {
         Map<String, String> headers = HeadersBuilder.basicAuthHeader("api-key");
         String actual = headers.get("Authorization");
         assertEquals("Basic ", actual.substring(0, 6));
-        String decoded = new String(Base64.getDecoder().decode(actual.substring(6)));
+        String decoded = new String(Base64.decodeBase64(actual.substring(6)));
 
         assertEquals("api-key:", decoded);
     }

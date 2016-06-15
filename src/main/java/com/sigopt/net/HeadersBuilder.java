@@ -4,7 +4,8 @@ import com.sigopt.Sigopt;
 import com.sigopt.exception.AuthenticationException;
 import com.squareup.okhttp.Request;
 
-import java.util.Base64;
+import org.apache.commons.codec.binary.Base64;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
@@ -57,7 +58,7 @@ public class HeadersBuilder {
 
         Map<String, String> ret = new HashMap<String, String>();
         byte[] apiKeyBytes = String.format("%s:", apiKey).getBytes();
-        String base64Key = Base64.getEncoder().encodeToString(apiKeyBytes);
+        String base64Key = new String(Base64.encodeBase64(apiKeyBytes));
         ret.put("Authorization", "Basic " + base64Key);
         return ret;
     }

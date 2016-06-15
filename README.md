@@ -5,7 +5,7 @@ You can sign up for a Sigopt experiment at https://sigopt.com.
 Requirements
 ============
 
-Sigopt-java requires Java 1.8.
+Sigopt-java requires Java 1.6.
 
 Installation
 ============
