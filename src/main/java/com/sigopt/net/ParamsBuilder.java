@@ -1,8 +1,7 @@
 package com.sigopt.net;
 
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.sigopt.model.APIObject;
+import com.sigopt.model.APIResource;
 
 import java.util.Collection;
 import java.util.HashMap;

@@ -1,67 +1,59 @@
 package com.sigopt.model;
 
-import com.sigopt.net.APIObject;
+import java.util.Map;
 
 public class Progress extends APIObject {
-    Observation bestObservation;
-    Observation firstObservation;
-    Observation lastObservation;
-    Integer observation_count;
+    public Progress() {
+        super();
+    }
 
-    public Progress(
-        Observation bestObservation,
-        Observation firstObservation,
-        Observation lastObservation,
-        Integer observation_count
-    ) {
-        this.bestObservation = bestObservation;
-        this.firstObservation = firstObservation;
-        this.lastObservation = lastObservation;
-        this.observation_count = observation_count;
+    private Observation asObservation(Object obj) {
+        return Utils.mergeInto(new Observation(), obj);
     }
 
     public Observation getBestObservation() {
-        return bestObservation;
+        return this.asObservation(this.get("best_observation"));
     }
 
     public Observation getFirstObservation() {
-        return firstObservation;
+        return this.asObservation(this.get("first_observation"));
     }
 
     public Observation getLastObservation() {
-        return lastObservation;
+        return this.asObservation(this.get("last_observation"));
+    }
+
+    public Integer getObservationCount() {
+        return Utils.asInteger(this.get("observation_count"));
     }
 
     public static class Builder {
-        Observation bestObservation;
-        Observation firstObservation;
-        Observation lastObservation;
-        Integer observation_count;
-
+        Progress p;
         public Builder() {
+            this.p = new Progress();
         }
 
         public Progress build() {
-            return new Progress(bestObservation, firstObservation, lastObservation, observation_count);
+            return this.p;
         }
 
         public Builder bestObservation(Observation bestObservation) {
-            this.bestObservation = bestObservation;
+            this.p.set("best_observation", bestObservation);
             return this;
         }
 
         public Builder firtObservation(Observation firstObservation) {
-            this.firstObservation = firstObservation;
+            this.p.set("first_observation", firstObservation);
             return this;
         }
 
         public Builder lastObservation(Observation lastObservation) {
-            this.lastObservation = lastObservation;
+            this.p.set("last_observation", lastObservation);
             return this;
         }
 
-        public Builder observationCount(Integer observation_count) {
-            this.observation_count = observation_count;
+        public Builder observationCount(Integer observationCount) {
+            this.p.set("observation_count", observationCount);
             return this;
         }
     }

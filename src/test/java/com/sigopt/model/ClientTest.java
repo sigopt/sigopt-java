@@ -1,6 +1,6 @@
 package com.sigopt.model;
 
-import com.sigopt.net.APIResource;
+import com.sigopt.model.APIResource;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -23,5 +23,6 @@ public class ClientTest extends APIResourceTestBase {
 
         assertEquals("1", client.getId());
         assertEquals("SigOpt", client.getName());
+        assertEquals(123, (Object) client.getCreated());
     }
 }

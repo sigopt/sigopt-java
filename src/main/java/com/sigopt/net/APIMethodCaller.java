@@ -1,11 +1,13 @@
 package com.sigopt.net;
 
 import com.sigopt.exception.APIException;
+import com.sigopt.model.APIObject;
+import com.sigopt.model.APIResource;
 
 import java.lang.reflect.Type;
 import java.util.Map;
 
-public class APIMethodCaller<T> {
+public class APIMethodCaller<T extends APIObject> {
     APIMethod apiMethod;
     APIMethod.Builder apiMethodBuilder = new APIMethod.Builder();
     Class<T> klass;
@@ -18,26 +20,16 @@ public class APIMethodCaller<T> {
         this.apiMethodBuilder.method(method).path(path);
         this.klass = klass;
     }
-    public APIMethodCaller(String method, String path, Type typeOfT) {
-        this.apiMethodBuilder.method(method).path(path);
-        this.typeOfT = typeOfT;
-    }
 
     public T call() throws APIException {
         this.apiMethod = apiMethodBuilder.build();
         apiMethod.execute();
+        return this.processBody(apiMethod.response.body);
 
-        if(klass != null) {
-            if (APIObject.class.isAssignableFrom(klass) || APIResource.class.isAssignableFrom(klass)) {
-                return APIResource.constructFromJson(apiMethod.response.body, klass);
-            } else {
-                return null;
-            }
-        } else if(typeOfT != null) {
-            return APIResource.constructTypedFromJson(apiMethod.response.body, typeOfT);
-        } else {
-            return null;
-        }
+    }
+
+    protected T processBody(String body) {
+        return APIResource.constructFromJson(apiMethod.response.body, this.klass);
     }
 
     public APIMethod getApiMethod() {

@@ -1,109 +1,59 @@
 package com.sigopt.model;
 
-import com.sigopt.net.APIObject;
-
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Parameter extends APIObject {
-    String name;
-    String type;
-    Bounds bounds;
-    List<CategoricalValue> categoricalValues;
-    String transformation;
-
     public Parameter() {
-    }
-
-    public Parameter(String name, String type, Bounds bounds, List<CategoricalValue> categoricalValues, String transformation) {
-        this.name = name;
-        this.type = type;
-        this.bounds = bounds;
-        this.categoricalValues = categoricalValues;
-        this.transformation = transformation;
+        super();
     }
 
     public String getName() {
-        return name;
-    }
-
-    public Parameter setName(String name) {
-        this.name = name;
-        return this;
+        return (String) this.get("name");
     }
 
     public String getType() {
-        return type;
+        return (String) this.get("type");
     }
 
     public Bounds getBounds() {
-        return bounds;
-    }
-
-    public Parameter setBounds(Bounds bounds) {
-        this.bounds = bounds;
-        return this;
+        return Utils.mergeInto(new Bounds(), this.get("bounds"));
     }
 
     public List<CategoricalValue> getCategoricalValues() {
-        return categoricalValues;
-    }
-
-    public Parameter setCategoricalValues(List<CategoricalValue> categoricalValues) {
-        this.categoricalValues = categoricalValues;
-        return this;
-    }
-
-    public Parameter addCategoricalValue(CategoricalValue categoricalValue) {
-        this.categoricalValues.add(categoricalValue);
-        return this;
-    }
-    public Parameter removeCategoricalValue(CategoricalValue categoricalValue) {
-        this.categoricalValues.remove(categoricalValue);
-        return this;
-    }
-
-    public String getTransformation() {
-        return transformation;
+        return Utils.mergeIntoList(new ArrayList<CategoricalValue>(), this.get("categorical_values"), CategoricalValue.class);
     }
 
     public static class Builder {
-        String name;
-        String type;
-        Bounds bounds;
-        List<CategoricalValue> categoricalValues;
-        String transformation;
+        Parameter p;
 
         public Builder() {
+            this.p = new Parameter();
         }
 
         public Parameter build() {
-            return new Parameter(name, type, bounds, categoricalValues, transformation);
+            return this.p;
         }
 
         public Builder name(String name) {
-            this.name = name;
+            this.p.set("name", name);
             return this;
         }
 
         public Builder type(String type) {
-            this.type = type;
+            this.p.set("type", type);
             return this;
         }
 
         public Builder bounds(Bounds bounds) {
-            this.bounds = bounds;
+            this.p.set("bounds", bounds);
             return this;
         }
 
         public Builder categoricalValues(List<CategoricalValue> categoricalValues) {
-            this.categoricalValues = categoricalValues;
-            return this;
-        }
-
-        public Builder transformation(String transformation) {
-            this.transformation = transformation;
+            this.p.set("categorical_values", categoricalValues);
             return this;
         }
     }
-
 }

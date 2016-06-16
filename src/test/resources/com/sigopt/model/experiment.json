@@ -1,30 +1,94 @@
 {
-  "id": 1,
+  "object": "experiment",
+  "id": "123",
+  "name": "Test Experiment",
+  "type": "offline",
+  "created": 321,
+  "state": "active",
+  "client": "678",
   "metric": {
+    "object": "metric",
     "name": "Revenue"
   },
-  "name": "Ads Clickthrough Rate",
+  "progress": {
+    "object": "progress",
+    "observation_count": 3,
+    "first_observation": {
+      "object": "observation",
+      "id": "1",
+      "assignments": {
+        "a": 1,
+        "b": "c"
+      },
+      "value": 3.1,
+      "value_stddev": null,
+      "failed": false,
+      "created": 451,
+      "suggestion": "11",
+      "experiment": "123"
+    },
+    "last_observation": {
+      "object": "observation",
+      "id": "2",
+      "assignments": {
+        "a": 2,
+        "b": "d"
+      },
+      "value": 3.1,
+      "value_stddev": 0.5,
+      "failed": false,
+      "created": 452,
+      "suggestion": "12",
+      "experiment": "123"
+    },
+    "best_observation": {
+      "object": "observation",
+      "id": "3",
+      "assignments": {
+        "a": 3,
+        "b": "d"
+      },
+      "value": null,
+      "value_stddev": null,
+      "failed": true,
+      "created": 453,
+      "suggestion": "13",
+      "experiment": "123",
+      "metadata": {
+        "abc": "def",
+        "ghi": 123
+      }
+    }
+  },
   "parameters": [
     {
+      "object": "parameter",
+      "name": "a",
+      "type": "double",
       "bounds": {
-        "max": 10,
-        "min": 0
+        "object": "bounds",
+        "min": 1,
+        "max": 2
       },
-      "name": "timesShown",
-      "type": "int"
+      "categorical_values": null,
+      "precision": 3,
+      "default_value": 2
     },
     {
+      "object": "parameter",
+      "name": "b",
+      "type": "categorical",
+      "bounds": null,
       "categorical_values": [
-        {
-          "name": "true"
-        },
-        {
-          "name": "false"
-        }
+        {"name": "c", "enum_index": 1},
+        {"name": "d", "enum_index": 2}
       ],
-      "name": "showBanner",
-      "type": "categorical"
+      "precision": null,
+      "default_value": null
     }
   ],
-  "type": "offline"
+  "metadata": {
+    "abc": "def",
+    "ghi": 123
+  }
 }

@@ -1,96 +1,49 @@
 package com.sigopt.model;
 
 import com.sigopt.exception.APIException;
-import com.sigopt.net.APIObject;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class Pagination<T> extends APIObject {
-    int count;
-    List<T> data;
-    Paging paging;
+public class Pagination<T extends APIObject> extends APIObject {
+    Class<T> klass;
 
-    public Pagination() {
+    public Pagination(Class<T> klass) {
+        super();
+        this.klass = klass;
     }
 
-    public Pagination(int count, List<T> data, Paging paging) {
-        this.count = count;
-        this.data = data;
-        this.paging = paging;
-    }
-
-    public int getCount() {
-        return this.count;
+    public Integer getCount() {
+        return Utils.asInteger(this.get("count"));
     }
 
     public List<T> getData() {
-        return this.data;
+        return Utils.mergeIntoList(new ArrayList<T>(), this.get("data"), this.klass);
     }
 
     public Paging getPaging() {
-        return this.paging;
-    }
-
-    public static class Builder<TT> {
-        int count;
-        List<TT> data;
-        Paging paging;
-
-        public Pagination<TT> build() {
-            return new Pagination<TT>(count, data, paging);
-        }
-
-        public Builder<TT> count(int count) {
-            this.count = count;
-            return this;
-        }
-
-        public Builder<TT> data(List<TT> data) {
-            this.data = data;
-            return this;
-        }
-
-        public Builder<TT> paging(Paging paging) {
-            this.paging = paging;
-            return this;
-        }
+        return Utils.mergeInto(new Paging(), this.get("paging"));
     }
 }
 
 class Paging extends APIObject {
-    String before;
-    String after;
+    public Paging() {
+        super();
+    }
 
     public Paging(String before, String after) {
-        this.before = before;
-        this.after = after;
+        super();
+        this.set("before", before);
+        this.set("after", after);
     }
 
     public String getBefore() {
-        return this.before;
+        return (String) this.get("before");
     }
 
     public String getAfter() {
-        return this.after;
-    }
-
-    public static class Builder {
-        String before;
-        String after;
-
-        public Paging build() {
-            return new Paging(before, after);
-        }
-
-        public Builder before(String before) {
-            this.before = before;
-            return this;
-        }
-
-        public Builder after(String after) {
-            this.after = after;
-            return this;
-        }
+        return (String) this.get("after");
     }
 }

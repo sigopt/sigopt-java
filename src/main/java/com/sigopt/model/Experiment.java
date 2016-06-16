@@ -1,93 +1,62 @@
 package com.sigopt.model;
 
-import com.google.gson.reflect.TypeToken;
-import com.sigopt.net.APIObject;
 import com.sigopt.net.APIMethodCaller;
-import com.sigopt.net.APIResource;
 import com.sigopt.net.BoundObject;
+import com.sigopt.net.PaginatedAPIMethodCaller;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Experiment extends APIResource {
-    Integer created;
-    List<Parameter> parameters;
-    Map<String, String> metadata;
-    Metric metric;
-    Progress progress;
-    String client;
-    String id;
-    String name;
-    String state;
-    String type;
-
-    public Experiment(String id) {
-        this.id = id;
+    public Experiment() {
+        super();
     }
 
-    protected Experiment(
-        Integer created,
-        List<Parameter> parameters,
-        Map<String, String> metadata,
-        Metric metric,
-        Progress progress,
-        String client,
-        String id,
-        String name,
-        String state,
-        String type
-    ) {
-        this.created = created;
-        this.parameters = parameters;
-        this.metadata = metadata;
-        this.metric = metric;
-        this.progress = progress;
-        this.client = client;
-        this.id = id;
-        this.name = name;
-        this.state = state;
-        this.type = type;
+    public Experiment(String id) {
+        super();
+        this.set("id", id);
     }
 
     public String getId() {
-        return id;
+        return (String) this.get("id");
     }
 
     public String getType() {
-        return type;
+        return (String) this.get("type");
     }
 
     public String getName() {
-        return name;
+        return (String) this.get("name");
     }
 
     public List<Parameter> getParameters() {
-        return parameters;
+        return Utils.mergeIntoList(new ArrayList<Parameter>(), this.get("parameters"), Parameter.class);
     }
 
     public Metric getMetric() {
-        return metric;
+        return Utils.mergeInto(new Metric(), this.get("metric"));
     }
 
     public Progress getProgress() {
-      return progress;
+        return Utils.mergeInto(new Progress(), this.get("progress"));
     }
 
     public Map<String, String> getMetadata() {
-      return metadata;
+      return (Map<String, String>) this.get("metadata");
     }
 
     public String getClient() {
-      return client;
+      return (String) this.get("client");
     }
 
     public String getState() {
-      return state;
+      return (String) this.get("state");
     }
 
     public Integer getCreated() {
-      return created;
+      return Utils.asInteger(this.get("created"));
     }
 
     public static APIMethodCaller<Experiment> fetch() {
@@ -98,9 +67,8 @@ public class Experiment extends APIResource {
         return Experiment.fetch().addPathComponent("id", id);
     }
 
-    public static APIMethodCaller<Pagination<Experiment>> list() {
-        Type type = new TypeToken<Pagination<Experiment>>() {}.getType();
-        return new APIMethodCaller<Pagination<Experiment>>("get", "/experiments", type);
+    public static PaginatedAPIMethodCaller<Experiment> list() {
+        return new PaginatedAPIMethodCaller<Experiment>("get", "/experiments", Experiment.class);
     }
 
     public static APIMethodCaller<Experiment> create() {
@@ -149,9 +117,8 @@ public class Experiment extends APIResource {
             return this.fetch().addParam("id", id);
         }
 
-        public APIMethodCaller<Pagination<T>> list() {
-            Type type = new TypeToken<Pagination<T>>() {}.getType();
-            return new APIMethodCaller<Pagination<T>>("get", this.prefix() + "/" + this.name, type);
+        public PaginatedAPIMethodCaller<T> list() {
+            return new PaginatedAPIMethodCaller<T>("get", this.prefix() + "/" + this.name, klass);
         }
 
         public APIMethodCaller<T> create() {
@@ -174,104 +141,85 @@ public class Experiment extends APIResource {
             return this.update(id).data(o);
         }
 
-        public APIMethodCaller<Void> deleteList() {
-            return new APIMethodCaller<Void>("delete", this.prefix() + "/" + this.name, null);
+        public APIMethodCaller<VoidObject> deleteList() {
+            return new APIMethodCaller<VoidObject>("delete", this.prefix() + "/" + this.name, null);
         }
 
-        public APIMethodCaller<Void> delete() {
-            return new APIMethodCaller<Void>("delete", this.prefix() + "/" + this.name + "/:id", null);
+        public APIMethodCaller<Experiment> delete() {
+            return new APIMethodCaller<Experiment>("delete", this.prefix() + "/" + this.name + "/:id", null);
         }
 
-        public APIMethodCaller<Void> delete(String id) {
+        public APIMethodCaller<Experiment> delete(String id) {
             return this.delete().addPathComponent("id", id);
         }
     }
 
     public Subresource<Observation> observations() {
-        return new Subresource<Observation>("/experiments/" + this.id, "observations", Observation.class);
+        return new Subresource<Observation>("/experiments/" + this.getId(), "observations", Observation.class);
     }
 
     public Subresource<Suggestion> suggestions() {
-        return new Subresource<Suggestion>("/experiments/" + this.id, "suggestions", Suggestion.class);
+        return new Subresource<Suggestion>("/experiments/" + this.getId(), "suggestions", Suggestion.class);
     }
 
     public static class Builder {
-        Integer created;
-        List<Parameter> parameters;
-        Map<String, String> metadata;
-        Metric metric;
-        Progress progress;
-        String client;
-        String id;
-        String name;
-        String state;
-        String type;
+        Experiment e;
 
         public Builder() {
+            this.e = new Experiment();
         }
 
         public Experiment build() {
-            return new Experiment(
-                created,
-                parameters,
-                metadata,
-                metric,
-                progress,
-                client,
-                id,
-                name,
-                state,
-                type
-            );
+            return this.e;
         }
 
         public Builder created(Integer created) {
-            this.created = created;
+            this.e.set("created", created);
             return this;
         }
 
         public Builder parameters(List<Parameter> parameters) {
-            this.parameters = parameters;
+            this.e.set("parameters", parameters);
             return this;
         }
 
         public Builder metadata(Map<String, String> metadata) {
-            this.metadata = metadata;
+            this.e.set("metadata", metadata);
             return this;
         }
 
         public Builder metric(Metric metric) {
-            this.metric = metric;
+            this.e.set("metric", metric);
             return this;
         }
 
         public Builder progress(Progress progress) {
-            this.progress = progress;
+            this.e.set("progress", progress);
             return this;
         }
 
         public Builder client(String client) {
-            this.client = client;
+            this.e.set("client", client);
             return this;
         }
 
         public Builder id(String id) {
-            this.id = id;
+            this.e.set("id", id);
             return this;
         }
 
         public Builder name(String name) {
-            this.name = name;
+            this.e.set("name", name);
             return this;
         }
 
         public Builder state(String state) {
-            this.state = state;
+            this.e.set("state", state);
             return this;
         }
 
         public Builder type(String type) {
-            this.type = type;
+            this.e.set("type", type);
             return this;
         }
     }

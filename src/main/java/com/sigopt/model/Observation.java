@@ -1,152 +1,106 @@
 package com.sigopt.model;
 
-import com.sigopt.net.APIObject;
-
 import java.util.*;
 
 public class Observation extends APIObject {
-    Boolean failed;
-    Double value;
-    Double valueStddev;
-    Integer created;
-    Map<String, Object> assignments;
-    Map<String, String> metadata;
-    String experiment;
-    String id;
-    String suggestion;
-
-    public Observation(String id) {
-        this.id = id;
+    public Observation() {
+        super();
     }
 
-    protected Observation(
-        Boolean failed,
-        Double value,
-        Double valueStddev,
-        Integer created,
-        Map<String, Object> assignments,
-        Map<String, String> metadata,
-        String experiment,
-        String id,
-        String suggestion
-    ) {
-        this.failed = failed;
-        this.value = value;
-        this.valueStddev = valueStddev;
-        this.created = created;
-        this.assignments = assignments;
-        this.metadata = metadata;
-        this.experiment = experiment;
-        this.id = id;
-        this.suggestion = suggestion;
+    public Observation(String id) {
+        super();
+        this.set("id", id);
     }
 
     public Boolean isFailed() {
-        return failed;
+        return (Boolean) this.get("failed");
     }
 
     public Double getValue() {
-        return value;
+        return (Double) this.get("value");
     }
 
     public Double getValueStddev() {
-        return valueStddev;
+        return (Double) this.get("value_stddev");
     }
 
     public Integer getCreated() {
-        return created;
+        return Utils.asInteger(this.get("created"));
     }
 
     public Map<String, Object> getAssignments() {
-        return assignments;
+        return (Map<String, Object>) this.get("assignments");
     }
 
     public Map<String, String> getMetadata() {
-        return metadata;
+        return (Map<String, String>) this.get("metadata");
     }
 
     public String getExperiment() {
-        return experiment;
+        return (String) this.get("experiment");
     }
 
     public String getId() {
-        return id;
+        return (String) this.get("id");
     }
 
     public String getSuggestion() {
-        return suggestion;
+        return (String) this.get("suggestion");
     }
 
     public static class Builder {
-        Boolean failed;
-        Double value;
-        Double valueStddev;
-        Integer created;
-        Map<String, Object> assignments;
-        Map<String, String> metadata;
-        String experiment;
-        String id;
-        String suggestion;
+        Observation o;
 
         public Builder() {
+            this.o = new Observation();
         }
 
         public Observation build() {
-            return new Observation(
-                failed,
-                value,
-                valueStddev,
-                created,
-                assignments,
-                metadata,
-                experiment,
-                id,
-                suggestion
-            );
+            return this.o;
         }
 
         public Builder failed(Boolean failed) {
-            this.failed = failed;
+            this.o.set("failed", failed);
             return this;
         }
 
         public Builder value(Double value) {
-            this.value = value;
+            this.o.set("value", value);
             return this;
         }
 
         public Builder valueStddev(Double valueStddev) {
-            this.valueStddev = valueStddev;
+            this.o.set("value_stddev", valueStddev);
             return this;
         }
 
         public Builder created(Integer created) {
-            this.created = created;
+            this.o.set("created", created);
             return this;
         }
 
         public Builder assignments(Map<String, Object> assignments) {
-            this.assignments = assignments;
+            this.o.set("assignments", assignments);
             return this;
         }
 
         public Builder metadata(Map<String, String> metadata) {
-            this.metadata = metadata;
+            this.o.set("metadata", metadata);
             return this;
         }
 
         public Builder experiment(String experiment) {
-            this.experiment = experiment;
+            this.o.set("experiment", experiment);
             return this;
         }
 
         public Builder id(String id) {
-            this.id = id;
+            this.o.set("id", id);
             return this;
         }
 
         public Builder suggestion(String suggestion) {
-            this.suggestion = suggestion;
+            this.o.set("suggestion", suggestion);
             return this;
         }
     }
