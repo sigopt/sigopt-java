@@ -10,6 +10,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 public class ModelTest {
     @Test
@@ -62,9 +63,10 @@ public class ModelTest {
         Map<String, Object> assignments = new HashMap<String, Object>();
         assignments.put("a", 1);
         assignments.put("b", "c");
-        assertEquals(
-            new Observation.Builder().assignments(assignments).build().toJson(),
-            "{\"assignments\":{\"a\":1,\"b\":\"c\"}}"
+        String observationJson = new Observation.Builder().assignments(assignments).build().toJson();
+        assertTrue(
+            "{\"assignments\":{\"a\":1,\"b\":\"c\"}}".equals(observationJson) ||
+            "{\"assignments\":{\"b\":\"c\",\"a\":1}}".equals(observationJson)
         );
     }
 }
