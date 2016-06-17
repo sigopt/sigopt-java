@@ -1,4 +1,6 @@
 {
-  "id": 1,
-  "name": "SigOpt"
+  "object": "client",
+  "id": "1",
+  "name": "SigOpt",
+  "created": 123
 }

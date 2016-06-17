@@ -1,106 +1,82 @@
 package com.sigopt.model;
 
 import com.sigopt.net.APIMethod;
-import com.sigopt.net.APIResource;
 import com.sigopt.net.MapHelper;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Suggestion extends APIResource {
-    Integer created;
-    Map<String, Object> assignments;
-    Map<String, String> metadata;
-    String experiment;
-    String id;
-    String state;
-
-    public Suggestion(String id) {
-        this.id = id;
+    public Suggestion() {
+        super();
     }
 
-    protected Suggestion(
-        Integer created,
-        Map<String, Object> assignments,
-        Map<String, String> metadata,
-        String experiment,
-        String id,
-        String state
-    ) {
-        this.created = created;
-        this.assignments = assignments;
-        this.metadata = metadata;
-        this.experiment = experiment;
-        this.id = id;
-        this.state = state;
+    public Suggestion(String id) {
+        super();
+        this.set("id", id);
     }
 
     public Integer getCreated() {
-        return created;
+        return Utils.asInteger(this.get("created"));
     }
 
     public Map<String, Object> getAssignments() {
-        return assignments;
+        return (Map<String, Object>) this.get("assignments");
     }
 
     public Map<String, String> getMetadata() {
-        return metadata;
+        return (Map<String, String>) this.get("metadata");
     }
 
     public String getExperiment() {
-        return experiment;
+        return (String) this.get("experiment");
     }
 
     public String getId() {
-        return id;
+        return (String) this.get("id");
     }
 
     public String getState() {
-        return state;
+        return (String) this.get("state");
     }
 
     public static class Builder {
-        Integer created;
-        Map<String, Object> assignments;
-        Map<String, String> metadata;
-        String experiment;
-        String id;
-        String state;
-
+        Suggestion s;
         public Builder() {
+            this.s = new Suggestion();
         }
 
         public Suggestion build() {
-            return new Suggestion(created, assignments, metadata, experiment, id, state);
+            return this.s;
         }
 
         public Builder created(Integer created) {
-            this.created = created;
+            this.s.set("created", created);
             return this;
         }
 
         public Builder assignments(Map<String, Object> assignments) {
-            this.assignments = assignments;
+            this.s.set("assignments", assignments);
             return this;
         }
 
         public Builder metadata(Map<String, String> metadata) {
-            this.metadata = metadata;
+            this.s.set("metadata", metadata);
             return this;
         }
 
         public Builder experiment(String experiment) {
-            this.experiment = experiment;
+            this.s.set("experiment", experiment);
             return this;
         }
 
         public Builder id(String id) {
-            this.id = id;
+            this.s.set("id", id);
             return this;
         }
 
         public Builder state(String state) {
-            this.state = state;
+            this.s.set("state", state);
             return this;
         }
     }

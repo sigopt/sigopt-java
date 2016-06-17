@@ -1,9 +1,0 @@
-{
-  "assignments": {
-    "param1": 2.0,
-    "param2": "true"
-  },
-  "failed": false,
-  "value": 1.0,
-  "value_stddev": 0.01
-}

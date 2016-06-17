@@ -1,38 +1,30 @@
 package com.sigopt.model;
 
-import com.google.gson.reflect.TypeToken;
 import com.sigopt.exception.APIException;
 import com.sigopt.net.APIMethodCaller;
-import com.sigopt.net.APIResource;
 import com.sigopt.net.BoundObject;
-
-import java.lang.reflect.Type;
+import com.sigopt.net.PaginatedAPIMethodCaller;
 
 public class Client extends APIResource {
-    Integer created;
-    String id;
-    String name;
-
-    public Client(String id) {
-      this.id = id;
+    public Client() {
+        super();
     }
 
-    protected Client(Integer created, String id, String name) {
-        this.created = created;
-        this.id = id;
-        this.name = name;
+    public Client(String id) {
+        super();
+        this.set("id", id);
     }
 
     public String getId() {
-        return id;
+        return (String) this.get("id");
     }
 
     public String getName() {
-        return name;
+        return (String) this.get("name");
     }
 
     public Integer getCreated() {
-        return created;
+        return Utils.asInteger(this.get("created"));
     }
 
     public static APIMethodCaller<Client> fetch(String id) {
@@ -44,9 +36,12 @@ public class Client extends APIResource {
             super(prefix);
         }
 
-        public APIMethodCaller<Pagination<Experiment>> list() {
-            Type type = new TypeToken<Pagination<Experiment>>() {}.getType();
-            return new APIMethodCaller<Pagination<Experiment>>("get", this.prefix() + "/experiments", type);
+        public PaginatedAPIMethodCaller<Experiment> list() {
+            return new PaginatedAPIMethodCaller<Experiment>(
+                "get",
+                this.prefix() + "/experiments",
+                Experiment.class
+            );
         }
 
         public APIMethodCaller<Experiment> create() {
@@ -55,33 +50,31 @@ public class Client extends APIResource {
     }
 
     public Experiments experiments() {
-        return new Experiments("/clients/" + this.id);
+        return new Experiments("/clients/" + this.getId());
     }
 
     public static class Builder {
-        String id;
-        String name;
-        Integer created;
-
+        Client c;
         public Builder() {
+            this.c = new Client();
         }
 
         public Client build() {
-            return new Client(created, id, name);
+            return this.c;
         }
 
         public Builder id(String id) {
-            this.id = id;
+            this.c.set("id", id);
             return this;
         }
 
         public Builder name(String name) {
-            this.name = name;
+            this.c.set("name", name);
             return this;
         }
 
         public Builder created(Integer created) {
-            this.created = created;
+            this.c.set("created", created);
             return this;
         }
     }

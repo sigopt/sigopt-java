@@ -1,52 +1,51 @@
 package com.sigopt.model;
 
-import com.sigopt.net.APIObject;
-
 public class Bounds extends APIObject {
-    Double min;
-    Double max;
+    public Bounds() {
+        super();
+    }
 
     public Bounds(Double min, Double max) {
-        this.min = min;
-        this.max = max;
+        super();
+        this.set("min", min);
+        this.set("max", max);
     }
 
     public Double getMin() {
-        return min;
+        return (Double) this.get("min");
     }
 
     public Double getMax() {
-        return max;
+        return (Double) this.get("max");
     }
 
     public static class Builder {
-        Double min;
-        Double max;
-
+        Bounds b;
         public Builder() {
+            this.b = new Bounds();
         }
 
         public Bounds build() {
-            return new Bounds(this.min, this.max);
+            return this.b;
         }
 
         public Builder min(Double min) {
-            this.min = min;
+            this.b.set("min", min);
             return this;
         }
 
         public Builder min(Integer min) {
-            this.min = (double) min;
+            this.b.set("min", (double) min);
             return this;
         }
 
         public Builder max(Double max) {
-            this.max = max;
+            this.b.set("max", max);
             return this;
         }
 
         public Builder max(Integer max) {
-            this.max = (double) max;
+            this.b.set("max", (double) max);
             return this;
         }
     }

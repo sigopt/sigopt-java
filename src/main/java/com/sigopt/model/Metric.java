@@ -1,35 +1,32 @@
 package com.sigopt.model;
 
-import com.sigopt.net.APIObject;
-
 public class Metric extends APIObject {
-    String name;
+    public Metric() {
+        super();
+    }
 
     public Metric(String name) {
-        this.name = name;
+        super();
+        this.set("name", name);
     }
 
     public String getName() {
-        return name;
-    }
-
-    public Metric setName(String name) {
-        this.name = name;
-        return this;
+        return (String) this.get("name");
     }
 
     public static class Builder {
-        String name;
+        Metric m;
 
         public Builder() {
+            this.m = new Metric();
         }
 
         public Metric build() {
-            return new Metric(name);
+            return this.m;
         }
 
         public Builder name(String name) {
-            this.name = name;
+            this.m.set("name", name);
             return this;
         }
     }

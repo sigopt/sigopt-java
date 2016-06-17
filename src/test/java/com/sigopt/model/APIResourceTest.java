@@ -1,6 +1,5 @@
-package com.sigopt.net;
+package com.sigopt.model;
 
-import com.google.gson.reflect.TypeToken;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,25 +13,6 @@ import static org.junit.Assert.assertTrue;
 public class APIResourceTest {
     String mockResourceJson;
 
-    static class MockResource extends APIResource {
-        String id;
-        String superAwesomeName;
-
-        public Integer pubField = 555;
-
-        public MockResource(String id, String superAwesomeName) {
-            this.id = id;
-            this.superAwesomeName = superAwesomeName;
-        }
-
-        public String getId() {
-            return this.id;
-        }
-
-        public String getSuperAwesomeName() {
-            return this.superAwesomeName;
-        }
-    }
 
     @BeforeClass
     public static void setUp() {
@@ -42,16 +22,7 @@ public class APIResourceTest {
     public void setUpMockData() {
         mockResourceJson = "{\n" +
             "      \"id\": \"id-value\",\n" +
-            "      \"super_awesome_name\": \"name-value\",\n" +
-            "      \"pub_field\": 111\n" +
-            "}";
-    }
-
-    public String createMockResourceJson(String id, String superAwesomeName, Integer pubField) {
-        return "{\n" +
-            "  \"id\": \"" + id + "\",\n" +
-            "  \"super_awesome_name\": \"" + superAwesomeName + "\",\n" +
-            "  \"pub_field\": " + pubField + "\n" +
+            "      \"super_awesome_name\": \"name-value\"\n" +
             "}";
     }
 
@@ -70,7 +41,6 @@ public class APIResourceTest {
         MockResource actual = APIResource.constructFromJson(mockResourceJson, MockResource.class);
         assertEquals("id-value", actual.getId());
         assertEquals("name-value", actual.getSuperAwesomeName());
-        assertEquals((Integer)111, actual.pubField);
         assertTrue(actual instanceof MockResource);
     }
 }

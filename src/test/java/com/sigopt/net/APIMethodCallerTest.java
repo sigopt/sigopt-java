@@ -1,8 +1,9 @@
 package com.sigopt.net;
 
-import com.google.gson.reflect.TypeToken;
 import com.sigopt.Sigopt;
+import com.sigopt.model.APIResource;
 import com.sigopt.model.Experiment;
+import com.sigopt.model.MockResource;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -12,7 +13,6 @@ import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,27 +26,6 @@ import static org.junit.Assert.assertEquals;
 })
 public class APIMethodCallerTest {
     APIMethodCaller<MockResource> caller;
-    APIMethodCaller<List<MockResource>> listCaller;
-
-    static class MockResource extends APIResource {
-        String id;
-        String superAwesomeName;
-
-        public Integer pubField = 555;
-
-        public MockResource(String id, String superAwesomeName) {
-            this.id = id;
-            this.superAwesomeName = superAwesomeName;
-        }
-
-        public String getId() {
-            return this.id;
-        }
-
-        public String getSuperAwesomeName() {
-            return this.superAwesomeName;
-        }
-    }
 
     @BeforeClass
     public static void setUp() {
@@ -56,8 +35,6 @@ public class APIMethodCallerTest {
     @Before
     public void setUpMockData() {
         caller = new APIMethodCaller("get", "/path", MockResource.class);
-        Type type = new TypeToken<List<MockResource>>() {}.getType();
-        listCaller = new APIMethodCaller("post", "/path", type);
     }
 
     @Test
@@ -74,23 +51,5 @@ public class APIMethodCallerTest {
         PowerMockito.when(APIResource.constructFromJson(Mockito.anyString(), Mockito.any(Class.class))).thenReturn(expected);
 
         assertEquals(expected, caller.call());
-    }
-
-    @Test
-    public void callWithList() throws Exception {
-        APIMethod.Builder builder = Mockito.mock(APIMethod.Builder.class);
-        APIMethod method = Mockito.mock(APIMethod.class);
-        listCaller.apiMethodBuilder = builder;
-        Mockito.when(builder.build()).thenReturn(method);
-        Mockito.stub(method.execute()).toReturn(null);
-        method.response = new Requester.Response("{}", 200);
-
-        List<MockResource> expected = new ArrayList<MockResource>();
-        expected.add(new MockResource("exp-id", "exp-name"));
-
-        PowerMockito.mockStatic(APIResource.class);
-        PowerMockito.when(APIResource.constructTypedFromJson(Mockito.anyString(), Mockito.any(Class.class))).thenReturn(expected);
-
-        assertEquals(expected, listCaller.call());
     }
 }
