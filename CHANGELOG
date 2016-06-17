@@ -1,3 +1,8 @@
+=== 2.1.0 2016-06-16
+* Fix null value serialization. Previously all keys missing from objects
+were serialized as nulls. This meant it was impossible to make some API calls
+which required keys to be absent.
+
 === 2.0.1 2016-06-16
 * Add support for Java 7
 
