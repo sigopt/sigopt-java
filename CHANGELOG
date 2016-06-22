@@ -1,3 +1,7 @@
+=== 2.2.0 2016-2-16
+
+* Enable the use of connection proxies
+
 === 2.1.0 2016-06-16
 * Fix null value serialization. Previously all keys missing from objects
 were serialized as nulls. This meant it was impossible to make some API calls

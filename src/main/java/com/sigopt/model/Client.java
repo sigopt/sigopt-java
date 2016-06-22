@@ -2,7 +2,6 @@ package com.sigopt.model;
 
 import com.sigopt.exception.APIException;
 import com.sigopt.net.APIMethodCaller;
-import com.sigopt.net.BoundObject;
 import com.sigopt.net.PaginatedAPIMethodCaller;
 
 public class Client extends APIResource {

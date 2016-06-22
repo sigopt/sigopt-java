@@ -1,6 +1,6 @@
-package com.sigopt.net;
+package com.sigopt.model;
 
-public class BoundObject {
+class BoundObject {
     private String prefix;
     public BoundObject(String prefix) {
         this.prefix = prefix;

@@ -20,11 +20,9 @@ public class APIMethod {
     public APIException exception;
 
     public String clientToken;
-    public String apiBase;
 
-    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, String clientToken, String apiBase, String data, Map<String, String> pathComponents) throws AuthenticationException, APIException {
+    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, String clientToken, String data, Map<String, String> pathComponents) throws AuthenticationException, APIException {
         this.clientToken = (clientToken == null) ? Sigopt.clientToken : clientToken;
-        this.apiBase = (apiBase == null) ? Sigopt.apiBase : apiBase;
         params = MapHelper.ensure(params);
         headers = MapHelper.ensure(headers);
         pathComponents = MapHelper.ensure(pathComponents);
@@ -45,7 +43,7 @@ public class APIMethod {
             throw this.exception;
         }
 
-        if(response.code >= 200 && response.code < 300) {
+        if (response.code >= 200 && response.code < 300) {
             return this;
         } else {
             this.exception = new APIException(response.body, this);
@@ -54,7 +52,7 @@ public class APIMethod {
     }
 
     public String url() {
-        return String.format("%s%s", this.apiBase, this.path);
+        return String.format("%s/%s%s", Sigopt.getApiBase(), Sigopt.apiVersion, this.path);
     }
 
     public static class Builder {
@@ -64,14 +62,13 @@ public class APIMethod {
         Map<String, String> headers;
         Map<String, String> pathComponents;
         String clientToken;
-        String apiBase;
         String data;
 
         public Builder() {
         }
 
         public APIMethod build() throws AuthenticationException, APIException {
-            return new APIMethod(method, path, params, headers, clientToken, apiBase, data, pathComponents);
+            return new APIMethod(method, path, params, headers, clientToken, data, pathComponents);
         }
 
         public Builder method(String method) {
@@ -114,11 +111,6 @@ public class APIMethod {
 
         public Builder clientToken(String clientToken) {
             this.clientToken = clientToken;
-            return this;
-        }
-
-        public Builder apiBase(String apiBase) {
-            this.apiBase = apiBase;
             return this;
         }
 

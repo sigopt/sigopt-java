@@ -1,7 +1,6 @@
 package com.sigopt.model;
 
 import com.sigopt.net.APIMethod;
-import com.sigopt.net.MapHelper;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -4,14 +4,17 @@ import com.squareup.okhttp.*;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
+import java.net.PasswordAuthentication;
 import java.net.URLEncoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
-public class Requester {
+import com.sigopt.Sigopt;
 
+class Requester {
     public static final String CHARSET = "UTF-8";
     public static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
-    public static OkHttpClient client = new OkHttpClient();
 
     public static class Response {
         public String body;
@@ -24,6 +27,16 @@ public class Requester {
     }
 
     public static Response request(String method, String url, Map<String, Object> params, Map<String, String> headers, String data) throws Exception {
+        if (Sigopt.getProxyCredential() != null) {
+          java.net.Authenticator.setDefault(new java.net.Authenticator() {
+              @Override
+              protected PasswordAuthentication getPasswordAuthentication() {
+                  return Sigopt.getProxyCredential();
+              }
+          });
+        }
+        OkHttpClient client = new OkHttpClient();
+        client.setProxy(Sigopt.getConnectionProxy());
         com.squareup.okhttp.Response res = client.newCall(createRequest(method, url, params, headers, data)).execute();
         return new Response(res.body().string(), res.code());
     }

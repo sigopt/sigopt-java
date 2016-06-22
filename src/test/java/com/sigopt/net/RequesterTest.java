@@ -10,8 +10,6 @@ import java.util.HashMap;
 import static org.junit.Assert.assertTrue;
 
 public class RequesterTest {
-
-
     @Test
     public void createRequestGet() throws Exception {
         HashMap<String, Object> params = new HashMap<String, Object>();
