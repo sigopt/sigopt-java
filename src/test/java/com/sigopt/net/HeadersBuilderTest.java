@@ -75,7 +75,6 @@ public class HeadersBuilderTest {
             HeadersBuilder.basicAuthHeader(null);
             assertTrue("Authentication exception was never thrown", false);
         } catch (AuthenticationException e) {
-            assertTrue("AuthenticationException should contain the docs url.", e.getMessage().contains(Sigopt.DOCS_URL));
         }
     }
 

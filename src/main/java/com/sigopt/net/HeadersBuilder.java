@@ -52,7 +52,7 @@ class HeadersBuilder {
 
     public static Map<String, String> basicAuthHeader(String apiKey) throws AuthenticationException {
         if(apiKey == null) {
-            throw new AuthenticationException("An API key is required but was never set. Please see " + Sigopt.DOCS_URL + " for more information.");
+            throw new AuthenticationException("An API key is required but was never set. Please see https://sigopt.com/docs for more information.");
         }
 
         Map<String, String> ret = new HashMap<String, String>();

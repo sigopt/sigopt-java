@@ -74,9 +74,4 @@ public class APIMethodCaller<T extends APIObject> {
         this.apiMethodBuilder.clientToken(clientToken);
         return this;
     }
-
-    public APIMethodCaller<T> apiBase(String apiBase) {
-        this.apiMethodBuilder.apiBase(apiBase);
-        return this;
-    }
 }
