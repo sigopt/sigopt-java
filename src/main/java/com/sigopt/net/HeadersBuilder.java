@@ -10,8 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 
-public class HeadersBuilder {
-
+class HeadersBuilder {
     public static Map<String, String> build(Map<String, String> headers) throws AuthenticationException {
         return build(headers, null, null);
     }

@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ParamsBuilder {
+class ParamsBuilder {
     public static Map<String, Object> build(Map<String, Object> params) {
         Map<String, Object> ret = new HashMap<String, Object>();
 

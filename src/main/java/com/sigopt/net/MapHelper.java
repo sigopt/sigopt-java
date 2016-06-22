@@ -3,8 +3,7 @@ package com.sigopt.net;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapHelper {
-
+class MapHelper {
     // toMerge will overwrite map values.
     public static <S, T> Map<S, T> merge(Map<S, T> map, Map<S, T> toMerge) {
         Map<S, T> ret = new HashMap<S, T>();

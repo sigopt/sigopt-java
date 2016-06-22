@@ -1,7 +1,6 @@
 package com.sigopt.model;
 
 import com.sigopt.net.APIMethodCaller;
-import com.sigopt.net.BoundObject;
 import com.sigopt.net.PaginatedAPIMethodCaller;
 
 import java.lang.reflect.Type;

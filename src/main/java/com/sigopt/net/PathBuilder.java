@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 import com.sigopt.exception.APIException;
 
-public class PathBuilder {
+class PathBuilder {
     public static String build(String path, Map<String, String> params) throws APIException {
         params = MapHelper.ensure(params);
 
