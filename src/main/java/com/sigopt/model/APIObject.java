@@ -84,6 +84,7 @@ public class APIObject {
         );
     }
 
+    @Override
     public boolean equals(Object other) {
         return (
             other != null &&
@@ -91,6 +92,12 @@ public class APIObject {
             this.model.equals(((APIObject)other).model)
         );
     }
+
+    @Override
+    public int hashCode() {
+        return this.model.hashCode();
+    }
+
 
     public static boolean equals(Object a, Object b) {
         return a == null ? b == null : a.equals(b);
