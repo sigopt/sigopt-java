@@ -55,19 +55,23 @@ public class APIObject {
         }
     }
 
-    public static final Gson GSON = new GsonBuilder()
+    private static final Gson GSON = new GsonBuilder()
         .serializeNulls()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .create();
 
-    public static final Gson PRETTY_PRINT_GSON = new GsonBuilder()
+    private static final Gson PRETTY_PRINT_GSON = new GsonBuilder()
         .setPrettyPrinting()
         .serializeNulls()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .create();
 
+    public static String toJson(Object value) {
+        return GSON.toJson(value);
+    }
+
     public String toJson() {
-        return GSON.toJson(this.model);
+        return APIObject.toJson(this.model);
     }
 
     public static Map<String, Object> fromJson(String json, Type t) {
