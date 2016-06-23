@@ -76,7 +76,7 @@ public class ExperimentTest extends APIResourceTestBase {
         assertEquals(123.0, exp.getProgress().getBestObservation().getMetadata().get("ghi"));
 
         assertNotNull(exp.getParameters());
-        assertTrue(exp.getParameters().size() > 0);
+        assertEquals(2, exp.getParameters().size());
         assertEquals("a", exp.getParameters().get(0).getName());
         assertEquals("double", exp.getParameters().get(0).getType());
         assertEquals(1, exp.getParameters().get(0).getBounds().getMin(), 1e-9);
@@ -85,6 +85,7 @@ public class ExperimentTest extends APIResourceTestBase {
         assertEquals("b", exp.getParameters().get(1).getName());
         assertEquals("categorical", exp.getParameters().get(1).getType());
         assertNull(exp.getParameters().get(1).getBounds());
+        assertEquals(2, exp.getParameters().get(1).getCategoricalValues().size());
         assertEquals("c", exp.getParameters().get(1).getCategoricalValues().get(0).getName());
         assertEquals("d", exp.getParameters().get(1).getCategoricalValues().get(1).getName());
 
