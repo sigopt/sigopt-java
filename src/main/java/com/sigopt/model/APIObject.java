@@ -127,7 +127,7 @@ class StructObject extends APIObject {
  */
 class MapObject<V extends Object> extends APIObject implements Map<String, V> {
     final public void clear() {
-        this.model.clear();
+        throw new UnsupportedOperationException();
     }
 
     final public boolean containsKey(Object key) {
@@ -163,15 +163,15 @@ class MapObject<V extends Object> extends APIObject implements Map<String, V> {
     }
 
     final public V put(String key, V value) {
-        return (V) this.model.put(key, value);
+        throw new UnsupportedOperationException();
     }
 
     final public void putAll(Map<? extends String, ? extends V> m) {
-        this.model.putAll(m);
+        throw new UnsupportedOperationException();
     }
 
     final public V remove(Object key) {
-        return (V) this.model.remove(key);
+        throw new UnsupportedOperationException();
     }
 
     final public int size() {
