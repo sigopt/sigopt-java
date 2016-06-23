@@ -19,7 +19,7 @@ public abstract class APIObject {
         this.model = new HashMap<String, Object>();
     }
 
-    protected Object mapGet(String key) {
+    final protected Object mapGet(String key) {
         return this.model.get(key);
     }
 
@@ -44,11 +44,11 @@ public abstract class APIObject {
         }
     }
 
-    <T extends Object> void set(String key, T value) {
+    final <T extends Object> void set(String key, T value) {
         this.model.put(key, this.adaptForStorage(value));
     }
 
-    void setAll(Map<String, Object> map) {
+    final void setAll(Map<String, Object> map) {
         this.model.clear();
         if (map != null) {
             this.model.putAll(map);
@@ -112,7 +112,7 @@ public abstract class APIObject {
  * Enables users to treat JSON objects as both APIObects and Maps
  */
 class StructObject extends APIObject {
-    Object get(String key) {
+    final protected Object get(String key) {
         return this.mapGet(key);
     }
 }
@@ -122,59 +122,59 @@ class StructObject extends APIObject {
  * Enables users to treat JSON objects as both APIObects and Maps
  */
 class MapObject<V> extends APIObject implements Map<String, V> {
-    public void clear() {
+    final public void clear() {
         this.model.clear();
     }
 
-    boolean containsKey(Object key) {
+    final boolean containsKey(Object key) {
         return this.model.containsKey(key);
     }
 
-    public boolean containsValue(Object value) {
+    final public boolean containsValue(Object value) {
         return this.model.containsValue(value);
     }
 
-    public Set<Map.Entry<String,V>> entrySet() {
+    final public Set<Map.Entry<String,V>> entrySet() {
         return this.model.entrySet();
     }
 
-    public boolean equals(Object o) {
+    final public boolean equals(Object o) {
         return this.model.equals(o);
     }
 
-    public V get(Object key) {
+    final public V get(Object key) {
         return this.model.get(key);
     }
 
-    public int hashCode() {
+    final public int hashCode() {
         return this.model.hashCode();
     }
 
-    public boolean isEmpty() {
+    final public boolean isEmpty() {
         return this.model.isEmpty();
     }
 
-    public Set<String> keySet() {
+    final public Set<String> keySet() {
         return this.model.keySet();
     }
 
-    public V put(String key, V value) {
+    final public V put(String key, V value) {
         return this.model.put(key, value);
     }
 
-    public void putAll(Map<? extends String, ? extends V> m) {
+    final public void putAll(Map<? extends String, ? extends V> m) {
         return this.model.putAll(m);
     }
 
-    public V remove(Object key) {
+    final public V remove(Object key) {
         return this.model.remove(key);
     }
 
-    public int size() {
+    final public int size() {
         return this.model.size();
     }
 
-    public Collection<V> values() {
+    final public Collection<V> values() {
         return this.model.values();
     }
 }
