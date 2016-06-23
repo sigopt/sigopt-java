@@ -1,7 +1,6 @@
 package com.sigopt.net;
 
 import com.sigopt.model.APIObject;
-import com.sigopt.model.APIResource;
 
 import java.util.Collection;
 import java.util.HashMap;

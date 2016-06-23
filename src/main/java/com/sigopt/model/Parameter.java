@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Parameter extends APIObject {
+public class Parameter extends StructObject {
     public Parameter() {
         super();
     }

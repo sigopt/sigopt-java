@@ -2,7 +2,7 @@ package com.sigopt.model;
 
 import java.util.*;
 
-public class Observation extends APIObject {
+public class Observation extends StructObject {
     public Observation() {
         super();
     }

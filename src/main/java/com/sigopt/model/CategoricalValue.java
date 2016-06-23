@@ -1,6 +1,6 @@
 package com.sigopt.model;
 
-public class CategoricalValue extends APIObject {
+public class CategoricalValue extends StructObject {
     public CategoricalValue() {
         super();
     }

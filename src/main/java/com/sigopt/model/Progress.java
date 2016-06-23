@@ -2,7 +2,7 @@ package com.sigopt.model;
 
 import java.util.Map;
 
-public class Progress extends APIObject {
+public class Progress extends StructObject {
     public Progress() {
         super();
     }

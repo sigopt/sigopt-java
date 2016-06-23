@@ -12,14 +12,14 @@ import com.google.gson.GsonBuilder;
 
 import java.lang.reflect.Type;
 
-public class APIObject {
+public abstract class APIObject {
     Map<String, Object> model;
 
     public APIObject() {
         this.model = new HashMap<String, Object>();
     }
 
-    Object get(String key) {
+    protected Object mapGet(String key) {
         return this.model.get(key);
     }
 
@@ -102,8 +102,79 @@ public class APIObject {
         return this.model.hashCode();
     }
 
-
     public static boolean equals(Object a, Object b) {
         return a == null ? b == null : a.equals(b);
+    }
+}
+
+/**
+ * Used for JSON objects with strictly defined fields.
+ * Enables users to treat JSON objects as both APIObects and Maps
+ */
+class StructObject extends APIObject {
+    Object get(String key) {
+        return this.mapGet(key);
+    }
+}
+
+/**
+ * Used for JSON objects which can arbitrary key/value pairs.
+ * Enables users to treat JSON objects as both APIObects and Maps
+ */
+class MapObject<V> extends APIObject implements Map<String, V> {
+    public void clear() {
+        this.model.clear();
+    }
+
+    boolean containsKey(Object key) {
+        return this.model.containsKey(key);
+    }
+
+    public boolean containsValue(Object value) {
+        return this.model.containsValue(value);
+    }
+
+    public Set<Map.Entry<String,V>> entrySet() {
+        return this.model.entrySet();
+    }
+
+    public boolean equals(Object o) {
+        return this.model.equals(o);
+    }
+
+    public V get(Object key) {
+        return this.model.get(key);
+    }
+
+    public int hashCode() {
+        return this.model.hashCode();
+    }
+
+    public boolean isEmpty() {
+        return this.model.isEmpty();
+    }
+
+    public Set<String> keySet() {
+        return this.model.keySet();
+    }
+
+    public V put(String key, V value) {
+        return this.model.put(key, value);
+    }
+
+    public void putAll(Map<? extends String, ? extends V> m) {
+        return this.model.putAll(m);
+    }
+
+    public V remove(Object key) {
+        return this.model.remove(key);
+    }
+
+    public int size() {
+        return this.model.size();
+    }
+
+    public Collection<V> values() {
+        return this.model.values();
     }
 }

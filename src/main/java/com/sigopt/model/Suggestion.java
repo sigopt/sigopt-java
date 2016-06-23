@@ -5,7 +5,7 @@ import com.sigopt.net.APIMethod;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Suggestion extends APIResource {
+public class Suggestion extends StructObject {
     public Suggestion() {
         super();
     }
