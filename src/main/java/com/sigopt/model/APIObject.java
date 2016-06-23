@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -67,11 +68,14 @@ public abstract class APIObject {
         .create();
 
     public static String toJson(Object value) {
+        if (value instanceof APIObject) {
+          return GSON.toJson(((APIObject)value).model);
+        }
         return GSON.toJson(value);
     }
 
     public String toJson() {
-        return APIObject.toJson(this.model);
+        return APIObject.toJson(this);
     }
 
     public static Map<String, Object> fromJson(String json, Type t) {
@@ -121,12 +125,12 @@ class StructObject extends APIObject {
  * Used for JSON objects which can arbitrary key/value pairs.
  * Enables users to treat JSON objects as both APIObects and Maps
  */
-class MapObject<V> extends APIObject implements Map<String, V> {
+class MapObject<V extends Object> extends APIObject implements Map<String, V> {
     final public void clear() {
         this.model.clear();
     }
 
-    final boolean containsKey(Object key) {
+    final public boolean containsKey(Object key) {
         return this.model.containsKey(key);
     }
 
@@ -135,7 +139,7 @@ class MapObject<V> extends APIObject implements Map<String, V> {
     }
 
     final public Set<Map.Entry<String,V>> entrySet() {
-        return this.model.entrySet();
+        return ((Map<String,V>) this.model).entrySet();
     }
 
     final public boolean equals(Object o) {
@@ -143,7 +147,7 @@ class MapObject<V> extends APIObject implements Map<String, V> {
     }
 
     final public V get(Object key) {
-        return this.model.get(key);
+        return (V) this.model.get(key);
     }
 
     final public int hashCode() {
@@ -159,15 +163,15 @@ class MapObject<V> extends APIObject implements Map<String, V> {
     }
 
     final public V put(String key, V value) {
-        return this.model.put(key, value);
+        return (V) this.model.put(key, value);
     }
 
     final public void putAll(Map<? extends String, ? extends V> m) {
-        return this.model.putAll(m);
+        this.model.putAll(m);
     }
 
     final public V remove(Object key) {
-        return this.model.remove(key);
+        return (V) this.model.remove(key);
     }
 
     final public int size() {
@@ -175,6 +179,6 @@ class MapObject<V> extends APIObject implements Map<String, V> {
     }
 
     final public Collection<V> values() {
-        return this.model.values();
+        return (Collection<V>) this.model.values();
     }
 }

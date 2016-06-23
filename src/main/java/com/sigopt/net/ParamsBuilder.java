@@ -13,7 +13,7 @@ class ParamsBuilder {
         params = MapHelper.ensure(params);
         ret = MapHelper.merge(ret, params);
         for (Map.Entry<String, Object> entry: ret.entrySet()) {
-            entry.setValue(APIObject.toJson(value));
+            entry.setValue(APIObject.toJson(entry.getValue()));
         }
         return ret;
     }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Pagination<T extends APIObject> extends APIObject {
+public class Pagination<T extends APIObject> extends StructObject {
     Class<T> klass;
 
     public Pagination(Class<T> klass) {

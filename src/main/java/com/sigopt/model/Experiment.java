@@ -42,8 +42,8 @@ public class Experiment extends StructObject {
         return Utils.mergeInto(new Progress(), this.get("progress"));
     }
 
-    public Map<String, String> getMetadata() {
-      return (Map<String, String>) this.get("metadata");
+    public Metadata getMetadata() {
+        return Utils.mergeInto(new Metadata(), this.get("metadata"));
     }
 
     public String getClient() {

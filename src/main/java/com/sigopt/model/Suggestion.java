@@ -19,12 +19,12 @@ public class Suggestion extends StructObject {
         return Utils.asInteger(this.get("created"));
     }
 
-    public Map<String, Object> getAssignments() {
-        return (Map<String, Object>) this.get("assignments");
+    public Assignments getAssignments() {
+        return Utils.mergeInto(new Assignments(), this.get("assignments"));
     }
 
-    public Map<String, String> getMetadata() {
-        return (Map<String, String>) this.get("metadata");
+    public Metadata getMetadata() {
+        return Utils.mergeInto(new Metadata(), this.get("metadata"));
     }
 
     public String getExperiment() {
