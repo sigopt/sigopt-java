@@ -2,7 +2,7 @@ package com.sigopt.model;
 
 import java.util.List;
 
-public class PlanPeriod extends APIResource {
+public class PlanPeriod extends StructObject {
     public PlanPeriod() {
         super();
     }

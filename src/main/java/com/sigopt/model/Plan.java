@@ -1,6 +1,6 @@
 package com.sigopt.model;
 
-public class Plan extends APIResource {
+public class Plan extends StructObject {
     public Plan() {
         super();
     }

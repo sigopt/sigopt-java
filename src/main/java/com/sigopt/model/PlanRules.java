@@ -1,6 +1,6 @@
 package com.sigopt.model;
 
-public class PlanRules extends APIResource {
+public class PlanRules extends StructObject {
     public PlanRules() {
         super();
     }
