@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Pagination<T extends APIObject> extends APIObject {
+public class Pagination<T extends APIObject> extends StructObject {
     Class<T> klass;
 
     public Pagination(Class<T> klass) {
@@ -28,7 +28,7 @@ public class Pagination<T extends APIObject> extends APIObject {
     }
 }
 
-class Paging extends APIObject {
+class Paging extends StructObject {
     public Paging() {
         super();
     }

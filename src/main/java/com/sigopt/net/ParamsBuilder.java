@@ -1,7 +1,6 @@
 package com.sigopt.net;
 
 import com.sigopt.model.APIObject;
-import com.sigopt.model.APIResource;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,12 +13,7 @@ class ParamsBuilder {
         params = MapHelper.ensure(params);
         ret = MapHelper.merge(ret, params);
         for (Map.Entry<String, Object> entry: ret.entrySet()) {
-            Object value = entry.getValue();
-            if (value instanceof Map || value instanceof Collection) {
-                entry.setValue(APIObject.GSON.toJson(value));
-            } else if (value instanceof APIObject) {
-                entry.setValue(((APIObject)value).toJson());
-            }
+            entry.setValue(APIObject.toJson(entry.getValue()));
         }
         return ret;
     }

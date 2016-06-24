@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class APIResource extends APIObject {
+public final class APIResource {
     public static <T extends APIObject> T constructFromJson(String json, Class <T> klass) {
         T instance;
         try {

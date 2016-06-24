@@ -1,6 +1,6 @@
 package com.sigopt.model;
 
-public class MockResource extends APIResource {
+public class MockResource extends StructObject {
     public MockResource() {
         super();
     }

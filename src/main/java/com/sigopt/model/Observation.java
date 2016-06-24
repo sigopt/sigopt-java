@@ -2,7 +2,7 @@ package com.sigopt.model;
 
 import java.util.*;
 
-public class Observation extends APIObject {
+public class Observation extends StructObject {
     public Observation() {
         super();
     }
@@ -28,12 +28,12 @@ public class Observation extends APIObject {
         return Utils.asInteger(this.get("created"));
     }
 
-    public Map<String, Object> getAssignments() {
-        return (Map<String, Object>) this.get("assignments");
+    public Assignments getAssignments() {
+        return Utils.mergeInto(new Assignments(), this.get("assignments"));
     }
 
     public Map<String, String> getMetadata() {
-        return (Map<String, String>) this.get("metadata");
+        return Utils.mergeInto(new Metadata(), this.get("metadata"));
     }
 
     public String getExperiment() {

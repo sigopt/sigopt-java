@@ -1,6 +1,6 @@
 package com.sigopt.model;
 
-public class Bounds extends APIObject {
+public class Bounds extends StructObject {
     public Bounds() {
         super();
     }

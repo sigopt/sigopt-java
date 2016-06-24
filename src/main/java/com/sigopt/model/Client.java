@@ -4,7 +4,7 @@ import com.sigopt.exception.APIException;
 import com.sigopt.net.APIMethodCaller;
 import com.sigopt.net.PaginatedAPIMethodCaller;
 
-public class Client extends APIResource {
+public class Client extends StructObject {
     public Client() {
         super();
     }

@@ -1,6 +1,6 @@
 package com.sigopt.model;
 
-public class Metric extends APIObject {
+public class Metric extends StructObject {
     public Metric() {
         super();
     }
