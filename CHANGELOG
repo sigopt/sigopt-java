@@ -1,3 +1,9 @@
+=== 2.3.0 2016-2-24
+
+* Add native Assignments/Metadata classes, which should make working with
+	those objects easier.
+* Add in Plan object and /clients/X/plan endpoint
+
 === 2.2.0 2016-2-16
 
 * Fix APIObject hashcode
