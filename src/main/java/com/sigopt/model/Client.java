@@ -52,6 +52,24 @@ public class Client extends StructObject {
         return new Experiments("/clients/" + this.getId());
     }
 
+    public static class Plans extends BoundObject {
+        public Plans(String prefix) {
+            super(prefix);
+        }
+
+        public APIMethodCaller<Plan> fetch() {
+            return new APIMethodCaller<Plan>(
+                "get",
+                this.prefix() + "/plan",
+                Plan.class
+            );
+        }
+    }
+
+    public Plans plan() {
+        return new Plans("/clients/" + this.getId());
+    }
+
     public static class Builder {
         Client c;
         public Builder() {
