@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+set -e
+
+VERSION=$1
+if [ "x" = "x$VERSION" ]; then
+  echo 'Must provide version to deploy.'
+  exit 1
+fi
+
+mvn clean
+mvn package
+cp pom.xml "target/sigopt-java-$VERSION.pom"
+
+echo
+echo
+
+declare -a FILES=( \
+  "target/sigopt-java-$VERSION.pom" \
+  "target/sigopt-java-$VERSION.jar" \
+  "target/sigopt-java-$VERSION-sources.jar" \
+  "target/sigopt-java-$VERSION-javadoc.jar" \
+)
+
+echo 'Publishing the following files:'
+for FILE in ${FILES[@]}; do
+  echo "  $FILE"
+done
+echo
+
+read -s -p "Enter GPG signing passphrase:" GPG_PASSPHRASE
+echo
+for FILE in ${FILES[@]}; do
+  echo "$GPG_PASSPHRASE" | gpg -ab --batch --passphrase-fd 0 "$FILE"
+done
+
+echo 'Upload these files to bintray and then publish to Maven Central'
+for FILE in ${FILES[@]}; do
+  echo "  $FILE"
+  echo "  $FILE.asc"
+done
