@@ -58,6 +58,10 @@ public class Experiment extends StructObject {
       return Utils.asInteger(this.get("created"));
     }
 
+    public Integer getObservationBudget() {
+      return Utils.asInteger(this.get("observation_budget"));
+    }
+
     public static APIMethodCaller<Experiment> fetch() {
         return new APIMethodCaller<Experiment>("get", "/experiments/:id", Experiment.class);
     }
@@ -219,6 +223,11 @@ public class Experiment extends StructObject {
 
         public Builder type(String type) {
             this.e.set("type", type);
+            return this;
+        }
+
+        public Builder observationBudget(Integer budget) {
+            this.e.set("observation_budget", budget);
             return this;
         }
     }
