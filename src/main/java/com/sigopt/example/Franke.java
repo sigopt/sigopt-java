@@ -4,6 +4,7 @@ public class Franke {
     public Franke() {
     }
 
+    // http://www.sfu.ca/~ssurjano/franke2d.html
     public static Double evaluate(double x, double y) {
         return (
             0.75 * Math.exp(-Math.pow((9 * x - 2), 2.0) / 4.0 - Math.pow((9 * y - 2), 2.0) / 4.0) +
