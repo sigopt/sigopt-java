@@ -11,5 +11,12 @@ public class FrankeTest {
     assertTrue(Franke.evaluate(1.0, 0.0) > 0);
     assertTrue(Franke.evaluate(0.0, 1.0) > 0);
     assertTrue(Franke.evaluate(1.0, 1.0) > 0);
+    assertTrue(Franke.evaluate(0.2, 0.2) > 0);
+
+    assertTrue(Franke.evaluate(0.0, 0.0) < 1.22);
+    assertTrue(Franke.evaluate(1.0, 0.0) < 1.22);
+    assertTrue(Franke.evaluate(0.0, 1.0) < 1.22);
+    assertTrue(Franke.evaluate(1.0, 1.0) < 1.22);
+    assertTrue(Franke.evaluate(0.2, 0.2) < 1.22);
   }
 }
