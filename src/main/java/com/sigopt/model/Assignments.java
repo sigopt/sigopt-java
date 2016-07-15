@@ -31,4 +31,17 @@ public class Assignments extends MapObject<Object> {
             return this;
         }
     }
+
+    public String getCategorical(String name) {
+        return (String)this.get(name);
+    }
+
+    public int getInteger(String name) {
+        return ((Double)this.get(name)).intValue();
+    }
+
+    public double getDouble(String name) {
+        return ((Double)this.get(name));
+    }
+
 }
