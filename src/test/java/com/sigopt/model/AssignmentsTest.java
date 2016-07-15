@@ -12,15 +12,15 @@ public class AssignmentsTest extends APIResourceTestBase {
 
     @Before
     public void setUpMockData() throws IOException {
-        //json = resource("assignments.json");
+        json = resource("assignments.json");
     }
 
     @Test
     public void getValues() throws Exception {
-        // Assignments assignments = APIResource.constructFromJson(json, Assignments.class);
+        Assignments assignments = APIResource.constructFromJson(json, Assignments.class);
 
-        // assertEquals(0.2, assignments.getDouble("a"), 0.00001);
-        // assertEquals(1, assignments.getInteger("b"));
-        // assertEquals("foo", assignments.getCategorical("c"));
+        assertEquals(0.2, assignments.getDouble("a"), 0.00001);
+        assertEquals(1, assignments.getInteger("b"));
+        assertEquals("foo", assignments.getCategorical("c"));
     }
 }
