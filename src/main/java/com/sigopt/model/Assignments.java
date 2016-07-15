@@ -32,8 +32,12 @@ public class Assignments extends MapObject<Object> {
         }
     }
 
-    public String getCategorical(String name) {
-        return (String)this.get(name);
+    public String getString(String name) {
+        Object value = this.get(name);
+        if (value == null) {
+            throw new NullPointerException("No assignment for " + name);
+        }
+        return (String)value;
     }
 
     public int getInteger(String name) {
