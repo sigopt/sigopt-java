@@ -44,7 +44,7 @@ public class AssignmentsTest extends APIResourceTestBase {
     }
 
     @Test
-    public void noNullPointerExceptionString() throws Exception {
+    public void throwsNullPointerExceptionString() throws Exception {
         Assignments assignments = APIResource.constructFromJson(json, Assignments.class);
         thrown.expect(NullPointerException.class);
         assignments.getString("d");
