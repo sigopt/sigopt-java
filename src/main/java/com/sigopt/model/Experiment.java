@@ -94,11 +94,11 @@ public class Experiment extends StructObject {
         return Experiment.update(id).data(e);
     }
 
-    public static APIMethodCaller<Experiment> delete() {
-        return new APIMethodCaller<Experiment>("delete", "/experiments/:id", Experiment.class);
+    public static APIMethodCaller<VoidObject> delete() {
+        return new APIMethodCaller<VoidObject>("delete", "/experiments/:id", null);
     }
 
-    public static APIMethodCaller<Experiment> delete(String id) {
+    public static APIMethodCaller<VoidObject> delete(String id) {
         return Experiment.delete().addPathComponent("id", id);
     }
 
@@ -148,11 +148,11 @@ public class Experiment extends StructObject {
             return new APIMethodCaller<VoidObject>("delete", this.prefix() + "/" + this.name, null);
         }
 
-        public APIMethodCaller<Experiment> delete() {
-            return new APIMethodCaller<Experiment>("delete", this.prefix() + "/" + this.name + "/:id", null);
+        public APIMethodCaller<VoidObject> delete() {
+            return new APIMethodCaller<VoidObject>("delete", this.prefix() + "/" + this.name + "/:id", null);
         }
 
-        public APIMethodCaller<Experiment> delete(String id) {
+        public APIMethodCaller<VoidObject> delete(String id) {
             return this.delete().addPathComponent("id", id);
         }
     }
