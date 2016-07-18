@@ -1,3 +1,6 @@
+=== 3.0.0 2016-07-15
+* Fix response type of delete endpoints
+
 === 2.4.0 2016-07-13
 * Add Franke function as built-in example function
 
