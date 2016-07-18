@@ -31,4 +31,21 @@ public class Assignments extends MapObject<Object> {
             return this;
         }
     }
+
+    public String getString(String name) {
+        Object value = this.get(name);
+        if (value == null) {
+            throw new NullPointerException("No assignment for " + name);
+        }
+        return (String)value;
+    }
+
+    public int getInteger(String name) {
+        return ((Double)this.get(name)).intValue();
+    }
+
+    public double getDouble(String name) {
+        return ((Double)this.get(name));
+    }
+
 }
