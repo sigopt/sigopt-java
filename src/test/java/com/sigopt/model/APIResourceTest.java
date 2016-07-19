@@ -43,4 +43,9 @@ public class APIResourceTest {
         assertEquals("name-value", actual.getSuperAwesomeName());
         assertTrue(actual instanceof MockResource);
     }
+
+    @Test
+    public void constructVoidFromJson() throws Exception {
+        VoidObject v = APIResource.constructFromJson(mockResourceJson, VoidObject.class);
+    }
 }

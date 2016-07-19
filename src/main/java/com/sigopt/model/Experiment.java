@@ -95,7 +95,7 @@ public class Experiment extends StructObject {
     }
 
     public static APIMethodCaller<VoidObject> delete() {
-        return new APIMethodCaller<VoidObject>("delete", "/experiments/:id", null);
+        return new APIMethodCaller<VoidObject>("delete", "/experiments/:id", VoidObject.class);
     }
 
     public static APIMethodCaller<VoidObject> delete(String id) {
@@ -145,11 +145,11 @@ public class Experiment extends StructObject {
         }
 
         public APIMethodCaller<VoidObject> deleteList() {
-            return new APIMethodCaller<VoidObject>("delete", this.prefix() + "/" + this.name, null);
+            return new APIMethodCaller<VoidObject>("delete", this.prefix() + "/" + this.name, VoidObject.class);
         }
 
         public APIMethodCaller<VoidObject> delete() {
-            return new APIMethodCaller<VoidObject>("delete", this.prefix() + "/" + this.name + "/:id", null);
+            return new APIMethodCaller<VoidObject>("delete", this.prefix() + "/" + this.name + "/:id", VoidObject.class);
         }
 
         public APIMethodCaller<VoidObject> delete(String id) {
