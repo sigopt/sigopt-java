@@ -183,7 +183,7 @@ class MapObject<V extends Object> extends APIObject implements Map<String, V> {
 }
 
 /**
- * An extension of MapObject<Object> which adds some handy accessors.
+ * An extension of MapObject&lt;Object&gt; which adds some handy accessors.
  */
 class RichMapObject extends MapObject<Object> {
     final public String getString(String name) {
