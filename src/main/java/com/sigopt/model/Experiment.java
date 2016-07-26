@@ -176,7 +176,7 @@ public class Experiment extends StructObject {
             return this.e;
         }
 
-        public Builder created(Integer created) {
+        public Builder created(int created) {
             this.e.set("created", created);
             return this;
         }
@@ -226,7 +226,7 @@ public class Experiment extends StructObject {
             return this;
         }
 
-        public Builder observationBudget(Integer budget) {
+        public Builder observationBudget(int budget) {
             this.e.set("observation_budget", budget);
             return this;
         }

@@ -3,7 +3,7 @@
     <groupId>com.sigopt</groupId>
     <artifactId>sigopt-java</artifactId>
     <packaging>jar</packaging>
-    <version>3.1.1</version>
+    <version>3.2.0</version>
     <name>sigopt-java</name>
     <description>Sigopt Java Bindings</description>
     <url>https://sigopt.com</url>

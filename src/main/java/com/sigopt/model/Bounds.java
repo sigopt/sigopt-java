@@ -29,22 +29,22 @@ public class Bounds extends StructObject {
             return this.b;
         }
 
-        public Builder min(Double min) {
+        public Builder min(double min) {
             this.b.set("min", min);
             return this;
         }
 
-        public Builder min(Integer min) {
+        public Builder min(int min) {
             this.b.set("min", (double) min);
             return this;
         }
 
-        public Builder max(Double max) {
+        public Builder max(double max) {
             this.b.set("max", max);
             return this;
         }
 
-        public Builder max(Integer max) {
+        public Builder max(int max) {
             this.b.set("max", (double) max);
             return this;
         }

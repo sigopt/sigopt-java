@@ -1,3 +1,6 @@
+=== 3.2.0 2016-07-25
+* Make builders easier to use by requiring unboxed values
+
 === 3.1.1 2016-07-15
 * Fix a null pointer exception with delete calls
 

@@ -1,6 +1,6 @@
 package com.sigopt.model;
 
-public class Metadata extends MapObject<String> {
+public class Metadata extends RichMapObject {
     public Metadata() {
         super();
     }
@@ -17,6 +17,16 @@ public class Metadata extends MapObject<String> {
         }
 
         public Builder set(String key, String value) {
+            this.m.set(key, value);
+            return this;
+        }
+
+        public Builder set(String key, double value) {
+            this.m.set(key, value);
+            return this;
+        }
+
+        public Builder set(String key, int value) {
             this.m.set(key, value);
             return this;
         }

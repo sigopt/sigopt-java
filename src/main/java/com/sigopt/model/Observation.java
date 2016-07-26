@@ -32,7 +32,7 @@ public class Observation extends StructObject {
         return Utils.mergeInto(new Assignments(), this.get("assignments"));
     }
 
-    public Map<String, String> getMetadata() {
+    public Metadata getMetadata() {
         return Utils.mergeInto(new Metadata(), this.get("metadata"));
     }
 
@@ -64,17 +64,17 @@ public class Observation extends StructObject {
             return this;
         }
 
-        public Builder value(Double value) {
+        public Builder value(double value) {
             this.o.set("value", value);
             return this;
         }
 
-        public Builder valueStddev(Double valueStddev) {
+        public Builder valueStddev(double valueStddev) {
             this.o.set("value_stddev", valueStddev);
             return this;
         }
 
-        public Builder created(Integer created) {
+        public Builder created(int created) {
             this.o.set("created", created);
             return this;
         }
