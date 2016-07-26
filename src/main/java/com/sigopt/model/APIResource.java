@@ -27,7 +27,7 @@ public final class APIResource {
         String json,
         Class<T> subklass
     ) {
-        Pagination p = new Pagination(subklass);
+        Pagination<T> p = new Pagination<T>(subklass);
         Type type = new TypeToken<Map<String, Object>>() {}.getType();
         Map<String, Object> map = APIObject.fromJson(json, type);
         p.setAll(map);
