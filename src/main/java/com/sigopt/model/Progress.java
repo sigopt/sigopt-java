@@ -52,7 +52,7 @@ public class Progress extends StructObject {
             return this;
         }
 
-        public Builder observationCount(Integer observationCount) {
+        public Builder observationCount(int observationCount) {
             this.p.set("observation_count", observationCount);
             return this;
         }

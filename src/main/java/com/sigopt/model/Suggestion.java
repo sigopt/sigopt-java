@@ -49,7 +49,7 @@ public class Suggestion extends StructObject {
             return this.s;
         }
 
-        public Builder created(Integer created) {
+        public Builder created(int created) {
             this.s.set("created", created);
             return this;
         }

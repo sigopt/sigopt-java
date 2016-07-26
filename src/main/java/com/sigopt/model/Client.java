@@ -90,7 +90,7 @@ public class Client extends StructObject {
             return this;
         }
 
-        public Builder created(Integer created) {
+        public Builder created(int created) {
             this.c.set("created", created);
             return this;
         }
