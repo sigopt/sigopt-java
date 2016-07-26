@@ -113,7 +113,6 @@ public abstract class APIObject {
 
 /**
  * Used for JSON objects with strictly defined fields.
- * Enables users to treat JSON objects as both APIObects and Maps
  */
 class StructObject extends APIObject {
     final protected Object get(String key) {
@@ -123,7 +122,7 @@ class StructObject extends APIObject {
 
 /**
  * Used for JSON objects which can arbitrary key/value pairs.
- * Enables users to treat JSON objects as both APIObects and Maps
+ * Enables users to treat JSON objects as both APIObjects and Maps
  */
 class MapObject<V extends Object> extends APIObject implements Map<String, V> {
     final public void clear() {
@@ -180,5 +179,26 @@ class MapObject<V extends Object> extends APIObject implements Map<String, V> {
 
     final public Collection<V> values() {
         return (Collection<V>) this.model.values();
+    }
+}
+
+/**
+ * An extension of MapObject<Object> which adds some handy accessors.
+ */
+class RichMapObject extends MapObject<Object> {
+    final public String getString(String name) {
+        Object value = this.get(name);
+        if (value == null) {
+            throw new NullPointerException("No assignment for " + name);
+        }
+        return (String)value;
+    }
+
+    final public int getInteger(String name) {
+        return ((Double)this.get(name)).intValue();
+    }
+
+    final public double getDouble(String name) {
+        return ((Double)this.get(name));
     }
 }

@@ -1,6 +1,6 @@
 package com.sigopt.model;
 
-public class Assignments extends MapObject<Object> {
+public class Assignments extends RichMapObject {
     public Assignments() {
         super();
     }
@@ -21,31 +21,14 @@ public class Assignments extends MapObject<Object> {
             return this;
         }
 
-        public Builder set(String key, Integer value) {
+        public Builder set(String key, double value) {
             this.a.set(key, value);
             return this;
         }
 
-        public Builder set(String key, Double value) {
+        public Builder set(String key, int value) {
             this.a.set(key, value);
             return this;
         }
     }
-
-    public String getString(String name) {
-        Object value = this.get(name);
-        if (value == null) {
-            throw new NullPointerException("No assignment for " + name);
-        }
-        return (String)value;
-    }
-
-    public int getInteger(String name) {
-        return ((Double)this.get(name)).intValue();
-    }
-
-    public double getDouble(String name) {
-        return ((Double)this.get(name));
-    }
-
 }
