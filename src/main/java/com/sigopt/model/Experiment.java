@@ -62,6 +62,10 @@ public class Experiment extends StructObject {
       return Utils.asInteger(this.get("observation_budget"));
     }
 
+    public Boolean getDevelopment() {
+        return (Boolean) this.get("development");
+    }
+
     public static APIMethodCaller<Experiment> fetch() {
         return new APIMethodCaller<Experiment>("get", "/experiments/:id", Experiment.class);
     }

@@ -1,6 +1,7 @@
 {
   "object": "experiment",
   "id": "123",
+  "development": true,
   "name": "Test Experiment",
   "type": "offline",
   "created": 321,
