@@ -1,3 +1,6 @@
+=== 3.4.0 2016-07-27
+* Fix return value of development field
+
 === 3.3.0 2016-07-26
 * Add development field to Experiment
 
