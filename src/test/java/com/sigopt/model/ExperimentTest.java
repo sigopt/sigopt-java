@@ -31,6 +31,7 @@ public class ExperimentTest extends APIResourceTestBase {
         Experiment exp = APIResource.constructFromJson(json, Experiment.class);
 
         assertEquals("123", exp.getId());
+        assertTrue(exp.getDevelopment());
         assertEquals("offline", exp.getType());
         assertEquals("Test Experiment", exp.getName());
         assertEquals(321, (Object) exp.getCreated());
