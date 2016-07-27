@@ -234,5 +234,10 @@ public class Experiment extends StructObject {
             this.e.set("observation_budget", budget);
             return this;
         }
+
+        public Builder development(boolean development) {
+            this.e.set("development", development);
+            return this;
+        }
     }
 }
