@@ -59,7 +59,7 @@ public class Observation extends StructObject {
             return this.o;
         }
 
-        public Builder failed(Boolean failed) {
+        public Builder failed(boolean failed) {
             this.o.set("failed", failed);
             return this;
         }
