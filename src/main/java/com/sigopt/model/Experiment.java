@@ -63,7 +63,7 @@ public class Experiment extends StructObject {
     }
 
     public boolean getDevelopment() {
-        return (boolean) this.get("development");
+        return (Boolean) this.get("development");
     }
 
     public static APIMethodCaller<Experiment> fetch() {
