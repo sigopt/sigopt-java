@@ -1,7 +1,6 @@
 package com.sigopt.net;
 
 import com.sigopt.Sigopt;
-import com.sigopt.exception.AuthenticationException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -67,15 +66,6 @@ public class HeadersBuilderTest {
     public void customAuthHeader() throws Exception {
         Map<String, String> actual = HeadersBuilder.customAuthHeader("AuthToken", "actual-auth-value");
         assertEquals("actual-auth-value", actual.get("AuthToken"));
-    }
-
-    @Test
-    public void basicAuthHeaderWithNull() throws Exception {
-        try {
-            HeadersBuilder.basicAuthHeader(null);
-            assertTrue("Authentication exception was never thrown", false);
-        } catch (AuthenticationException e) {
-        }
     }
 
     @Test

@@ -7,10 +7,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.sigopt.exception.APIException;
-
 class PathBuilder {
-    public static String build(String path, Map<String, String> params) throws APIException {
+    public static String build(String path, Map<String, String> params) {
         params = MapHelper.ensure(params);
 
         Pattern r = Pattern.compile(":([^\\/]*)");
@@ -25,10 +23,10 @@ class PathBuilder {
         return path;
     }
 
-    public static String determineValue(String match, Map<String, String> params) throws APIException {
+    public static String determineValue(String match, Map<String, String> params) {
         String param = params.get(match);
         if (param == null) {
-            throw new APIException("Missing required parameter: " + match);
+            throw new NullPointerException("Missing required parameter: " + match);
         }
         return param;
     }

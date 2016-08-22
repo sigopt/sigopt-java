@@ -10,5 +10,4 @@ public abstract class SigoptException extends Exception {
     public SigoptException(String message, Throwable e) {
         super(message, e);
     }
-
 }

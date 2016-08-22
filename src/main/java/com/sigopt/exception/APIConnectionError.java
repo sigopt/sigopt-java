@@ -1,11 +1,11 @@
 package com.sigopt.exception;
 
-public class APIConnectionError extends APIException {
-
+public class APIConnectionError extends SigoptException {
     public APIConnectionError(String message) {
         super(message);
     }
 
-    private static final long serialVersionUID = 1L;
-
+    public APIConnectionError(String message, Throwable e) {
+        super(message, e);
+    }
 }

@@ -1,8 +1,9 @@
 package com.sigopt.net;
 
 import com.sigopt.Sigopt;
+import com.sigopt.exception.APIConnectionError;
 import com.sigopt.exception.APIException;
-import com.sigopt.exception.AuthenticationException;
+import com.sigopt.exception.SigoptException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,11 +18,11 @@ public class APIMethod {
     public String data;
 
     public Requester.Response response;
-    public APIException exception;
+    public SigoptException exception;
 
     public String clientToken;
 
-    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, String clientToken, String data, Map<String, String> pathComponents) throws AuthenticationException, APIException {
+    public APIMethod(String method, String path, Map<String, Object> params, Map<String, String> headers, String clientToken, String data, Map<String, String> pathComponents)  {
         this.clientToken = (clientToken == null) ? Sigopt.clientToken : clientToken;
         params = MapHelper.ensure(params);
         headers = MapHelper.ensure(headers);
@@ -34,12 +35,11 @@ public class APIMethod {
         this.data = data;
     }
 
-    public APIMethod execute() throws APIException {
+    public APIMethod execute() throws SigoptException {
         try {
             this.response = Requester.request(this.method, url(), this.params, this.headers, this.data);
         } catch(Exception e) {
-            // TODO(patrick): Compose an API error here.
-            this.exception = new APIException("An error occurred while connecting to the API.", this, e);
+            this.exception = new APIConnectionError("An error occurred while connecting to the API.", e);
             throw this.exception;
         }
 
@@ -67,7 +67,7 @@ public class APIMethod {
         public Builder() {
         }
 
-        public APIMethod build() throws AuthenticationException, APIException {
+        public APIMethod build() {
             return new APIMethod(method, path, params, headers, clientToken, data, pathComponents);
         }
 
