@@ -1,7 +1,6 @@
 package com.sigopt.net;
 
 import com.sigopt.Sigopt;
-import com.sigopt.exception.AuthenticationException;
 import com.squareup.okhttp.Request;
 
 import org.apache.commons.codec.binary.Base64;
@@ -11,15 +10,15 @@ import java.util.Map;
 import java.util.Iterator;
 
 class HeadersBuilder {
-    public static Map<String, String> build(Map<String, String> headers) throws AuthenticationException {
+    public static Map<String, String> build(Map<String, String> headers) {
         return build(headers, null, null);
     }
 
-    public static Map<String, String> build(Map<String, String> headers, String apiKey) throws AuthenticationException {
+    public static Map<String, String> build(Map<String, String> headers, String apiKey) {
         return build(headers, apiKey, null);
     }
 
-    public static Map<String, String> build(Map<String, String> headers, String apiKey, String authKey) throws AuthenticationException {
+    public static Map<String, String> build(Map<String, String> headers, String apiKey, String authKey) {
         Map<String, String> ret = new HashMap<String, String>();
         ret = MapHelper.merge(ret, defaultHeaders());
 
@@ -50,16 +49,13 @@ class HeadersBuilder {
         return ret;
     }
 
-    public static Map<String, String> basicAuthHeader(String apiKey) throws AuthenticationException {
-        if(apiKey == null) {
-            throw new AuthenticationException("An API key is required but was never set. Please see https://sigopt.com/docs for more information.");
-        }
-
+    public static Map<String, String> basicAuthHeader(String apiKey) {
         Map<String, String> ret = new HashMap<String, String>();
-        byte[] apiKeyBytes = String.format("%s:", apiKey).getBytes();
-        String base64Key = new String(Base64.encodeBase64(apiKeyBytes));
-        ret.put("Authorization", "Basic " + base64Key);
+        if (apiKey != null) {
+            byte[] apiKeyBytes = String.format("%s:", apiKey).getBytes();
+            String base64Key = new String(Base64.encodeBase64(apiKeyBytes));
+            ret.put("Authorization", "Basic " + base64Key);
+        }
         return ret;
     }
-
 }

@@ -1,6 +1,6 @@
 package com.sigopt.net;
 
-import com.sigopt.exception.APIException;
+import com.sigopt.exception.SigoptException;
 import com.sigopt.model.APIObject;
 import com.sigopt.model.APIResource;
 
@@ -21,11 +21,10 @@ public class APIMethodCaller<T extends APIObject> {
         this.klass = klass;
     }
 
-    public T call() throws APIException {
+    public T call() throws SigoptException {
         this.apiMethod = apiMethodBuilder.build();
         apiMethod.execute();
         return this.processBody(apiMethod.response.body);
-
     }
 
     protected T processBody(String body) {
