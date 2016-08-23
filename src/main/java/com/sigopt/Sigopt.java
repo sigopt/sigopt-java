@@ -10,6 +10,7 @@ public abstract class Sigopt {
 
     public static volatile String clientToken;
 
+    private static volatile long timeout = 10 * 1000;
     private static volatile String apiBase = "https://api.sigopt.com";
     private static volatile Proxy connectionProxy = null;
     private static volatile PasswordAuthentication proxyCredential = null;
@@ -40,5 +41,13 @@ public abstract class Sigopt {
 
     public static PasswordAuthentication getProxyCredential() {
         return Sigopt.proxyCredential;
+    }
+
+    public static void setConnectionTimeoutMs(long timeout) {
+        Sigopt.timeout = timeout;
+    }
+
+    public static long getConnectionTimeoutMs() {
+        return Sigopt.timeout;
     }
 }
