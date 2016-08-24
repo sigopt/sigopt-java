@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import com.sigopt.Sigopt;
 
@@ -37,6 +38,9 @@ class Requester {
         }
         OkHttpClient client = new OkHttpClient();
         client.setProxy(Sigopt.getConnectionProxy());
+        client.setConnectTimeout(Sigopt.getConnectionTimeoutMs(), TimeUnit.MILLISECONDS);
+        client.setReadTimeout(Sigopt.getConnectionTimeoutMs(), TimeUnit.MILLISECONDS);
+        client.setWriteTimeout(Sigopt.getConnectionTimeoutMs(), TimeUnit.MILLISECONDS);
         com.squareup.okhttp.Response res = client.newCall(createRequest(method, url, params, headers, data)).execute();
         return new Response(res.body().string(), res.code());
     }
