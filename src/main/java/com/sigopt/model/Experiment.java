@@ -169,6 +169,10 @@ public class Experiment extends StructObject {
         return new Subresource<Suggestion>("/experiments/" + this.getId(), "suggestions", Suggestion.class);
     }
 
+    public Subresource<Token> tokens() {
+        return new Subresource<Token>("/experiments/" + this.getId(), "tokens", Token.class);
+    }
+
     public static class Builder {
         Experiment e;
 
