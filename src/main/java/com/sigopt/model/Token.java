@@ -1,7 +1,6 @@
 package com.sigopt.model;
 
 import com.sigopt.net.APIMethod;
-import java.util.*;
 
 public class Token extends StructObject {
     public Token() {
@@ -16,8 +15,8 @@ public class Token extends StructObject {
         return (Boolean) this.get("development");
     }
 
-    public Integer getPermissions() {
-        return Utils.asInteger(this.get("permissions"));
+    public String getPermissions() {
+        return (String) this.get("permissions");
     }
 
     public String getToken() {
@@ -56,7 +55,7 @@ public class Token extends StructObject {
             return this;
         }
 
-        public Builder permissions(int permissions) {
+        public Builder permissions(String permissions) {
             this.t.set("permissions", permissions);
             return this;
         }
