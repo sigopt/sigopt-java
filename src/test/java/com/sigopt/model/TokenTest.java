@@ -31,7 +31,7 @@ public class TokenTest extends APIResourceTestBase {
         assertTrue(t.getDevelopment());
         assertEquals("read", t.getPermissions());
         assertEquals("123", t.getToken());
-        assertEquals("456", t.getClientId());
+        assertEquals("456", t.getClient());
         assertEquals("1", t.getExperiment());
         assertEquals("789", t.getUser());
     }
