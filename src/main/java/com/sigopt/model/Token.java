@@ -23,8 +23,8 @@ public class Token extends StructObject {
         return (String) this.get("token");
     }
 
-    public String getClientId() {
-        return (String) this.get("client_id");
+    public String getClient() {
+        return (String) this.get("client");
     }
 
     public String getExperiment() {
@@ -65,8 +65,8 @@ public class Token extends StructObject {
             return this;
         }
 
-        public Builder clientId(String clientId){
-            this.t.set("client_id", clientId);
+        public Builder client(String client){
+            this.t.set("client", client);
             return this;
         }
 
