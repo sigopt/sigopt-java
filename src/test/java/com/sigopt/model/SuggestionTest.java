@@ -38,5 +38,6 @@ public class SuggestionTest extends APIResourceTestBase {
         assertEquals(123, (Object) s.getCreated());
         assertEquals("def", s.getMetadata().get("abc"));
         assertEquals(123.0, s.getMetadata().get("ghi"));
+        assertEquals(3, (Object) s.getFoldIndex());
     }
 }

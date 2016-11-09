@@ -11,5 +11,6 @@
   "metadata": {
     "abc": "def",
     "ghi": 123
-  }
+  },
+  "fold_index": 3
 }
