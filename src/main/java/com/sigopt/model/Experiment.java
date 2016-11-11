@@ -66,6 +66,10 @@ public class Experiment extends StructObject {
         return (Boolean) this.get("development");
     }
 
+    public Integer getFolds() {
+      return Utils.asInteger(this.get("folds"));
+    }
+
     public static APIMethodCaller<Experiment> fetch() {
         return new APIMethodCaller<Experiment>("get", "/experiments/:id", Experiment.class);
     }
@@ -173,6 +177,10 @@ public class Experiment extends StructObject {
         return new Subresource<Token>("/experiments/" + this.getId(), "tokens", Token.class);
     }
 
+    public Subresource<BestAssignments> bestAssignments() {
+        return new Subresource<BestAssignments>("/experiments/" + this.getId(), "best_assignments", BestAssignments.class);
+    }
+
     public static class Builder {
         Experiment e;
 
@@ -208,7 +216,7 @@ public class Experiment extends StructObject {
             this.e.set("progress", progress);
             return this;
         }
-
+        
         public Builder client(String client) {
             this.e.set("client", client);
             return this;
@@ -241,6 +249,11 @@ public class Experiment extends StructObject {
 
         public Builder development(boolean development) {
             this.e.set("development", development);
+            return this;
+        }
+
+        public Builder folds(int folds) {
+            this.e.set("folds", folds);
             return this;
         }
     }
