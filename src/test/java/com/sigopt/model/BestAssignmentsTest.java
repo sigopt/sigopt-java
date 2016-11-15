@@ -32,7 +32,7 @@ public class BestAssignmentsTest extends APIResourceTestBase {
 
         assertEquals(5.0, (Object) b.getValue());
         assertEquals(0.5, (Object) b.getValueStddev());
-        assertEquals(1, b.getAssignments().get("a"));
+        assertEquals(1, b.getAssignments().getInteger("a"));
         assertEquals("c", b.getAssignments().get("b"));
     }
 }
