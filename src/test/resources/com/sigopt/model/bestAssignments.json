@@ -1,0 +1,9 @@
+{
+  "object": "bestAssignments",
+  "assignments": {
+    "a": 1,
+    "b": "c"
+  },
+  "value": 5,
+  "value_stddev": 0.5
+}
