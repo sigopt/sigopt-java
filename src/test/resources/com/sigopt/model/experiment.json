@@ -9,10 +9,16 @@
   "state": "active",
   "client": "678",
   "observation_budget": 51,
-  "metric": {
-    "object": "metric",
-    "name": "Revenue"
-  },
+  "metrics": [
+    {
+      "object": "metric",
+      "name": "Revenue"
+    },
+    {
+      "object": "metric",
+      "name": "Sales"
+    }
+  ],
   "progress": {
     "object": "progress",
     "observation_count": 3,
