@@ -24,6 +24,10 @@ public class Observation extends StructObject {
         return (Double) this.get("value_stddev");
     }
 
+    public List<Value> getValues() {
+      return Utils.mergeIntoList(new ArrayList<Value>(), this.get("values"), Value.class);
+    }
+
     public Integer getCreated() {
         return Utils.asInteger(this.get("created"));
     }
@@ -71,6 +75,11 @@ public class Observation extends StructObject {
 
         public Builder valueStddev(double valueStddev) {
             this.o.set("value_stddev", valueStddev);
+            return this;
+        }
+
+        public Builder values(List<Value> values) {
+            this.o.set("values", values);
             return this;
         }
 

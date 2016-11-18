@@ -47,32 +47,49 @@ public class ExperimentTest extends APIResourceTestBase {
 
         assertNotNull(exp.getProgress());
         assertEquals(3, (Object) exp.getProgress().getObservationCount());
+
         assertNotNull(exp.getProgress().getFirstObservation());
         assertEquals("1", exp.getProgress().getFirstObservation().getId());
         assertEquals(1.0, exp.getProgress().getFirstObservation().getAssignments().get("a"));
         assertEquals("c", exp.getProgress().getFirstObservation().getAssignments().get("b"));
-        assertEquals(3.1, exp.getProgress().getFirstObservation().getValue(), 1e-9);
-        assertNull(exp.getProgress().getFirstObservation().getValueStddev());
-        assertFalse(exp.getProgress().getLastObservation().isFailed());
+        assertNotNull(exp.getProgress().getFirstObservation().getValues());
+        assertEquals(2, exp.getProgress().getFirstObservation().getValues().size());
+        assertEquals("Revenue", exp.getProgress().getFirstObservation().getValues().get(0).getName());
+        assertEquals(3.1, exp.getProgress().getFirstObservation().getValues().get(0).getValue(), 1e-9);
+        assertNull(exp.getProgress().getFirstObservation().getValues().get(0).getValueStddev());
+        assertEquals("Sales", exp.getProgress().getFirstObservation().getValues().get(1).getName());
+        assertEquals(2.1, exp.getProgress().getFirstObservation().getValues().get(1).getValue(), 1e-9);
+        assertNull(exp.getProgress().getFirstObservation().getValues().get(1).getValueStddev());
+        assertFalse(exp.getProgress().getFirstObservation().isFailed());
         assertEquals(451, (Object) exp.getProgress().getFirstObservation().getCreated());
         assertEquals("11", exp.getProgress().getFirstObservation().getSuggestion());
         assertEquals("123", exp.getProgress().getFirstObservation().getExperiment());
+
         assertNotNull(exp.getProgress().getLastObservation());
         assertEquals("2", exp.getProgress().getLastObservation().getId());
         assertEquals(2.0, exp.getProgress().getLastObservation().getAssignments().get("a"));
         assertEquals("d", exp.getProgress().getLastObservation().getAssignments().get("b"));
-        assertEquals(3.1, exp.getProgress().getLastObservation().getValue(), 1e-9);
-        assertEquals(0.5, exp.getProgress().getLastObservation().getValueStddev(), 1e-9);
+        assertEquals("Revenue", exp.getProgress().getLastObservation().getValues().get(0).getName());
+        assertEquals(3.1, exp.getProgress().getLastObservation().getValues().get(0).getValue(), 1e-9);
+        assertEquals(0.5, exp.getProgress().getLastObservation().getValues().get(0).getValueStddev(), 1e-9);
+        assertEquals("Sales", exp.getProgress().getLastObservation().getValues().get(1).getName());
+        assertEquals(2.1, exp.getProgress().getFirstObservation().getValues().get(1).getValue(), 1e-9);
+        assertNull(exp.getProgress().getLastObservation().getValues().get(1).getValueStddev());
         assertFalse(exp.getProgress().getLastObservation().isFailed());
         assertEquals(452, (Object) exp.getProgress().getLastObservation().getCreated());
         assertEquals("12", exp.getProgress().getLastObservation().getSuggestion());
         assertEquals("123", exp.getProgress().getLastObservation().getExperiment());
+
         assertNotNull(exp.getProgress().getBestObservation());
         assertEquals("3", exp.getProgress().getBestObservation().getId());
         assertEquals(3.0, exp.getProgress().getBestObservation().getAssignments().get("a"));
         assertEquals("d", exp.getProgress().getBestObservation().getAssignments().get("b"));
-        assertNull(exp.getProgress().getBestObservation().getValue());
-        assertNull(exp.getProgress().getBestObservation().getValueStddev());
+        assertEquals("Revenue", exp.getProgress().getBestObservation().getValues().get(0).getName());
+        assertNull(exp.getProgress().getBestObservation().getValues().get(0).getValue());
+        assertNull(exp.getProgress().getBestObservation().getValues().get(0).getValueStddev());
+        assertEquals("Sales", exp.getProgress().getBestObservation().getValues().get(1).getName());
+        assertNull(exp.getProgress().getBestObservation().getValues().get(1).getValue());
+        assertNull(exp.getProgress().getBestObservation().getValues().get(1).getValueStddev());
         assertTrue(exp.getProgress().getBestObservation().isFailed());
         assertEquals(453, (Object) exp.getProgress().getBestObservation().getCreated());
         assertEquals("13", exp.getProgress().getBestObservation().getSuggestion());
