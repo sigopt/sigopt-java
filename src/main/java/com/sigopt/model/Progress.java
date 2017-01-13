@@ -11,6 +11,10 @@ public class Progress extends StructObject {
         return Utils.mergeInto(new Observation(), obj);
     }
 
+    /**
+     * @deprecated Prefer Experiment.bestAssignments
+     */
+    @Deprecated
     public Observation getBestObservation() {
         return this.asObservation(this.get("best_observation"));
     }
@@ -37,6 +41,10 @@ public class Progress extends StructObject {
             return this.p;
         }
 
+        /**
+         * @deprecated Prefer Experiment.bestAssignments
+         */
+        @Deprecated
         public Builder bestObservation(Observation bestObservation) {
             this.p.set("best_observation", bestObservation);
             return this;
