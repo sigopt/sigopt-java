@@ -78,7 +78,7 @@ public class Observation extends StructObject {
             return this;
         }
 
-        public Builder values(List<Value> values) {
+        public Builder values(List<MetricEvaluation> values) {
             this.o.set("values", values);
             return this;
         }
