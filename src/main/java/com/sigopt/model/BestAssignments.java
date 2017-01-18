@@ -15,8 +15,8 @@ public class BestAssignments extends StructObject {
         return (Double) this.get("value_stddev");
     }
 
-    public List<Value> getValues() {
-      return Utils.mergeIntoList(new ArrayList<Value>(), this.get("values"), Value.class);
+    public List<MetricEvaluation> getValues() {
+      return Utils.mergeIntoList(new ArrayList<MetricEvaluation>(), this.get("values"), MetricEvaluation.class);
     }
 
     public Assignments getAssignments() {
@@ -48,7 +48,7 @@ public class BestAssignments extends StructObject {
             return this;
         }
 
-        public Builder values(List<Value> values) {
+        public Builder values(List<MetricEvaluation> values) {
             this.b.set("values", values);
             return this;
         }

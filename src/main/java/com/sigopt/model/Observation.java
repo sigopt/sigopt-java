@@ -24,8 +24,8 @@ public class Observation extends StructObject {
         return (Double) this.get("value_stddev");
     }
 
-    public List<Value> getValues() {
-      return Utils.mergeIntoList(new ArrayList<Value>(), this.get("values"), Value.class);
+    public List<MetricEvaluation> getValues() {
+      return Utils.mergeIntoList(new ArrayList<MetricEvaluation>(), this.get("values"), MetricEvaluation.class);
     }
 
     public Integer getCreated() {

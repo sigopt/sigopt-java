@@ -1,7 +1,7 @@
 package com.sigopt.model;
 
-public class Value extends StructObject {
-    public Value() {
+public class MetricEvaluation extends StructObject {
+    public MetricEvaluation() {
         super();
     }
 
@@ -18,13 +18,13 @@ public class Value extends StructObject {
     }
 
     public static class Builder {
-        Value v;
+        MetricEvaluation v;
 
         public Builder() {
-            this.v = new Value();
+            this.v = new MetricEvaluation();
         }
 
-        public Value build() {
+        public MetricEvaluation build() {
             return this.v;
         }
 
