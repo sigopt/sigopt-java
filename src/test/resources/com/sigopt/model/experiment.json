@@ -9,10 +9,16 @@
   "state": "active",
   "client": "678",
   "observation_budget": 51,
-  "metric": {
-    "object": "metric",
-    "name": "Revenue"
-  },
+  "metrics": [
+    {
+      "object": "metric",
+      "name": "Revenue"
+    },
+    {
+      "object": "metric",
+      "name": "Sales"
+    }
+  ],
   "progress": {
     "object": "progress",
     "observation_count": 3,
@@ -23,8 +29,20 @@
         "a": 1,
         "b": "c"
       },
-      "value": 3.1,
-      "value_stddev": null,
+      "values": [
+        {
+          "object": "value",
+          "name": "Revenue",
+          "value": 3.1,
+          "value_stddev": null
+        },
+        {
+          "object": "value",
+          "name": "Sales",
+          "value": 2.1,
+          "value_stddev": null
+        }
+      ],
       "failed": false,
       "created": 451,
       "suggestion": "11",
@@ -37,8 +55,20 @@
         "a": 2,
         "b": "d"
       },
-      "value": 3.1,
-      "value_stddev": 0.5,
+      "values": [
+        {
+          "object": "value",
+          "name": "Revenue",
+          "value": 3.1,
+          "value_stddev": 0.5
+        },
+        {
+          "object": "value",
+          "name": "Sales",
+          "value": 2.1,
+          "value_stddev": null
+        }
+      ],
       "failed": false,
       "created": 452,
       "suggestion": "12",
@@ -51,8 +81,20 @@
         "a": 3,
         "b": "d"
       },
-      "value": null,
-      "value_stddev": null,
+      "values": [
+        {
+          "object": "value",
+          "name": "Revenue",
+          "value": null,
+          "value_stddev": null
+        },
+        {
+          "object": "value",
+          "name": "Sales",
+          "value": null,
+          "value_stddev": null
+        }
+      ],
       "failed": true,
       "created": 453,
       "suggestion": "13",

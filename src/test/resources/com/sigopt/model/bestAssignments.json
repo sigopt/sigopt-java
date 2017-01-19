@@ -5,5 +5,19 @@
     "b": "c"
   },
   "value": 5,
-  "value_stddev": 0.5
+  "value_stddev": 0.5,
+  "values": [
+    {
+      "object": "value",
+      "name": "Revenue",
+      "value": 3.1,
+      "value_stddev": 0.5
+    },
+    {
+      "object": "value",
+      "name": "Sales",
+      "value": 2.1,
+      "value_stddev": null
+    }
+  ]
 }

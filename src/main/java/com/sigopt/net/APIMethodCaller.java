@@ -68,9 +68,4 @@ public class APIMethodCaller<T extends APIObject> {
         this.apiMethodBuilder.addHeader(key, value);
         return this;
     }
-
-    public APIMethodCaller<T> clientToken(String clientToken) {
-        this.apiMethodBuilder.clientToken(clientToken);
-        return this;
-    }
 }

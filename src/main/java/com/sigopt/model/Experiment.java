@@ -34,6 +34,10 @@ public class Experiment extends StructObject {
         return Utils.mergeIntoList(new ArrayList<Parameter>(), this.get("parameters"), Parameter.class);
     }
 
+    public List<Metric> getMetrics() {
+        return Utils.mergeIntoList(new ArrayList<Metric>(), this.get("metrics"), Metric.class);
+    }
+
     public Metric getMetric() {
         return Utils.mergeInto(new Metric(), this.get("metric"));
     }
@@ -199,6 +203,11 @@ public class Experiment extends StructObject {
 
         public Builder parameters(List<Parameter> parameters) {
             this.e.set("parameters", parameters);
+            return this;
+        }
+
+        public Builder metrics(List<Metric> metrics) {
+            this.e.set("metrics", metrics);
             return this;
         }
 
