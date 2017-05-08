@@ -9,7 +9,7 @@ public class PaginatedAPIMethodCaller<T extends APIObject> extends APIMethodCall
 
     public PaginatedAPIMethodCaller(String method, String path, Class<T> klass) {
         super(method, path);
-        this.subklass = subklass;
+        this.subklass = klass;
     }
 
     @Override
