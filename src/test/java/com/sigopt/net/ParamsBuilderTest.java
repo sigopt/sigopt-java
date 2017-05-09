@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class ParamsBuilderTest {
@@ -24,7 +25,19 @@ public class ParamsBuilderTest {
     @Before
     public void setUpMockData() {
         params = new HashMap<String, Object>();
+    }
+
+    @Test
+    public void buildSimple() throws Exception {
         params.put("age", 100);
+        params.put("name", "sigopt");
+        params.put("is_cool", true);
+        params.put("null_key", null);
+        Map<String, Object> actual = ParamsBuilder.build(params);
+        assertEquals("100", actual.get("age"));
+        assertEquals("sigopt", actual.get("name"));
+        assertEquals("true", actual.get("is_cool"));
+        assertFalse(actual.containsKey("null_key"));
     }
 
     @Test

@@ -9,11 +9,14 @@ import java.util.Map;
 class ParamsBuilder {
     public static Map<String, Object> build(Map<String, Object> params) {
         Map<String, Object> ret = new HashMap<String, Object>();
-
         params = MapHelper.ensure(params);
-        ret = MapHelper.merge(ret, params);
-        for (Map.Entry<String, Object> entry: ret.entrySet()) {
-            entry.setValue(APIObject.toJson(entry.getValue()));
+        for (Map.Entry<String, Object> entry: params.entrySet()) {
+            if (entry.getValue() == null) { continue; }
+            if (entry.getValue() instanceof APIObject) {
+                ret.put(entry.getKey(), APIObject.toJson(entry.getValue()));
+            } else {
+                ret.put(entry.getKey(), entry.getValue().toString());
+            }
         }
         return ret;
     }
