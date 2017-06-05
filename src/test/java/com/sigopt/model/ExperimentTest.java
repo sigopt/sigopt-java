@@ -39,6 +39,7 @@ public class ExperimentTest extends APIResourceTestBase {
         assertEquals("active", exp.getState());
         assertEquals("678", exp.getClient());
         assertEquals(51, (Object) exp.getObservationBudget());
+        assertEquals(3, (Object) exp.getNumSolutions());
 
         assertNotNull(exp.getMetrics());
         assertEquals(2, exp.getMetrics().size());

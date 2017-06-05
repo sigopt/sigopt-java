@@ -66,6 +66,10 @@ public class Experiment extends StructObject {
       return Utils.asInteger(this.get("observation_budget"));
     }
 
+    public Integer getNumSolutions() {
+      return Utils.asInteger(this.get("num_solutions"));
+    }
+
     public Boolean getDevelopment() {
         return (Boolean) this.get("development");
     }
@@ -225,7 +229,7 @@ public class Experiment extends StructObject {
             this.e.set("progress", progress);
             return this;
         }
-        
+
         public Builder client(String client) {
             this.e.set("client", client);
             return this;
@@ -253,6 +257,11 @@ public class Experiment extends StructObject {
 
         public Builder observationBudget(int budget) {
             this.e.set("observation_budget", budget);
+            return this;
+        }
+
+        public Builder numSolutions(int numSolutions) {
+            this.e.set("num_solutions", numSolutions);
             return this;
         }
 
