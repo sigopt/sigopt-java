@@ -83,7 +83,7 @@ public class Experiment extends StructObject {
     }
 
     public static APIMethodCaller<Experiment> fetch(String id) {
-        return Experiment.fetch().addPathComponent("id", id);
+        return Experiment.fetch().addParam("id", id);
     }
 
     public static PaginatedAPIMethodCaller<Experiment> list() {
