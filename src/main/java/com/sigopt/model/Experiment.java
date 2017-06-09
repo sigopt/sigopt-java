@@ -119,11 +119,9 @@ public class Experiment extends StructObject {
     }
 
     /**
-    *   LinkedResource is used for a resource linked strongly to another.
-    *   One example is StoppingCriteria, which isn't a
-    *   full object with its own id but still must be
-    *   retrieved as its own resource (separate from Experiment, in the case of)
-    *   Stopping Criteria.
+    *   LinkedResource is used for a resource linked strongly to another e.g.
+    *   StoppingCriteria isn't a full object with its own id but still must be
+    *   retrieved as its own resource separate from Experiment
     */
     public static class LinkedResource<T extends APIObject> extends BoundObject {
         String name;
