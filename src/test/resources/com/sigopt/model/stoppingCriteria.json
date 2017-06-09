@@ -1,0 +1,7 @@
+{
+  "should_stop": true,
+  "reasons": [
+    "observation_budget_reached",
+    "possible_stagnation"
+  ]
+}

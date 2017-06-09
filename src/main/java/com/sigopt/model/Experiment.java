@@ -118,6 +118,26 @@ public class Experiment extends StructObject {
         return Experiment.delete().addPathComponent("id", id);
     }
 
+    /**
+    *   PropertyResource is used for a resource linked strongly to another e.g.
+    *   StoppingCriteria isn't a full object with its own id but still must be
+    *   retrieved as its own resource separate from Experiment
+    */
+    public static class PropertyResource<T extends APIObject> extends BoundObject {
+        String name;
+        Class<T> klass;
+
+        public PropertyResource(String prefix, String name, Class<T> klass) {
+            super(prefix);
+            this.name = name;
+            this.klass = klass;
+        }
+
+        public APIMethodCaller<T> fetch() {
+            return new APIMethodCaller<T>("get", this.prefix() + "/" + this.name, klass);
+        }
+    }
+
     public static class Subresource<T extends APIObject> extends BoundObject {
         String name;
         Class<T> klass;
@@ -175,6 +195,10 @@ public class Experiment extends StructObject {
 
     public Subresource<Observation> observations() {
         return new Subresource<Observation>("/experiments/" + this.getId(), "observations", Observation.class);
+    }
+
+    public PropertyResource<StoppingCriteria> stoppingCriteria() {
+        return new PropertyResource<StoppingCriteria>("/experiments/" + this.getId(), "stopping_criteria", StoppingCriteria.class);
     }
 
     public Subresource<Suggestion> suggestions() {
