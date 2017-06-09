@@ -119,15 +119,15 @@ public class Experiment extends StructObject {
     }
 
     /**
-    *   LinkedResource is used for a resource linked strongly to another e.g.
+    *   PropertyResource is used for a resource linked strongly to another e.g.
     *   StoppingCriteria isn't a full object with its own id but still must be
     *   retrieved as its own resource separate from Experiment
     */
-    public static class LinkedResource<T extends APIObject> extends BoundObject {
+    public static class PropertyResource<T extends APIObject> extends BoundObject {
         String name;
         Class<T> klass;
 
-        public LinkedResource(String prefix, String name, Class<T> klass) {
+        public PropertyResource(String prefix, String name, Class<T> klass) {
             super(prefix);
             this.name = name;
             this.klass = klass;
@@ -153,7 +153,7 @@ public class Experiment extends StructObject {
         }
 
         public APIMethodCaller<T> fetch(String id) {
-            return this.fetch().addParam("id", id);
+            return this.fetch().addPathComponent("id", id);
         }
 
         public PaginatedAPIMethodCaller<T> list() {
@@ -197,8 +197,8 @@ public class Experiment extends StructObject {
         return new Subresource<Observation>("/experiments/" + this.getId(), "observations", Observation.class);
     }
 
-    public LinkedResource<StoppingCriteria> stoppingCriteria() {
-        return new LinkedResource<StoppingCriteria>("/experiments/" + this.getId(), "stopping_criteria", StoppingCriteria.class);
+    public PropertyResource<StoppingCriteria> stoppingCriteria() {
+        return new PropertyResource<StoppingCriteria>("/experiments/" + this.getId(), "stopping_criteria", StoppingCriteria.class);
     }
 
     public Subresource<Suggestion> suggestions() {
