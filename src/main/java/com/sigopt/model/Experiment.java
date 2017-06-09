@@ -118,6 +118,28 @@ public class Experiment extends StructObject {
         return Experiment.delete().addPathComponent("id", id);
     }
 
+    /**
+    *   LinkedResource is used for a resource linked strongly to another.
+    *   One example is StoppingCriteria, which isn't a
+    *   full object with its own id but still must be
+    *   retrieved as its own resource (separate from Experiment, in the case of)
+    *   Stopping Criteria.
+    */
+    public static class LinkedResource<T extends APIObject> extends BoundObject {
+        String name;
+        Class<T> klass;
+
+        public LinkedResource(String prefix, String name, Class<T> klass) {
+            super(prefix);
+            this.name = name;
+            this.klass = klass;
+        }
+
+        public APIMethodCaller<T> fetch() {
+            return new APIMethodCaller<T>("get", this.prefix() + "/" + this.name, klass);
+        }
+    }
+
     public static class Subresource<T extends APIObject> extends BoundObject {
         String name;
         Class<T> klass;
@@ -175,6 +197,10 @@ public class Experiment extends StructObject {
 
     public Subresource<Observation> observations() {
         return new Subresource<Observation>("/experiments/" + this.getId(), "observations", Observation.class);
+    }
+
+    public LinkedResource<StoppingCriteria> stoppingCriteria() {
+        return new LinkedResource<StoppingCriteria>("/experiments/" + this.getId(), "stopping_criteria", StoppingCriteria.class);
     }
 
     public Subresource<Suggestion> suggestions() {
