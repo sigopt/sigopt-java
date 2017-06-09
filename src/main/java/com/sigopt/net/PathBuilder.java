@@ -9,12 +9,6 @@ import java.util.regex.Pattern;
 
 class PathBuilder {
     public static String build(String path, Map<String, String> params) {
-        System.out.println("Path: " + path);
-        for(String key : params.keySet()) {
-            System.out.println("Key: " + key);
-            System.out.println("Value: " + params.get(key));
-        }
-
         params = MapHelper.ensure(params);
 
         Pattern r = Pattern.compile(":([^\\/]*)");
