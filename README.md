@@ -75,8 +75,9 @@ compile "com.sigopt:sigopt-java:4.6.1"
 You'll need to manually install the following JARs:
 
 * The sigopt-java JAR.
-* [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.4-release.zip>.
-* [OkHttp](http://square.github.io/okhttp/) from <https://search.maven.org/remote_content?g=com.squareup.okio&a=okio&v=LATEST>.
+* `commons-codec` from <http://repo1.maven.org/maven2/commons-codec/commons-codec/1.7/>.
+* [Google Gson](http://code.google.com/p/google-gson/) from <http://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.4/>.
+* [OkHttp](http://square.github.io/okhttp/) from <http://repo1.maven.org/maven2/com/squareup/okhttp/okhttp/2.7.5/>.
 
 Getting Started
 ===============
