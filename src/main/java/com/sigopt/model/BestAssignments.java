@@ -7,6 +7,10 @@ public class BestAssignments extends StructObject {
         super();
     }
 
+    public String getID() {
+        return (String) this.get("id");
+    }
+
     public Double getValue() {
         return (Double) this.get("value");
     }
@@ -35,6 +39,11 @@ public class BestAssignments extends StructObject {
 
         public Builder assignments(Map<String, Object> assignments) {
             this.b.set("assignments", assignments);
+            return this;
+        }
+
+        public Builder id(String id) {
+            this.b.set("id", id);
             return this;
         }
 
