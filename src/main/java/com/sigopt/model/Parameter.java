@@ -25,6 +25,10 @@ public class Parameter extends StructObject {
         return Utils.mergeIntoList(new ArrayList<CategoricalValue>(), this.get("categorical_values"), CategoricalValue.class);
     }
 
+    public Conditions getConditions() {
+        return Utils.mergeInto(new Conditions(), this.get("conditions"));
+    }
+
     public static class Builder {
         Parameter p;
 
@@ -53,6 +57,11 @@ public class Parameter extends StructObject {
 
         public Builder categoricalValues(List<CategoricalValue> categoricalValues) {
             this.p.set("categorical_values", categoricalValues);
+            return this;
+        }
+
+        public Builder conditions(Map<String, String> conditions) {
+            this.p.set("conditions", conditions);
             return this;
         }
     }

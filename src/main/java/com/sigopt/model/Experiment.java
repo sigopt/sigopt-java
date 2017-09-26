@@ -78,6 +78,10 @@ public class Experiment extends StructObject {
       return Utils.asInteger(this.get("folds"));
     }
 
+    public List<Conditional> getConditionals() {
+        return Utils.mergeIntoList(new ArrayList<Conditional>(), this.get("conditionals"), Conditional.class);
+    }
+
     public static APIMethodCaller<Experiment> fetch() {
         return new APIMethodCaller<Experiment>("get", "/experiments/:id", Experiment.class);
     }
