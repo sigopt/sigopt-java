@@ -41,6 +41,13 @@ public class ExperimentTest extends APIResourceTestBase {
         assertEquals(51, (Object) exp.getObservationBudget());
         assertEquals(3, (Object) exp.getNumSolutions());
 
+        assertNotNull(exp.getConditionals());
+        assertEquals(1, exp.getConditionals().size());
+        assertEquals("num_hidden_layers", exp.getConditionals().get(0).getName());
+        assertEquals(2, exp.getConditionals().get(0).getValues().size());
+        assertEquals("1", exp.getConditionals().get(0).getValues().get(0));
+        assertEquals("3", exp.getConditionals().get(0).getValues().get(1));
+
         assertNotNull(exp.getMetrics());
         assertEquals(2, exp.getMetrics().size());
         assertEquals("Revenue", exp.getMetrics().get(0).getName());
@@ -105,12 +112,19 @@ public class ExperimentTest extends APIResourceTestBase {
         assertEquals(1, exp.getParameters().get(0).getBounds().getMin(), 1e-9);
         assertEquals(2, exp.getParameters().get(0).getBounds().getMax(), 1e-9);
         assertNull(exp.getParameters().get(0).getCategoricalValues());
+        assertNotNull(exp.getParameters().get(0).getConditions());
+        assertEquals(0, exp.getParameters().get(0).getConditions().get("num_hidden_layers").size());
+
         assertEquals("b", exp.getParameters().get(1).getName());
         assertEquals("categorical", exp.getParameters().get(1).getType());
         assertNull(exp.getParameters().get(1).getBounds());
         assertEquals(2, exp.getParameters().get(1).getCategoricalValues().size());
         assertEquals("c", exp.getParameters().get(1).getCategoricalValues().get(0).getName());
         assertEquals("d", exp.getParameters().get(1).getCategoricalValues().get(1).getName());
+        assertNotNull(exp.getParameters().get(1).getConditions());
+        assertEquals(2, exp.getParameters().get(1).getConditions().get("num_hidden_layers").size());
+        assertEquals("1", exp.getParameters().get(1).getConditions().get("num_hidden_layers").get(0));
+        assertEquals("3", exp.getParameters().get(1).getConditions().get("num_hidden_layers").get(1));
 
         assertEquals("def", exp.getMetadata().get("abc"));
         assertEquals(123.0, exp.getMetadata().get("ghi"));
