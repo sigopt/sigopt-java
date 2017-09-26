@@ -10,6 +10,14 @@
   "client": "678",
   "observation_budget": 51,
   "num_solutions": 3,
+  "linear_constraints": [{
+    "type": "greater_than",
+    "terms": [{
+      "name": "a",
+      "weight": 2
+    }],
+    "threshold": 5
+  }],
   "conditionals": [{
     "object": "conditional",
     "name": "num_hidden_layers",

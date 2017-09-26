@@ -41,6 +41,15 @@ public class ExperimentTest extends APIResourceTestBase {
         assertEquals(51, (Object) exp.getObservationBudget());
         assertEquals(3, (Object) exp.getNumSolutions());
 
+        assertNotNull(exp.getLinearConstraints());
+        assertEquals(1, exp.getLinearConstraints().size());
+        assertEquals("greater_than", exp.getLinearConstraints().get(0).getType());
+        assertEquals(5.0, (Object) exp.getLinearConstraints().get(0).getThreshold());
+        assertNotNull(exp.getLinearConstraints().get(0).getTerms());
+        assertEquals(1, exp.getLinearConstraints().get(0).getTerms().size());
+        assertEquals("a", exp.getLinearConstraints().get(0).getTerms().get(0).getName());
+        assertEquals(2.0, (Object) exp.getLinearConstraints().get(0).getTerms().get(0).getWeight());
+
         assertNotNull(exp.getConditionals());
         assertEquals(1, exp.getConditionals().size());
         assertEquals("num_hidden_layers", exp.getConditionals().get(0).getName());
