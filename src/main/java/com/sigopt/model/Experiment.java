@@ -77,7 +77,7 @@ public class Experiment extends StructObject {
     public Integer getFolds() {
       return Utils.asInteger(this.get("folds"));
     }
-  
+
     public List<LinearConstraint> getLinearConstraints() {
         return Utils.mergeIntoList(new ArrayList<LinearConstraint>(), this.get("linear_constraints"), LinearConstraint.class);
     }
@@ -304,6 +304,16 @@ public class Experiment extends StructObject {
 
         public Builder folds(int folds) {
             this.e.set("folds", folds);
+            return this;
+        }
+
+        public Builder conditionals(List<Conditional> conditionals) {
+            this.e.set("conditionals", conditionals);
+            return this;
+        }
+
+        public Builder linearConstraints(List<LinearConstraint> linearConstraints) {
+            this.e.set("linear_constraints", linearConstraints);
             return this;
         }
     }
