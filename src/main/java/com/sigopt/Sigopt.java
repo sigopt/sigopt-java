@@ -5,7 +5,7 @@ import java.net.Proxy;
 import java.net.InetSocketAddress;
 
 public abstract class Sigopt {
-    public static final String VERSION = "4.8.0";
+    public static final String VERSION = "4.8.1";
     public static final String apiVersion = "v1";
 
     public static volatile String clientToken;
