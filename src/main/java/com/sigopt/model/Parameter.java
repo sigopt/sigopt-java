@@ -60,7 +60,7 @@ public class Parameter extends StructObject {
             return this;
         }
 
-        public Builder conditions(Map<String, String> conditions) {
+        public Builder conditions(Map<String, List<String>> conditions) {
             this.p.set("conditions", conditions);
             return this;
         }
