@@ -22,6 +22,10 @@ public class Experiment extends StructObject {
         return (String) this.get("id");
     }
 
+    public String getUser() {
+        return (String) this.get("user");
+    }
+
     public String getType() {
         return (String) this.get("type");
     }
@@ -60,6 +64,10 @@ public class Experiment extends StructObject {
 
     public Integer getCreated() {
       return Utils.asInteger(this.get("created"));
+    }
+
+    public Integer getUpdated() {
+      return Utils.asInteger(this.get("updated"));
     }
 
     public Integer getObservationBudget() {

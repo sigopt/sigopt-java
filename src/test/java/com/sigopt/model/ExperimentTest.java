@@ -36,8 +36,10 @@ public class ExperimentTest extends APIResourceTestBase {
         assertEquals(5, (Object) exp.getFolds());
         assertEquals("Test Experiment", exp.getName());
         assertEquals(321, (Object) exp.getCreated());
+        assertEquals(453, (Object) exp.getUpdated());
         assertEquals("active", exp.getState());
         assertEquals("678", exp.getClient());
+        assertEquals("789", exp.getUser());
         assertEquals(51, (Object) exp.getObservationBudget());
         assertEquals(3, (Object) exp.getNumSolutions());
 
