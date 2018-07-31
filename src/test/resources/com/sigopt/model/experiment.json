@@ -97,7 +97,11 @@
       "failed": false,
       "created": 452,
       "suggestion": "12",
-      "experiment": "123"
+      "experiment": "123",
+      "task": {
+        "name": "task_name",
+        "cost": 1
+      }
     },
     "best_observation": {
       "object": "observation",

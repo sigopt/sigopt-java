@@ -106,6 +106,8 @@ public class ExperimentTest extends APIResourceTestBase {
         assertEquals(452, (Object) exp.getProgress().getLastObservation().getCreated());
         assertEquals("12", exp.getProgress().getLastObservation().getSuggestion());
         assertEquals("123", exp.getProgress().getLastObservation().getExperiment());
+        assertEquals("task_name", exp.getProgress().getLastObservation().getTask().getName());
+        assertEquals(1.0, exp.getProgress().getLastObservation().getTask().getCost(), 1e-9);
 
         assertNotNull(exp.getProgress().getBestObservation());
         assertEquals("3", exp.getProgress().getBestObservation().getId());
