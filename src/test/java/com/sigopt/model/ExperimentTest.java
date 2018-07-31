@@ -42,6 +42,7 @@ public class ExperimentTest extends APIResourceTestBase {
         assertEquals("789", exp.getUser());
         assertEquals(51, (Object) exp.getObservationBudget());
         assertEquals(3, (Object) exp.getNumSolutions());
+        assertEquals(2, (Object) exp.getParallelBandwidth());
 
         assertNotNull(exp.getLinearConstraints());
         assertEquals(1, exp.getLinearConstraints().size());
@@ -58,6 +59,13 @@ public class ExperimentTest extends APIResourceTestBase {
         assertEquals(2, exp.getConditionals().get(0).getValues().size());
         assertEquals("1", exp.getConditionals().get(0).getValues().get(0));
         assertEquals("3", exp.getConditionals().get(0).getValues().get(1));
+
+        assertNotNull(exp.getTasks());
+        assertEquals(2, exp.getTasks().size());
+        assertEquals("test_task_1", exp.getTasks().get(0).getName());
+        assertEquals("test_task_2", exp.getTasks().get(1).getName());
+        assertEquals(0.1, exp.getTasks().get(0).getCost(), 1e-9);
+        assertEquals(1.0, exp.getTasks().get(1).getCost(), 1e-9);
 
         assertNotNull(exp.getMetrics());
         assertEquals(2, exp.getMetrics().size());

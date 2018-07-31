@@ -55,27 +55,27 @@ public class Experiment extends StructObject {
     }
 
     public String getClient() {
-      return (String) this.get("client");
+        return (String) this.get("client");
     }
 
     public String getState() {
-      return (String) this.get("state");
+        return (String) this.get("state");
     }
 
     public Integer getCreated() {
-      return Utils.asInteger(this.get("created"));
+        return Utils.asInteger(this.get("created"));
     }
 
     public Integer getUpdated() {
-      return Utils.asInteger(this.get("updated"));
+        return Utils.asInteger(this.get("updated"));
     }
 
     public Integer getObservationBudget() {
-      return Utils.asInteger(this.get("observation_budget"));
+        return Utils.asInteger(this.get("observation_budget"));
     }
 
     public Integer getNumSolutions() {
-      return Utils.asInteger(this.get("num_solutions"));
+        return Utils.asInteger(this.get("num_solutions"));
     }
 
     public Boolean getDevelopment() {
@@ -83,7 +83,11 @@ public class Experiment extends StructObject {
     }
 
     public Integer getFolds() {
-      return Utils.asInteger(this.get("folds"));
+        return Utils.asInteger(this.get("folds"));
+    }
+
+    public Integer getParallelBandwidth() {
+        return Utils.asInteger(this.get("parallel_bandwidth"));
     }
 
     public List<LinearConstraint> getLinearConstraints() {
@@ -92,6 +96,10 @@ public class Experiment extends StructObject {
 
     public List<Conditional> getConditionals() {
         return Utils.mergeIntoList(new ArrayList<Conditional>(), this.get("conditionals"), Conditional.class);
+    }
+
+    public List<Task> getTasks() {
+        return Utils.mergeIntoList(new ArrayList<Task>(), this.get("tasks"), Task.class);
     }
 
     public static APIMethodCaller<Experiment> fetch() {
@@ -322,6 +330,16 @@ public class Experiment extends StructObject {
 
         public Builder linearConstraints(List<LinearConstraint> linearConstraints) {
             this.e.set("linear_constraints", linearConstraints);
+            return this;
+        }
+
+        public Builder parallelBandwidth(int parallelBandwidth) {
+            this.e.set("parallel_bandwidth", parallelBandwidth);
+            return this;
+        }
+
+        public Builder tasks(List<Task> tasks) {
+            this.e.set("tasks", tasks);
             return this;
         }
     }
