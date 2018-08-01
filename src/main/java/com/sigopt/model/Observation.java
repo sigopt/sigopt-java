@@ -52,6 +52,10 @@ public class Observation extends StructObject {
         return (String) this.get("suggestion");
     }
 
+    public Task getTask() {
+        return Utils.mergeInto(new Task(), this.get("task"));
+    }
+
     public static class Builder {
         Observation o;
 
@@ -110,6 +114,11 @@ public class Observation extends StructObject {
 
         public Builder suggestion(String suggestion) {
             this.o.set("suggestion", suggestion);
+            return this;
+        }
+
+        public Builder task(Task task) {
+            this.o.set("task", task);
             return this;
         }
     }

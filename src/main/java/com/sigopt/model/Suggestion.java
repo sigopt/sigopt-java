@@ -43,6 +43,10 @@ public class Suggestion extends StructObject {
         return (String) this.get("state");
     }
 
+    public Task getTask() {
+        return Utils.mergeInto(new Task(), this.get("task"));
+    }
+
     public static class Builder {
         Suggestion s;
         public Builder() {
@@ -85,6 +89,11 @@ public class Suggestion extends StructObject {
 
         public Builder foldIndex(int foldIndex) {
             this.s.set("fold_index", foldIndex);
+            return this;
+        }
+
+        public Builder task(Task task) {
+            this.s.set("task", task);
             return this;
         }
     }

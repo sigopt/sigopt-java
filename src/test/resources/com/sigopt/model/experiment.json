@@ -10,6 +10,7 @@
   "client": "678",
   "observation_budget": 51,
   "num_solutions": 3,
+  "parallel_bandwidth": 2,
   "linear_constraints": [{
     "type": "greater_than",
     "terms": [{
@@ -23,6 +24,16 @@
     "name": "num_hidden_layers",
     "values": ["1", "3"]
   }],
+  "tasks": [
+    {
+      "name": "test_task_1",
+      "cost": 0.1
+    },
+    {
+      "name": "test_task_2",
+      "cost": 1
+    }
+  ],
   "metrics": [
     {
       "object": "metric",
@@ -86,7 +97,11 @@
       "failed": false,
       "created": 452,
       "suggestion": "12",
-      "experiment": "123"
+      "experiment": "123",
+      "task": {
+        "name": "task_name",
+        "cost": 1
+      }
     },
     "best_observation": {
       "object": "observation",
