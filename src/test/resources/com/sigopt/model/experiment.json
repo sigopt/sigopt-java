@@ -9,6 +9,7 @@
   "state": "active",
   "client": "678",
   "observation_budget": 51,
+  "parallel_bandwidth": 6,
   "num_solutions": 3,
   "linear_constraints": [{
     "type": "greater_than",

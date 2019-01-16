@@ -66,6 +66,10 @@ public class Experiment extends StructObject {
       return Utils.asInteger(this.get("observation_budget"));
     }
 
+    public Integer getParallelBandwidth() {
+      return Utils.asInteger(this.get("parallel_bandwidth"));
+    }
+
     public Integer getNumSolutions() {
       return Utils.asInteger(this.get("num_solutions"));
     }
@@ -289,6 +293,11 @@ public class Experiment extends StructObject {
 
         public Builder observationBudget(int budget) {
             this.e.set("observation_budget", budget);
+            return this;
+        }
+
+        public Builder parallelBandwidth(int parallelBandwidth) {
+            this.e.set("parallel_bandwidth", parallelBandwidth);
             return this;
         }
 
