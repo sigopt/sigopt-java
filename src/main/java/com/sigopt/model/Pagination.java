@@ -28,7 +28,7 @@ public class Pagination<T extends APIObject> extends StructObject {
     }
 }
 
-class Paging extends StructObject {
+public class Paging extends StructObject {
     public Paging() {
         super();
     }
