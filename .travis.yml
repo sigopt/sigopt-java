@@ -12,8 +12,10 @@ jdk:
   - oraclejdk9
   # - oraclejdk10  # Unsupported - https://www.oracle.com/technetwork/java/javase/eol-135779.html
   - oraclejdk11
-allow_failures:
-  - jdk: openjdk7
+
+matrix:
+  allow_failures:
+    - jdk: openjdk7  # powermock fails in Java 7, which causes the tests that mock static methods to fail
 
 install:
 - echo $JAVA_HOME
