@@ -62,7 +62,7 @@ class PaginationIterable<T extends APIObject> implements Iterable {
     }
 
     public Iterator<T> iterator() {
-        return new PaginationIterator(this.pagination);
+        return ((Iterator<T>) new PaginationIterator<T>(this.pagination));
     }
 }
 
@@ -117,7 +117,7 @@ public class Pagination<T extends APIObject> extends StructObject {
     }
 
     public Iterable<T> iteratePages() {
-        return new PaginationIterable<T>(this);
+        return ((Iterable<T>) new PaginationIterable<T>(this));
     }
 }
 
