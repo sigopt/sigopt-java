@@ -15,8 +15,7 @@ jdk:
 allow_failures:
   - jdk: openjdk7
 
-install:
+script:
 - echo $JAVA_HOME
 - mvn install -Dgpg.skip=true -Dmaven.javadoc.skip=true
-
-script: mvn test -Dmaven.javadoc.skip=true
+- mvn test -Dmaven.javadoc.skip=true
