@@ -43,7 +43,7 @@ public class Progress extends StructObject {
         }
 
         /**
-         * @param  Observation
+         * @param  bestObservation Observation
          * @deprecated Prefer Experiment.bestAssignments
          * @return  Builder
          */
