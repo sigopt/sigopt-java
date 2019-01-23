@@ -13,7 +13,6 @@ public class Progress extends StructObject {
 
     /**
      * @deprecated Prefer Experiment.bestAssignments
-     * @return  Observation
      */
     @Deprecated
     public Observation getBestObservation() {
@@ -43,9 +42,7 @@ public class Progress extends StructObject {
         }
 
         /**
-         * @param  bestObservation Observation
          * @deprecated Prefer Experiment.bestAssignments
-         * @return  Builder
          */
         @Deprecated
         public Builder bestObservation(Observation bestObservation) {

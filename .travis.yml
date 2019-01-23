@@ -17,4 +17,4 @@ install:
 - echo $JAVA_HOME
 - mvn install -Dgpg.skip=true
 
-script: mvn test
+script: mvn test -Dmaven.javadoc.skip=true
