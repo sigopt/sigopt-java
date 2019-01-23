@@ -12,6 +12,8 @@ jdk:
   - oraclejdk9
   # - oraclejdk10  # Unsupported - https://www.oracle.com/technetwork/java/javase/eol-135779.html
   - oraclejdk11
+allow_failures:
+  - jdk: openjdk7
 
 install:
 - echo $JAVA_HOME
