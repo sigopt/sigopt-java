@@ -43,7 +43,7 @@ public class APIMethodCallerTest {
         APIMethod method = Mockito.mock(APIMethod.class);
         caller.apiMethodBuilder = builder;
         Mockito.when(builder.build()).thenReturn(method);
-        Mockito.stub(method.execute()).toReturn(null);
+        Mockito.when(method.execute()).thenReturn(null);
         method.response = new Requester.Response("{}", 200);
 
         MockResource expected = new MockResource("exp-id", "exp-name");

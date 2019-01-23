@@ -1,11 +1,18 @@
+sudo: false
 language: java
 
 jdk:
   - openjdk7
   - openjdk8
+  - openjdk9
+  - openjdk10
+  - openjdk11
+  - openjdk-ea
+  - oraclejdk7
   - oraclejdk8
-
-sudo: false
+  - oraclejdk9
+  - oraclejdk10
+  - oraclejdk11
 
 install: 
 - echo $JAVA_HOME
