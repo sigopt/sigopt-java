@@ -7,14 +7,13 @@ jdk:
   - openjdk9
   - openjdk10
   - openjdk11
-  - openjdk-ea
-  - oraclejdk7
+  # - oraclejdk7  # Unsupported
   - oraclejdk8
   - oraclejdk9
-  - oraclejdk10
+  # - oraclejdk10  # Unsupported - https://www.oracle.com/technetwork/java/javase/eol-135779.html
   - oraclejdk11
 
-install: 
+install:
 - echo $JAVA_HOME
 - mvn install -Dgpg.skip=true
 
