@@ -17,6 +17,6 @@ allow_failures:
 
 install:
 - echo $JAVA_HOME
-- mvn install -Dgpg.skip=true
+- mvn install -Dgpg.skip=true -Dmaven.javadoc.skip=true
 
 script: mvn test -Dmaven.javadoc.skip=true
