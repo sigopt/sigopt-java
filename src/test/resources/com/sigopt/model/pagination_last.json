@@ -1,0 +1,16 @@
+{
+  "object": "pagination",
+  "count": 2,
+  "data": [
+    {
+      "object": "client",
+      "id": "2",
+      "name": "Other SigOpt",
+      "created": 456
+    }
+  ],
+  "paging": {
+    "before": null,
+    "after": null
+  }
+}

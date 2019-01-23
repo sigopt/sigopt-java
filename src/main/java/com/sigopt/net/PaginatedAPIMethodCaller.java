@@ -14,6 +14,8 @@ public class PaginatedAPIMethodCaller<T extends APIObject> extends APIMethodCall
 
     @Override
     protected Pagination<T> processBody(String body) {
-        return APIResource.constructPaginationFromJson(apiMethod.response.body, this.subklass);
+        Pagination<T> ret = APIResource.constructPaginationFromJson(apiMethod.response.body, this.subklass);
+        ret.bind(this);
+        return ret;
     }
 }
