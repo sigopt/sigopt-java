@@ -7,13 +7,11 @@ jdk:
   - openjdk9
   - openjdk10
   - openjdk11
-  - openjdk-ea
   # - oraclejdk7  # Unsupported
   - oraclejdk8
   - oraclejdk9
   # - oraclejdk10  # Unsupported - https://www.oracle.com/technetwork/java/javase/eol-135779.html
   - oraclejdk11
-  - oraclejdk-ea
 
 install:
 - echo $JAVA_HOME
