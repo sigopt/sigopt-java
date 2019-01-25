@@ -52,6 +52,10 @@ class PaginationIterator<T extends APIObject> implements Iterator {
         this.advance();
         return ret;
     }
+
+    public void remove() {
+        throw new UnsupportedOperationException();
+    }
 }
 
 class PaginationIterable<T extends APIObject> implements Iterable {
