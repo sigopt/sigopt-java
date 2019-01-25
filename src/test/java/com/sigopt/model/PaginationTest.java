@@ -67,8 +67,6 @@ public class PaginationTest extends APIResourceTestBase {
 
         APIMethodCaller<Pagination<Client>> apiMethodCaller = Mockito.mock(APIMethodCaller.class);
         Mockito.when(apiMethodCaller.call()).thenReturn(page2);
-        Mockito.when(apiMethodCaller.getParams()).thenReturn(new HashMap<String, Object>());
-        Mockito.when(apiMethodCaller.params(Mockito.any(Map.class))).thenReturn(apiMethodCaller);
         page1.bind(apiMethodCaller);
 
         List<Client> clients = iterableToList(page1.iteratePages());

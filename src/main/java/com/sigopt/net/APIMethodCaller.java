@@ -44,10 +44,6 @@ public class APIMethodCaller<T extends APIObject> {
         return this;
     }
 
-    public Map<String, Object> getParams() {
-        return this.apiMethodBuilder.params;
-    }
-
     public APIMethodCaller<T> params(Map<String, Object> params) {
         this.apiMethodBuilder.params(params);
         return this;
