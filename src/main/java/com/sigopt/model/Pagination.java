@@ -35,7 +35,7 @@ class PaginationIterator<T extends APIObject> implements Iterator {
             } else {
                 this.nextItem = null;
             }
-        } catch (Exception e) {
+        } catch (SigoptException e) {
             throw new RuntimeException("Failed to fetch next data page", e);
         }
     }
@@ -81,8 +81,12 @@ public class Pagination<T extends APIObject> extends StructObject {
     }
 
     private boolean useBefore() {
-        // TODO(patrick): Set this more appropriately
-        return true;
+        if (this.apiMethodCaller == null) {
+            return true;
+        }
+        Map<String, Object> params = this.apiMethodCaller.getParams();
+        // Taken from sigopt-python
+        return (params.containsKey("before") || !params.containsKey("after"));
     }
 
     boolean hasNext() {
@@ -101,7 +105,9 @@ public class Pagination<T extends APIObject> extends StructObject {
             this.apiMethodCaller.addParam("after", this.getPaging().getAfter());
             this.apiMethodCaller.removeParam("before");
         }
-        return this.apiMethodCaller.call();
+        Pagination<T> ret = this.apiMethodCaller.call();
+        ret.bind(this.apiMethodCaller);
+        return ret;
     }
 
     public Integer getCount() {

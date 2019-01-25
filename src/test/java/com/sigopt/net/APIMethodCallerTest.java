@@ -3,8 +3,7 @@ package com.sigopt.net;
 import com.sigopt.Sigopt;
 import com.sigopt.model.APIResource;
 import com.sigopt.model.Experiment;
-import com.sigopt.model.MockResource;
-import org.junit.Before;
+import com.sigopt.model.MockResource; import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,6 +34,15 @@ public class APIMethodCallerTest {
     @Before
     public void setUpMockData() {
         caller = new APIMethodCaller("get", "/path", MockResource.class);
+    }
+
+    @Test
+    public void testModifyParams() {
+        assertEquals(caller.getParams(), new HashMap<String, Object>());
+        caller.addParam("before", "abc");
+        assertEquals(caller.getParams().get("before"), "abc");
+        caller.removeParam("before");
+        assertEquals(caller.getParams(), new HashMap<String, Object>());
     }
 
     @Test

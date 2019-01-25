@@ -5,6 +5,7 @@ import com.sigopt.model.APIObject;
 import com.sigopt.model.APIResource;
 
 import java.lang.reflect.Type;
+import java.util.Collections;
 import java.util.Map;
 
 public class APIMethodCaller<T extends APIObject> {
@@ -33,6 +34,10 @@ public class APIMethodCaller<T extends APIObject> {
 
     public APIMethod getApiMethod() {
         return apiMethod;
+    }
+
+    public Map<String, Object> getParams() {
+        return Collections.unmodifiableMap(MapHelper.ensure(this.apiMethodBuilder.params));
     }
 
     public APIMethodCaller<T> data(APIObject data) {

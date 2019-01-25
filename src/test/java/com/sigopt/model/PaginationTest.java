@@ -68,13 +68,22 @@ public class PaginationTest extends APIResourceTestBase {
         Pagination<Client> page2 = APIResource.constructPaginationFromJson(jsonLast, Client.class);
 
         APIMethodCaller<Pagination<Client>> apiMethodCaller = Mockito.mock(APIMethodCaller.class);
-        Mockito.when(apiMethodCaller.call()).thenReturn(page2);
         page1.bind(apiMethodCaller);
 
+        Mockito.when(apiMethodCaller.getParams()).thenReturn(new HashMap<String, Object>());
+        Mockito.when(apiMethodCaller.call()).thenReturn(page2);
+
         List<Client> clients = iterableToList(page1.iteratePages());
+
         assertEquals(2, clients.size());
         assertEquals("SigOpt", clients.get(0).getName());
         assertEquals("Other SigOpt", clients.get(1).getName());
+
+        Mockito.verify(apiMethodCaller, Mockito.atLeastOnce()).getParams();
+        Mockito.verify(apiMethodCaller).addParam("before", page1.getPaging().getBefore());
+        Mockito.verify(apiMethodCaller).removeParam("after");
+        Mockito.verify(apiMethodCaller).call();
+        Mockito.verifyNoMoreInteractions(apiMethodCaller);
     }
 
     @Test
@@ -84,8 +93,17 @@ public class PaginationTest extends APIResourceTestBase {
         APIMethodCaller<Pagination<Client>> apiMethodCaller = Mockito.mock(APIMethodCaller.class);
         emptyPage.bind(apiMethodCaller);
 
+        Mockito.when(apiMethodCaller.getParams()).thenReturn(new HashMap<String, Object>());
+
         List<Client> clients = iterableToList(emptyPage.iteratePages());
+
         assertEquals(0, clients.size());
+
+        Mockito.verify(apiMethodCaller, Mockito.atLeastOnce()).getParams();
+        Mockito.verify(apiMethodCaller, Mockito.never()).addParam(Mockito.anyString(), Mockito.any());
+        Mockito.verify(apiMethodCaller, Mockito.never()).removeParam(Mockito.anyString());
+        Mockito.verify(apiMethodCaller, Mockito.never()).call();
+        Mockito.verifyNoMoreInteractions(apiMethodCaller);
     }
 
     @Test
@@ -94,11 +112,71 @@ public class PaginationTest extends APIResourceTestBase {
         Pagination<Client> page2 = APIResource.constructPaginationFromJson(jsonEmpty, Client.class);
 
         APIMethodCaller<Pagination<Client>> apiMethodCaller = Mockito.mock(APIMethodCaller.class);
-        Mockito.when(apiMethodCaller.call()).thenReturn(page2);
         page1.bind(apiMethodCaller);
 
+        Mockito.when(apiMethodCaller.getParams()).thenReturn(new HashMap<String, Object>());
+        Mockito.when(apiMethodCaller.call()).thenReturn(page2);
+
         List<Client> clients = iterableToList(page1.iteratePages());
+
         assertEquals(1, clients.size());
         assertEquals("SigOpt", clients.get(0).getName());
+
+        Mockito.verify(apiMethodCaller, Mockito.atLeastOnce()).getParams();
+        Mockito.verify(apiMethodCaller).addParam("before", page1.getPaging().getBefore());
+        Mockito.verify(apiMethodCaller).removeParam("after");
+        Mockito.verify(apiMethodCaller).call();
+        Mockito.verifyNoMoreInteractions(apiMethodCaller);
+    }
+
+    @Test
+    public void iteratePagesAfter() throws Exception {
+        Pagination<Client> page1 = APIResource.constructPaginationFromJson(json, Client.class);
+        Pagination<Client> page2 = APIResource.constructPaginationFromJson(jsonLast, Client.class);
+
+        APIMethodCaller<Pagination<Client>> apiMethodCaller = Mockito.mock(APIMethodCaller.class);
+        page1.bind(apiMethodCaller);
+
+        Mockito.when(apiMethodCaller.getParams()).thenReturn(new HashMap<String, Object>() {{
+            put("after", "2");
+        }});
+        Mockito.when(apiMethodCaller.call()).thenReturn(page2);
+
+        List<Client> clients = iterableToList(page1.iteratePages());
+
+        assertEquals(2, clients.size());
+        assertEquals("SigOpt", clients.get(0).getName());
+        assertEquals("Other SigOpt", clients.get(1).getName());
+
+        Mockito.verify(apiMethodCaller, Mockito.atLeastOnce()).getParams();
+        Mockito.verify(apiMethodCaller).addParam("after", page1.getPaging().getAfter());
+        Mockito.verify(apiMethodCaller).removeParam("before");
+        Mockito.verify(apiMethodCaller).call();
+        Mockito.verifyNoMoreInteractions(apiMethodCaller);
+    }
+
+    @Test
+    public void iterateMultiplePages() throws Exception {
+        Pagination<Client> page1 = APIResource.constructPaginationFromJson(json, Client.class);
+        Pagination<Client> page2 = APIResource.constructPaginationFromJson(json, Client.class);
+        Pagination<Client> page3 = APIResource.constructPaginationFromJson(json, Client.class);
+        Pagination<Client> page4 = APIResource.constructPaginationFromJson(jsonLast, Client.class);
+
+        APIMethodCaller<Pagination<Client>> apiMethodCaller = Mockito.mock(APIMethodCaller.class);
+        page1.bind(apiMethodCaller);
+        Mockito.when(apiMethodCaller.call()).thenReturn(page2).thenReturn(page3).thenReturn(page4);
+
+        List<Client> clients = iterableToList(page1.iteratePages());
+        assertEquals(4, clients.size());
+        assertEquals("SigOpt", clients.get(0).getName());
+        assertEquals("SigOpt", clients.get(1).getName());
+        assertEquals("SigOpt", clients.get(2).getName());
+        assertEquals("Other SigOpt", clients.get(3).getName());
+
+        Mockito.verify(apiMethodCaller, Mockito.atLeastOnce()).getParams();
+        Mockito.verify(apiMethodCaller, Mockito.times(3)).addParam("before", page1.getPaging().getBefore());
+        Mockito.verify(apiMethodCaller, Mockito.times(3)).removeParam("after");
+        Mockito.verify(apiMethodCaller, Mockito.times(3)).call();
+        Mockito.verifyNoMoreInteractions(apiMethodCaller);
     }
 }
