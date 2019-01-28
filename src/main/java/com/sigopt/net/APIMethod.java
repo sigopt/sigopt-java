@@ -92,6 +92,12 @@ public class APIMethod {
             return this;
         }
 
+        public Builder removeParam(String key) {
+            this.params = MapHelper.ensure(this.params);
+            this.params.remove(key);
+            return this;
+        }
+
         public Builder addPathComponent(String key, String value) {
             this.pathComponents = MapHelper.ensure(this.pathComponents);
             this.pathComponents.put(key, value);
