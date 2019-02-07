@@ -37,11 +37,13 @@
   "metrics": [
     {
       "object": "metric",
-      "name": "Revenue"
+      "name": "Revenue",
+      "value_baseline": 200.0
     },
     {
       "object": "metric",
-      "name": "Sales"
+      "name": "Sales",
+      "value_baseline": null
     }
   ],
   "progress": {

@@ -57,7 +57,7 @@ Then, add this dependency to your project's POM:
 <dependency>
   <groupId>com.sigopt</groupId>
   <artifactId>sigopt-java</artifactId>
-  <version>4.10.0</version>
+  <version>4.11.0</version>
 </dependency>
 ```
 
@@ -67,7 +67,7 @@ Then, add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.sigopt:sigopt-java:4.10.0"
+compile "com.sigopt:sigopt-java:4.11.0"
 ```
 
 ### Others
