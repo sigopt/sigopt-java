@@ -7,7 +7,7 @@ public class StructObjectBuilder<T extends StructObject> {
         return this.obj;
     }
 
-    final StructObjectBuilder<T> set(String key, Object value) {
+    final public StructObjectBuilder<T> set(String key, Object value) {
         this.obj.set(key, value);
         return this;
     }
