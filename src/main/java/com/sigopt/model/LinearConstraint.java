@@ -20,29 +20,23 @@ public class LinearConstraint extends StructObject {
         return (String) this.get("type");
     }
 
-    public static class Builder {
-        LinearConstraint c;
-
+    public static class Builder extends StructObjectBuilder<LinearConstraint> {
         public Builder() {
-            this.c = new LinearConstraint();
-        }
-
-        public LinearConstraint build() {
-            return this.c;
+            this.obj = new LinearConstraint();
         }
 
         public Builder terms(List<ConstraintTerm> terms) {
-            this.c.set("terms", terms);
+            this.obj.set("terms", terms);
             return this;
         }
 
         public Builder threshold(double threshold) {
-            this.c.set("threshold", threshold);
+            this.obj.set("threshold", threshold);
             return this;
         }
 
         public Builder type(String type) {
-            this.c.set("type", type);
+            this.obj.set("type", type);
             return this;
         }
     }

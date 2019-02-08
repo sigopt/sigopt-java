@@ -17,23 +17,18 @@ public class StoppingCriteria extends StructObject {
     return (List<String>) this.get("reasons");
   }
 
-  public static class Builder {
-    StoppingCriteria s;
+  public static class Builder extends StructObjectBuilder<StoppingCriteria> {
     public Builder() {
-      this.s = new StoppingCriteria();
-    }
-
-    public StoppingCriteria build() {
-      return this.s;
+      this.obj = new StoppingCriteria();
     }
 
     public Builder shouldStop(Boolean shouldStop) {
-      this.s.set("should_stop", shouldStop);
+      this.obj.set("should_stop", shouldStop);
       return this;
     }
 
     public Builder reasons(List<String> reasons) {
-      this.s.set("reasons", reasons);
+      this.obj.set("reasons", reasons);
       return this;
     }
 

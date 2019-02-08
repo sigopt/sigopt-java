@@ -13,24 +13,18 @@ public class Task extends StructObject {
         return (String) this.get("name");
     }
 
-    public static class Builder {
-        Task t;
-
+    public static class Builder extends StructObjectBuilder<Task> {
         public Builder() {
-            this.t = new Task();
-        }
-
-        public Task build() {
-            return this.t;
+            this.obj = new Task();
         }
 
         public Builder cost(double cost) {
-            this.t.set("cost", cost);
+            this.obj.set("cost", cost);
             return this;
         }
 
         public Builder name(String name) {
-            this.t.set("name", name);
+            this.obj.set("name", name);
             return this;
         }
     }

@@ -35,48 +35,43 @@ public class Token extends StructObject {
         return (String) this.get("user");
     }
 
-    public static class Builder {
-        Token t;
+    public static class Builder extends StructObjectBuilder<Token> {
         public Builder() {
-            this.t = new Token();
-        }
-
-        public Token build(){
-            return this.t;
+            this.obj = new Token();
         }
 
         public Builder allExperiments(boolean allExperiments) {
-            this.t.set("all_experiments", allExperiments);
+            this.obj.set("all_experiments", allExperiments);
             return this;
         }
 
         public Builder development(boolean development) {
-            this.t.set("development", development);
+            this.obj.set("development", development);
             return this;
         }
 
         public Builder permissions(String permissions) {
-            this.t.set("permissions", permissions);
+            this.obj.set("permissions", permissions);
             return this;
         }
 
         public Builder token(String token){
-            this.t.set("token", token);
+            this.obj.set("token", token);
             return this;
         }
 
         public Builder client(String client){
-            this.t.set("client", client);
+            this.obj.set("client", client);
             return this;
         }
 
         public Builder experiment(String experiment){
-            this.t.set("experiment", experiment);
+            this.obj.set("experiment", experiment);
             return this;
         }
 
         public Builder user(String user){
-            this.t.set("user", user);
+            this.obj.set("user", user);
             return this;
         }
     }

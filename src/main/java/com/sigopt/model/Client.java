@@ -70,28 +70,23 @@ public class Client extends StructObject {
         return new Plans("/clients/" + this.getId());
     }
 
-    public static class Builder {
-        Client c;
+    public static class Builder extends StructObjectBuilder<Client> {
         public Builder() {
-            this.c = new Client();
-        }
-
-        public Client build() {
-            return this.c;
+            this.obj = new Client();
         }
 
         public Builder id(String id) {
-            this.c.set("id", id);
+            this.obj.set("id", id);
             return this;
         }
 
         public Builder name(String name) {
-            this.c.set("name", name);
+            this.obj.set("name", name);
             return this;
         }
 
         public Builder created(int created) {
-            this.c.set("created", created);
+            this.obj.set("created", created);
             return this;
         }
     }

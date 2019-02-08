@@ -19,33 +19,28 @@ public class Bounds extends StructObject {
         return (Double) this.get("max");
     }
 
-    public static class Builder {
-        Bounds b;
+    public static class Builder extends StructObjectBuilder<Bounds> {
         public Builder() {
-            this.b = new Bounds();
-        }
-
-        public Bounds build() {
-            return this.b;
+            this.obj = new Bounds();
         }
 
         public Builder min(double min) {
-            this.b.set("min", min);
+            this.obj.set("min", min);
             return this;
         }
 
         public Builder min(int min) {
-            this.b.set("min", (double) min);
+            this.obj.set("min", (double) min);
             return this;
         }
 
         public Builder max(double max) {
-            this.b.set("max", max);
+            this.obj.set("max", max);
             return this;
         }
 
         public Builder max(int max) {
-            this.b.set("max", (double) max);
+            this.obj.set("max", (double) max);
             return this;
         }
     }

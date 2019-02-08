@@ -13,24 +13,18 @@ public class ConstraintTerm extends StructObject {
         return (String) this.get("name");
     }
 
-    public static class Builder {
-        ConstraintTerm c;
-
+    public static class Builder extends StructObjectBuilder<ConstraintTerm> {
         public Builder() {
-            this.c = new ConstraintTerm();
-        }
-
-        public ConstraintTerm build() {
-            return this.c;
+            this.obj = new ConstraintTerm();
         }
 
         public Builder weight(double weight) {
-            this.c.set("weight", weight);
+            this.obj.set("weight", weight);
             return this;
         }
 
         public Builder name(String name) {
-            this.c.set("name", name);
+            this.obj.set("name", name);
             return this;
         }
     }

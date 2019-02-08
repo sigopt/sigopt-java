@@ -15,24 +15,18 @@ public class Conditional extends StructObject {
         return (List<String>) this.get("values");
     }
 
-    public static class Builder {
-        Conditional c;
-
+    public static class Builder extends StructObjectBuilder<Conditional> {
         public Builder() {
-            this.c = new Conditional();
-        }
-
-        public Conditional build() {
-            return this.c;
+            this.obj = new Conditional();
         }
 
         public Builder name(String name) {
-            this.c.set("name", name);
+            this.obj.set("name", name);
             return this;
         }
 
         public Builder values(List<String> values) {
-            this.c.set("values", values);
+            this.obj.set("values", values);
             return this;
         }
     }

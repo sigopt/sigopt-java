@@ -27,38 +27,33 @@ public class BestAssignments extends StructObject {
         return Utils.mergeInto(new Assignments(), this.get("assignments"));
     }
 
-    public static class Builder {
-        BestAssignments b;
+    public static class Builder extends StructObjectBuilder<BestAssignments> {
         public Builder() {
-            this.b = new BestAssignments();
-        }
-
-        public BestAssignments build(){
-            return this.b;
+            this.obj = new BestAssignments();
         }
 
         public Builder assignments(Map<String, Object> assignments) {
-            this.b.set("assignments", assignments);
+            this.obj.set("assignments", assignments);
             return this;
         }
 
         public Builder id(String id) {
-            this.b.set("id", id);
+            this.obj.set("id", id);
             return this;
         }
 
         public Builder value(double value) {
-            this.b.set("value", value);
+            this.obj.set("value", value);
             return this;
         }
 
         public Builder valueStddev(double valueStddev) {
-            this.b.set("value_stddev", valueStddev);
+            this.obj.set("value_stddev", valueStddev);
             return this;
         }
 
         public Builder values(List<MetricEvaluation> values) {
-            this.b.set("values", values);
+            this.obj.set("values", values);
             return this;
         }
 

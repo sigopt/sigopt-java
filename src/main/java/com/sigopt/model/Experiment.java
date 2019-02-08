@@ -237,109 +237,103 @@ public class Experiment extends StructObject {
         return new Subresource<BestAssignments>("/experiments/" + this.getId(), "best_assignments", BestAssignments.class);
     }
 
-    public static class Builder {
-        Experiment e;
-
+    public static class Builder extends StructObjectBuilder<Experiment> {
         public Builder() {
-            this.e = new Experiment();
-        }
-
-        public Experiment build() {
-            return this.e;
+            this.obj = new Experiment();
         }
 
         public Builder created(int created) {
-            this.e.set("created", created);
+            this.obj.set("created", created);
             return this;
         }
 
         public Builder parameters(List<Parameter> parameters) {
-            this.e.set("parameters", parameters);
+            this.obj.set("parameters", parameters);
             return this;
         }
 
         public Builder metrics(List<Metric> metrics) {
-            this.e.set("metrics", metrics);
+            this.obj.set("metrics", metrics);
             return this;
         }
 
         public Builder metadata(Map<String, String> metadata) {
-            this.e.set("metadata", metadata);
+            this.obj.set("metadata", metadata);
             return this;
         }
 
         public Builder metric(Metric metric) {
-            this.e.set("metric", metric);
+            this.obj.set("metric", metric);
             return this;
         }
 
         public Builder progress(Progress progress) {
-            this.e.set("progress", progress);
+            this.obj.set("progress", progress);
             return this;
         }
 
         public Builder client(String client) {
-            this.e.set("client", client);
+            this.obj.set("client", client);
             return this;
         }
 
         public Builder id(String id) {
-            this.e.set("id", id);
+            this.obj.set("id", id);
             return this;
         }
 
         public Builder name(String name) {
-            this.e.set("name", name);
+            this.obj.set("name", name);
             return this;
         }
 
         public Builder state(String state) {
-            this.e.set("state", state);
+            this.obj.set("state", state);
             return this;
         }
 
         public Builder type(String type) {
-            this.e.set("type", type);
+            this.obj.set("type", type);
             return this;
         }
 
         public Builder observationBudget(int budget) {
-            this.e.set("observation_budget", budget);
+            this.obj.set("observation_budget", budget);
             return this;
         }
 
         public Builder numSolutions(int numSolutions) {
-            this.e.set("num_solutions", numSolutions);
+            this.obj.set("num_solutions", numSolutions);
             return this;
         }
 
         public Builder development(boolean development) {
-            this.e.set("development", development);
+            this.obj.set("development", development);
             return this;
         }
 
         public Builder folds(int folds) {
-            this.e.set("folds", folds);
+            this.obj.set("folds", folds);
             return this;
         }
 
         public Builder conditionals(List<Conditional> conditionals) {
-            this.e.set("conditionals", conditionals);
+            this.obj.set("conditionals", conditionals);
             return this;
         }
 
         public Builder linearConstraints(List<LinearConstraint> linearConstraints) {
-            this.e.set("linear_constraints", linearConstraints);
+            this.obj.set("linear_constraints", linearConstraints);
             return this;
         }
 
         public Builder parallelBandwidth(int parallelBandwidth) {
-            this.e.set("parallel_bandwidth", parallelBandwidth);
+            this.obj.set("parallel_bandwidth", parallelBandwidth);
             return this;
         }
 
         public Builder tasks(List<Task> tasks) {
-            this.e.set("tasks", tasks);
+            this.obj.set("tasks", tasks);
             return this;
         }
     }

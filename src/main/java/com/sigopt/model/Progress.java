@@ -31,14 +31,9 @@ public class Progress extends StructObject {
         return Utils.asInteger(this.get("observation_count"));
     }
 
-    public static class Builder {
-        Progress p;
+    public static class Builder extends StructObjectBuilder<Progress> {
         public Builder() {
-            this.p = new Progress();
-        }
-
-        public Progress build() {
-            return this.p;
+            this.obj = new Progress();
         }
 
         /**
@@ -46,22 +41,22 @@ public class Progress extends StructObject {
          */
         @Deprecated
         public Builder bestObservation(Observation bestObservation) {
-            this.p.set("best_observation", bestObservation);
+            this.obj.set("best_observation", bestObservation);
             return this;
         }
 
         public Builder firtObservation(Observation firstObservation) {
-            this.p.set("first_observation", firstObservation);
+            this.obj.set("first_observation", firstObservation);
             return this;
         }
 
         public Builder lastObservation(Observation lastObservation) {
-            this.p.set("last_observation", lastObservation);
+            this.obj.set("last_observation", lastObservation);
             return this;
         }
 
         public Builder observationCount(int observationCount) {
-            this.p.set("observation_count", observationCount);
+            this.obj.set("observation_count", observationCount);
             return this;
         }
     }
