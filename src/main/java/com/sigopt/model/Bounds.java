@@ -19,7 +19,7 @@ public class Bounds extends StructObject {
         return (Double) this.get("max");
     }
 
-    public static class Builder extends StructObjectBuilder<Bounds> {
+    public static class Builder extends APIObjectBuilder<Bounds> {
         public Builder() {
             this.obj = new Bounds();
         }

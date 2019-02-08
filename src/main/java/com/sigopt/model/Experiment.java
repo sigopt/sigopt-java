@@ -237,7 +237,7 @@ public class Experiment extends StructObject {
         return new Subresource<BestAssignments>("/experiments/" + this.getId(), "best_assignments", BestAssignments.class);
     }
 
-    public static class Builder extends StructObjectBuilder<Experiment> {
+    public static class Builder extends APIObjectBuilder<Experiment> {
         public Builder() {
             this.obj = new Experiment();
         }

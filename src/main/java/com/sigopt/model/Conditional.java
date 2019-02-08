@@ -15,7 +15,7 @@ public class Conditional extends StructObject {
         return (List<String>) this.get("values");
     }
 
-    public static class Builder extends StructObjectBuilder<Conditional> {
+    public static class Builder extends APIObjectBuilder<Conditional> {
         public Builder() {
             this.obj = new Conditional();
         }

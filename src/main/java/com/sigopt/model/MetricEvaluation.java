@@ -17,7 +17,7 @@ public class MetricEvaluation extends StructObject {
         return (Double) this.get("value_stddev");
     }
 
-    public static class Builder extends StructObjectBuilder<MetricEvaluation> {
+    public static class Builder extends APIObjectBuilder<MetricEvaluation> {
         public Builder() {
             this.obj = new MetricEvaluation();
         }

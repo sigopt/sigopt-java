@@ -35,7 +35,7 @@ public class Token extends StructObject {
         return (String) this.get("user");
     }
 
-    public static class Builder extends StructObjectBuilder<Token> {
+    public static class Builder extends APIObjectBuilder<Token> {
         public Builder() {
             this.obj = new Token();
         }

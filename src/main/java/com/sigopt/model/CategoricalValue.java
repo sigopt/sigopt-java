@@ -14,7 +14,7 @@ public class CategoricalValue extends StructObject {
         return (String) this.get("name");
     }
 
-    public static class Builder extends StructObjectBuilder<CategoricalValue> {
+    public static class Builder extends APIObjectBuilder<CategoricalValue> {
         public Builder() {
             this.obj = new CategoricalValue();
         }

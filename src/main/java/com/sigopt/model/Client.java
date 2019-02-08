@@ -70,7 +70,7 @@ public class Client extends StructObject {
         return new Plans("/clients/" + this.getId());
     }
 
-    public static class Builder extends StructObjectBuilder<Client> {
+    public static class Builder extends APIObjectBuilder<Client> {
         public Builder() {
             this.obj = new Client();
         }

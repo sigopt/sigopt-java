@@ -47,7 +47,7 @@ public class Suggestion extends StructObject {
         return Utils.mergeInto(new Task(), this.get("task"));
     }
 
-    public static class Builder extends StructObjectBuilder<Suggestion> {
+    public static class Builder extends APIObjectBuilder<Suggestion> {
         public Builder() {
             this.obj = new Suggestion();
         }

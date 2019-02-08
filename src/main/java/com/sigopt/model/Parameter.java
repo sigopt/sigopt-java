@@ -29,7 +29,7 @@ public class Parameter extends StructObject {
         return Utils.mergeInto(new Conditions(), this.get("conditions"));
     }
 
-    public static class Builder extends StructObjectBuilder<Parameter> {
+    public static class Builder extends APIObjectBuilder<Parameter> {
         public Builder() {
             this.obj = new Parameter();
         }
