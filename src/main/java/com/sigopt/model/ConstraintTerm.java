@@ -13,7 +13,7 @@ public class ConstraintTerm extends StructObject {
         return (String) this.get("name");
     }
 
-    public static class Builder extends StructObjectBuilder<ConstraintTerm> {
+    public static class Builder extends APIObjectBuilder<ConstraintTerm> {
         public Builder() {
             this.obj = new ConstraintTerm();
         }

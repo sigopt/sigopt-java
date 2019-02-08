@@ -18,7 +18,7 @@ public class Metric extends StructObject {
         return (Double) this.get("value_baseline");
     }
 
-    public static class Builder extends StructObjectBuilder<Metric> {
+    public static class Builder extends APIObjectBuilder<Metric> {
         public Builder() {
             this.obj = new Metric();
         }

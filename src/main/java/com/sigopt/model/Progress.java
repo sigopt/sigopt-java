@@ -31,7 +31,7 @@ public class Progress extends StructObject {
         return Utils.asInteger(this.get("observation_count"));
     }
 
-    public static class Builder extends StructObjectBuilder<Progress> {
+    public static class Builder extends APIObjectBuilder<Progress> {
         public Builder() {
             this.obj = new Progress();
         }

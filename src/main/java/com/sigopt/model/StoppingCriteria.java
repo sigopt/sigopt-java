@@ -17,7 +17,7 @@ public class StoppingCriteria extends StructObject {
     return (List<String>) this.get("reasons");
   }
 
-  public static class Builder extends StructObjectBuilder<StoppingCriteria> {
+  public static class Builder extends APIObjectBuilder<StoppingCriteria> {
     public Builder() {
       this.obj = new StoppingCriteria();
     }

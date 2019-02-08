@@ -1,13 +1,13 @@
 package com.sigopt.model;
 
-public class StructObjectBuilder<T extends StructObject> {
+public class APIObjectBuilder<T extends StructObject> {
     T obj;
 
     final public T build() {
         return this.obj;
     }
 
-    final public StructObjectBuilder<T> set(String key, Object value) {
+    final public APIObjectBuilder<T> set(String key, Object value) {
         this.obj.set(key, value);
         return this;
     }

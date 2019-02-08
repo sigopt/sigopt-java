@@ -27,7 +27,7 @@ public class BestAssignments extends StructObject {
         return Utils.mergeInto(new Assignments(), this.get("assignments"));
     }
 
-    public static class Builder extends StructObjectBuilder<BestAssignments> {
+    public static class Builder extends APIObjectBuilder<BestAssignments> {
         public Builder() {
             this.obj = new BestAssignments();
         }

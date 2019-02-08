@@ -20,7 +20,7 @@ public class LinearConstraint extends StructObject {
         return (String) this.get("type");
     }
 
-    public static class Builder extends StructObjectBuilder<LinearConstraint> {
+    public static class Builder extends APIObjectBuilder<LinearConstraint> {
         public Builder() {
             this.obj = new LinearConstraint();
         }

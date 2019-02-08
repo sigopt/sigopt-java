@@ -13,7 +13,7 @@ public class Task extends StructObject {
         return (String) this.get("name");
     }
 
-    public static class Builder extends StructObjectBuilder<Task> {
+    public static class Builder extends APIObjectBuilder<Task> {
         public Builder() {
             this.obj = new Task();
         }
