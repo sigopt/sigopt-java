@@ -18,24 +18,18 @@ public class Metric extends StructObject {
         return (Double) this.get("value_baseline");
     }
 
-    public static class Builder {
-        Metric m;
-
+    public static class Builder extends APIObjectBuilder<Metric> {
         public Builder() {
-            this.m = new Metric();
-        }
-
-        public Metric build() {
-            return this.m;
+            this.obj = new Metric();
         }
 
         public Builder name(String name) {
-            this.m.set("name", name);
+            this.obj.set("name", name);
             return this;
         }
 
         public Builder valueBaseline(Double valueBaseline) {
-            this.m.set("value_baseline", valueBaseline);
+            this.obj.set("value_baseline", valueBaseline);
             return this;
         }
     }

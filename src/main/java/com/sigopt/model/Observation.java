@@ -56,69 +56,63 @@ public class Observation extends StructObject {
         return Utils.mergeInto(new Task(), this.get("task"));
     }
 
-    public static class Builder {
-        Observation o;
-
+    public static class Builder extends APIObjectBuilder<Observation> {
         public Builder() {
-            this.o = new Observation();
-        }
-
-        public Observation build() {
-            return this.o;
+            this.obj = new Observation();
         }
 
         public Builder failed(boolean failed) {
-            this.o.set("failed", failed);
+            this.obj.set("failed", failed);
             return this;
         }
 
         public Builder value(double value) {
-            this.o.set("value", value);
+            this.obj.set("value", value);
             return this;
         }
 
         public Builder valueStddev(double valueStddev) {
-            this.o.set("value_stddev", valueStddev);
+            this.obj.set("value_stddev", valueStddev);
             return this;
         }
 
         public Builder values(List<MetricEvaluation> values) {
-            this.o.set("values", values);
+            this.obj.set("values", values);
             return this;
         }
 
         public Builder created(int created) {
-            this.o.set("created", created);
+            this.obj.set("created", created);
             return this;
         }
 
         public Builder assignments(Map<String, Object> assignments) {
-            this.o.set("assignments", assignments);
+            this.obj.set("assignments", assignments);
             return this;
         }
 
         public Builder metadata(Map<String, String> metadata) {
-            this.o.set("metadata", metadata);
+            this.obj.set("metadata", metadata);
             return this;
         }
 
         public Builder experiment(String experiment) {
-            this.o.set("experiment", experiment);
+            this.obj.set("experiment", experiment);
             return this;
         }
 
         public Builder id(String id) {
-            this.o.set("id", id);
+            this.obj.set("id", id);
             return this;
         }
 
         public Builder suggestion(String suggestion) {
-            this.o.set("suggestion", suggestion);
+            this.obj.set("suggestion", suggestion);
             return this;
         }
 
         public Builder task(Task task) {
-            this.o.set("task", task);
+            this.obj.set("task", task);
             return this;
         }
     }

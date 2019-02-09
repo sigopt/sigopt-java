@@ -47,53 +47,48 @@ public class Suggestion extends StructObject {
         return Utils.mergeInto(new Task(), this.get("task"));
     }
 
-    public static class Builder {
-        Suggestion s;
+    public static class Builder extends APIObjectBuilder<Suggestion> {
         public Builder() {
-            this.s = new Suggestion();
-        }
-
-        public Suggestion build() {
-            return this.s;
+            this.obj = new Suggestion();
         }
 
         public Builder created(int created) {
-            this.s.set("created", created);
+            this.obj.set("created", created);
             return this;
         }
 
         public Builder assignments(Map<String, Object> assignments) {
-            this.s.set("assignments", assignments);
+            this.obj.set("assignments", assignments);
             return this;
         }
 
         public Builder metadata(Map<String, String> metadata) {
-            this.s.set("metadata", metadata);
+            this.obj.set("metadata", metadata);
             return this;
         }
 
         public Builder experiment(String experiment) {
-            this.s.set("experiment", experiment);
+            this.obj.set("experiment", experiment);
             return this;
         }
 
         public Builder id(String id) {
-            this.s.set("id", id);
+            this.obj.set("id", id);
             return this;
         }
 
         public Builder state(String state) {
-            this.s.set("state", state);
+            this.obj.set("state", state);
             return this;
         }
 
         public Builder foldIndex(int foldIndex) {
-            this.s.set("fold_index", foldIndex);
+            this.obj.set("fold_index", foldIndex);
             return this;
         }
 
         public Builder task(Task task) {
-            this.s.set("task", task);
+            this.obj.set("task", task);
             return this;
         }
     }

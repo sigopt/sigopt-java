@@ -29,39 +29,33 @@ public class Parameter extends StructObject {
         return Utils.mergeInto(new Conditions(), this.get("conditions"));
     }
 
-    public static class Builder {
-        Parameter p;
-
+    public static class Builder extends APIObjectBuilder<Parameter> {
         public Builder() {
-            this.p = new Parameter();
-        }
-
-        public Parameter build() {
-            return this.p;
+            this.obj = new Parameter();
         }
 
         public Builder name(String name) {
-            this.p.set("name", name);
+            this.obj.set("name", name);
             return this;
         }
 
         public Builder type(String type) {
-            this.p.set("type", type);
+            this.obj.set("type", type);
             return this;
         }
 
         public Builder bounds(Bounds bounds) {
-            this.p.set("bounds", bounds);
+            this.obj.set("bounds", bounds);
             return this;
         }
 
         public Builder categoricalValues(List<CategoricalValue> categoricalValues) {
-            this.p.set("categorical_values", categoricalValues);
+            this.obj.set("categorical_values", categoricalValues);
             return this;
         }
 
         public Builder conditions(Map<String, List<String>> conditions) {
-            this.p.set("conditions", conditions);
+            this.obj.set("conditions", conditions);
             return this;
         }
     }

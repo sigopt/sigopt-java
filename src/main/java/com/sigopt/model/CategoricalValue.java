@@ -14,18 +14,13 @@ public class CategoricalValue extends StructObject {
         return (String) this.get("name");
     }
 
-    public static class Builder {
-        CategoricalValue c;
+    public static class Builder extends APIObjectBuilder<CategoricalValue> {
         public Builder() {
-            this.c = new CategoricalValue();
-        }
-
-        public CategoricalValue build() {
-            return this.c;
+            this.obj = new CategoricalValue();
         }
 
         public Builder name(String name) {
-            this.c.set("name", name);
+            this.obj.set("name", name);
             return this;
         }
     }
