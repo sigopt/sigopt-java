@@ -7,7 +7,7 @@ public class APIObjectBuilder<T extends StructObject> {
         return this.obj;
     }
 
-    final APIObjectBuilder<T> set(String key, Object value) {
+    final public APIObjectBuilder<T> set(String key, Object value) {
         this.obj.set(key, value);
         return this;
     }

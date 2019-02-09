@@ -115,7 +115,7 @@ public abstract class APIObject {
  * Used for JSON objects with strictly defined fields.
  */
 class StructObject extends APIObject {
-    final protected Object get(String key) {
+    final public Object get(String key) {
         return this.mapGet(key);
     }
 }
