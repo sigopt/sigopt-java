@@ -1,0 +1,11 @@
+{
+  "object": "project",
+  "id": "test-project",
+  "name": "Test Project",
+  "created": 123,
+  "updated": 456,
+  "metadata": {
+    "abc": "def",
+    "ghi": 123.0
+  }
+}
