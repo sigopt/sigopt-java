@@ -52,5 +52,10 @@ public class Project extends StructObject {
             this.obj.set("name", name);
             return this;
         }
+
+        public Builder metadata(Map<String, String> metadata) {
+            this.obj.set("metadata", metadata);
+            return this;
+        }
     }
 }
