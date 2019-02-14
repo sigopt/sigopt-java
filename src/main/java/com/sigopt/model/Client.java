@@ -49,7 +49,7 @@ public class Client extends StructObject {
     }
 
     public static class ProjectsRoot extends BoundObject {
-        public Projects(String prefix) {
+        public ProjectsRoot(String prefix) {
             super(prefix);
         }
 
@@ -69,7 +69,7 @@ public class Client extends StructObject {
     public static class ProjectsResource extends BoundObject {
         private String id;
 
-        public Projects(String prefix, String id) {
+        public ProjectsResource(String prefix, String id) {
             super(prefix);
             this.id = id;
         }
