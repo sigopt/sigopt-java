@@ -78,8 +78,8 @@ public class Client extends StructObject {
             return new APIMethodCaller<Project>("get", this.prefix() + "/projects/:id", Project.class).addPathComponent("id", this.id);
         }
 
-        public PaginatedAPIMethodCaller<Experiment> experiments(String id) {
-            return new Client.Experiments(this.prefix() + "/projects/" + this.id).list();
+        public Client.Experiments experiments() {
+            return new Client.Experiments(this.prefix() + "/projects/" + this.id);
         }
     }
 
