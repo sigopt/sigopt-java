@@ -1,5 +1,7 @@
 package com.sigopt.model;
 
+import java.util.Map;
+
 public class Project extends StructObject {
     public Project() {
         super();
