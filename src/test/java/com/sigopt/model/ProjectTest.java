@@ -25,8 +25,8 @@ public class ProjectTest extends APIResourceTestBase {
         assertEquals("Test Project", project.getName());
         assertEquals("1", project.getClient());
         assertEquals("2092", project.getUser());
-        assertEquals(123, project.getCreated());
-        assertEquals(456, project.getUpdated());
+        assertEquals(123, (Object) project.getCreated());
+        assertEquals(456, (Object) project.getUpdated());
         assertEquals("def", project.getMetadata().get("abc"));
         assertEquals(123.0, project.getMetadata().get("ghi"));
     }
