@@ -82,10 +82,6 @@ public class Experiment extends StructObject {
         return (Boolean) this.get("development");
     }
 
-    public Integer getFolds() {
-        return Utils.asInteger(this.get("folds"));
-    }
-
     public Integer getParallelBandwidth() {
         return Utils.asInteger(this.get("parallel_bandwidth"));
     }
@@ -309,11 +305,6 @@ public class Experiment extends StructObject {
 
         public Builder development(boolean development) {
             this.obj.set("development", development);
-            return this;
-        }
-
-        public Builder folds(int folds) {
-            this.obj.set("folds", folds);
             return this;
         }
 

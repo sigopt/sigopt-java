@@ -12,7 +12,6 @@
     "abc": "def",
     "ghi": 123
   },
-  "fold_index": 3,
   "task": {
     "name": "task_name",
     "cost": 1

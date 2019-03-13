@@ -32,7 +32,6 @@ public class ExperimentTest extends APIResourceTestBase {
 
         assertEquals("123", exp.getId());
         assertTrue(exp.getDevelopment());
-        assertEquals("cross_validated", exp.getType());
         assertEquals(5, (Object) exp.getFolds());
         assertEquals("Test Experiment", exp.getName());
         assertEquals(321, (Object) exp.getCreated());

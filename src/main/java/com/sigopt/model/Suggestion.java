@@ -19,10 +19,6 @@ public class Suggestion extends StructObject {
         return Utils.asInteger(this.get("created"));
     }
 
-    public Integer getFoldIndex() {
-        return Utils.asInteger(this.get("fold_index"));
-    }
-
     public Assignments getAssignments() {
         return Utils.mergeInto(new Assignments(), this.get("assignments"));
     }
@@ -79,11 +75,6 @@ public class Suggestion extends StructObject {
 
         public Builder state(String state) {
             this.obj.set("state", state);
-            return this;
-        }
-
-        public Builder foldIndex(int foldIndex) {
-            this.obj.set("fold_index", foldIndex);
             return this;
         }
 
