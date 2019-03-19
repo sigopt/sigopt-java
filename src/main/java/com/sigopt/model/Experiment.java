@@ -58,6 +58,10 @@ public class Experiment extends StructObject {
         return (String) this.get("client");
     }
 
+    public String getProject() {
+        return (String) this.get("project");
+    }
+
     public String getState() {
         return (String) this.get("state");
     }
@@ -270,6 +274,11 @@ public class Experiment extends StructObject {
 
         public Builder client(String client) {
             this.obj.set("client", client);
+            return this;
+        }
+
+        public Builder project(String project) {
+            this.obj.set("project", project);
             return this;
         }
 

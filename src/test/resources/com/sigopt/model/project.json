@@ -1,0 +1,13 @@
+{
+  "object": "project",
+  "id": "test-project",
+  "name": "Test Project",
+  "client": "1",
+  "user": "2092",
+  "created": 123,
+  "updated": 456,
+  "metadata": {
+    "abc": "def",
+    "ghi": 123.0
+  }
+}

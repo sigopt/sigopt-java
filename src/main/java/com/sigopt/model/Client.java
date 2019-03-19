@@ -48,8 +48,51 @@ public class Client extends StructObject {
         }
     }
 
+    public static class ProjectsRoot extends BoundObject {
+        public ProjectsRoot(String prefix) {
+            super(prefix);
+        }
+
+        public PaginatedAPIMethodCaller<Project> list() {
+            return new PaginatedAPIMethodCaller<Project>(
+                "get",
+                this.prefix() + "/projects",
+                Project.class
+            );
+        }
+
+        public APIMethodCaller<Project> create() {
+            return new APIMethodCaller<Project>("post", this.prefix() + "/projects", Project.class);
+        }
+    }
+
+    public static class ProjectsResource extends BoundObject {
+        private String id;
+
+        public ProjectsResource(String prefix, String id) {
+            super(prefix);
+            this.id = id;
+        }
+
+        public APIMethodCaller<Project> fetch() {
+            return new APIMethodCaller<Project>("get", this.prefix() + "/projects/:id", Project.class).addPathComponent("id", this.id);
+        }
+
+        public Client.Experiments experiments() {
+            return new Client.Experiments(this.prefix() + "/projects/" + this.id);
+        }
+    }
+
     public Experiments experiments() {
         return new Experiments("/clients/" + this.getId());
+    }
+
+    public ProjectsRoot projects() {
+        return new ProjectsRoot("/clients/" + this.getId());
+    }
+
+    public ProjectsResource projects(String id) {
+        return new ProjectsResource("/clients/" + this.getId(), id);
     }
 
     public static class Plans extends BoundObject {

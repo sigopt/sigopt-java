@@ -6,6 +6,7 @@
   "created": 321,
   "state": "active",
   "client": "678",
+  "project": "test-project",
   "observation_budget": 51,
   "num_solutions": 3,
   "parallel_bandwidth": 2,
