@@ -103,6 +103,7 @@ Metric metric = new Metric("Total Revenue");
 Experiment experiment = new Experiment.Builder()
     .type("offline")
     .name("Offline Experiment")
+    .project("sigopt-examples")
     .parameters(params)
     .metric(metric)
     .build();
