@@ -10,12 +10,21 @@ public class Metric extends StructObject {
         this.set("name", name);
     }
 
+    public Metric(String name, String objective) {
+        super();
+        this.set("objective", objective);
+    }
+
     public String getName() {
         return (String) this.get("name");
     }
 
     public Double getValueBaseline() {
         return (Double) this.get("value_baseline");
+    }
+
+    public String getObjective() {
+        return (String) this.get("objective");
     }
 
     public static class Builder extends APIObjectBuilder<Metric> {
@@ -30,6 +39,11 @@ public class Metric extends StructObject {
 
         public Builder valueBaseline(Double valueBaseline) {
             this.obj.set("value_baseline", valueBaseline);
+            return this;
+        }
+
+        public Builder objective(String objective) {
+            this.obj.set("objective", objective);
             return this;
         }
     }
