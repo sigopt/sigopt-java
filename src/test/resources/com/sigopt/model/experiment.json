@@ -42,7 +42,8 @@
     {
       "object": "metric",
       "name": "Sales",
-      "value_baseline": null
+      "value_baseline": null,
+      "objective": "maximize"
     }
   ],
   "progress": {
