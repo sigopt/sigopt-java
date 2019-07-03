@@ -5,10 +5,9 @@ public class Metric extends StructObject {
         super();
     }
 
-    public Metric(String name, Double threshold) {
+    public Metric(String name) {
         super();
         this.set("name", name);
-        this.set("threshold", threshold);
     }
 
     public String getName() {
