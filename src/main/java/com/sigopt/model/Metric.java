@@ -5,9 +5,10 @@ public class Metric extends StructObject {
         super();
     }
 
-    public Metric(String name) {
+    public Metric(String name, Double threshold) {
         super();
         this.set("name", name);
+        this.set("threshold", threshold);
     }
 
     public String getName() {
@@ -16,6 +17,10 @@ public class Metric extends StructObject {
 
     public Double getValueBaseline() {
         return (Double) this.get("value_baseline");
+    }
+
+    public Double getThreshold() {
+        return (Double) this.get("threshold");
     }
 
     public static class Builder extends APIObjectBuilder<Metric> {
@@ -30,6 +35,11 @@ public class Metric extends StructObject {
 
         public Builder valueBaseline(Double valueBaseline) {
             this.obj.set("value_baseline", valueBaseline);
+            return this;
+        }
+
+        public Builder threshold(Double threshold) {
+            this.obj.set("threshold", threshold);
             return this;
         }
     }
