@@ -4,12 +4,12 @@ language: java
 jdk:
   - openjdk7
   - openjdk8
-  - openjdk9
+  # - openjdk9
   - openjdk10
   - openjdk11
   # - oraclejdk7  # Unsupported
   - oraclejdk8
-  - oraclejdk9
+  # - oraclejdk9
   # - oraclejdk10  # Unsupported - https://www.oracle.com/technetwork/java/javase/eol-135779.html
   - oraclejdk11
 
@@ -17,7 +17,11 @@ matrix:
   allow_failures:
     - jdk: openjdk7  # powermock fails in Java 7, which causes the tests that mock static methods to fail
   include:
-    - jdk: openjdk10
+    - jdk: openjdk9
+      before_install:
+        - rm "${JAVA_HOME}/lib/security/cacerts"
+        - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    - jdk: oraclejdk9
       before_install:
         - rm "${JAVA_HOME}/lib/security/cacerts"
         - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
