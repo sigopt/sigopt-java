@@ -16,6 +16,14 @@ jdk:
 matrix:
   allow_failures:
     - jdk: openjdk7  # powermock fails in Java 7, which causes the tests that mock static methods to fail
+  include:
+    - jdk: openjdk9
+      before_install:
+        # Java certificate issues can happen according to travis
+        # This is mentioned for openjdk10 but we have an issue with openjdk9
+        # https://www.deps.co/guides/travis-ci-latest-java/#certificate-issues
+        - rm "${JAVA_HOME}/lib/security/cacerts"
+        - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
 
 install:
 - echo $JAVA_HOME
