@@ -25,14 +25,14 @@ matrix:
       addons:
         apt:
           update: true
-    - jdk: openjdk9
-      before_install:
-        - rm "${JAVA_HOME}/lib/security/cacerts"
-        - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
-    - jdk: oraclejdk9
-      before_install:
-        - rm "${JAVA_HOME}/lib/security/cacerts"
-        - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    # - jdk: openjdk9
+    #   before_install:
+    #     - rm "${JAVA_HOME}/lib/security/cacerts"
+    #     - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    # - jdk: oraclejdk9
+    #   before_install:
+    #     - rm "${JAVA_HOME}/lib/security/cacerts"
+    #     - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
 
 install:
 - echo $JAVA_HOME
