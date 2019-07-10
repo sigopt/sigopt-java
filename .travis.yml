@@ -20,9 +20,9 @@ matrix:
     - language: generic
       install:
         - sudo apt-get update
-        - sudo add-apt-repository ppa:linuxuprising/java
-        - sudo apt install oracle-java8-installer
-        - sudo apt install oracle-java8-set-default
+        - sudo add-apt-repository -y ppa:linuxuprising/java
+        - sudo apt install -y oracle-java8-installer
+        - sudo apt install -y oracle-java8-set-default
       env:
         - TRAVIS_JOB_NAME="oraclejdk8"
     #   before_install:
