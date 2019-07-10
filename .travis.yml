@@ -2,16 +2,16 @@ sudo: false
 language: java
 
 jdk:
-  # - openjdk7
-  # - openjdk8
+  - openjdk7
+  - openjdk8
   # - openjdk9  # In the matrix
-  # - openjdk10
-  # - openjdk11
+  - openjdk10
+  - openjdk11
   # - oraclejdk7  # Unsupported
   # - oraclejdk8  # In the matrix
   # - oraclejdk9  # In the matrix
   # - oraclejdk10  # Unsupported - https://www.oracle.com/technetwork/java/javase/eol-135779.html
-  # - oraclejdk11
+  - oraclejdk11
 
 matrix:
   allow_failures:
@@ -31,18 +31,14 @@ matrix:
         - sudo chmod a+x /usr/bin/javac
         - sudo chmod a+x /usr/bin/javaws
         - sudo chown -R root:root /usr/lib/jvm/jdk1.8.0
-        # - sudo apt-get update
-        # - sudo add-apt-repository -y ppa:linuxuprising/java
-        # - sudo apt-get update
-        # - sudo apt install -y oracle-java8-installer
-        # - sudo apt install -y oracle-java8-set-default
-    #   before_install:
-    #     - rm "${JAVA_HOME}/lib/security/cacerts"
-    #     - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
-    # - jdk: oraclejdk9
-    #   before_install:
-    #     - rm "${JAVA_HOME}/lib/security/cacerts"
-    #     - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    - jdk: openjdk9
+      before_install:
+        - rm "${JAVA_HOME}/lib/security/cacerts"
+        - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    - jdk: oraclejdk9
+      before_install:
+        - rm "${JAVA_HOME}/lib/security/cacerts"
+        - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
 
 install:
 - echo $JAVA_HOME
