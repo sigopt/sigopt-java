@@ -23,6 +23,8 @@ matrix:
         - sudo add-apt-repository ppa:linuxuprising/java
         - sudo apt install oracle-java8-installer
         - sudo apt install oracle-java8-set-default
+      env:
+        - TRAVIS_JOB_NAME="oraclejdk8"
     #   before_install:
     #     - rm "${JAVA_HOME}/lib/security/cacerts"
     #     - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
