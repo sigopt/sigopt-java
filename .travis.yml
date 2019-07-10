@@ -20,7 +20,9 @@ matrix:
     - language: generic
       install:
         - sudo apt-get update
-        - sudo apt-get install -y openjdk-8-jdk-headless
+        - sudo add-apt-repository ppa:linuxuprising/java
+        - sudo apt install oracle-java8-installer
+        - sudo apt install oracle-java8-set-default
     #   before_install:
     #     - rm "${JAVA_HOME}/lib/security/cacerts"
     #     - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
