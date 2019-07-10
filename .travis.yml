@@ -18,6 +18,7 @@ matrix:
     - jdk: openjdk7  # powermock fails in Java 7, which causes the tests that mock static methods to fail
   include:
     - language: generic
+    - dist: trusty
     - jdk: oraclejdk8
       install:
         - sudo apt-get update
