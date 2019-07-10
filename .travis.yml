@@ -2,16 +2,16 @@ sudo: false
 language: java
 
 jdk:
-  - openjdk7
-  - openjdk8
-  # - openjdk9
-  - openjdk10
-  - openjdk11
+  # - openjdk7
+  # - openjdk8
+  # - openjdk9  # In the matrix
+  # - openjdk10
+  # - openjdk11
   # - oraclejdk7  # Unsupported
-  # - oraclejdk8
-  # - oraclejdk9
+  # - oraclejdk8  # In the matrix
+  # - oraclejdk9  # In the matrix
   # - oraclejdk10  # Unsupported - https://www.oracle.com/technetwork/java/javase/eol-135779.html
-  - oraclejdk11
+  # - oraclejdk11
 
 matrix:
   allow_failures:
