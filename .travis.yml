@@ -19,9 +19,11 @@ matrix:
   include:
     - jdk: openjdk9
       before_install:
-        - sudo apt-get update
-        - sudo apt-get install -y openjdk-9-jdk-headless
+        - rm "${JAVA_HOME}/lib/security/cacerts"
         - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+        #- sudo apt-get update
+        #- sudo apt-get install -y openjdk-9-jdk-headless
+        #- ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
     - jdk: openjdk10
       before_install:
         - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
