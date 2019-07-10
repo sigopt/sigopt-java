@@ -13,12 +13,14 @@ public class APIMethodCaller<T extends APIObject> {
     APIMethod.Builder apiMethodBuilder = new APIMethod.Builder();
     Class<T> klass;
     Type typeOfT;
+    String path;
 
     public APIMethodCaller(String method, String path) {
         this(method, path, null);
     }
     public APIMethodCaller(String method, String path, Class<T> klass) {
         this.apiMethodBuilder.method(method).path(path);
+        this.path = path;
         this.klass = klass;
     }
 
@@ -29,7 +31,7 @@ public class APIMethodCaller<T extends APIObject> {
     }
 
     protected T processBody(String body) {
-        return APIResource.constructFromJson(apiMethod.response.body, this.klass);
+        return APIResource.constructFromJson(apiMethod.response.body, this.klass, this.path);
     }
 
     public APIMethod getApiMethod() {

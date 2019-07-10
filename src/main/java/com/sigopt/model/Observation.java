@@ -25,7 +25,7 @@ public class Observation extends StructObject {
     }
 
     public List<MetricEvaluation> getValues() {
-      return Utils.mergeIntoList(new ArrayList<MetricEvaluation>(), this.get("values"), MetricEvaluation.class);
+        return Utils.mergeIntoList(new ArrayList<MetricEvaluation>(), this.get("values"), MetricEvaluation.class);
     }
 
     public Integer getCreated() {

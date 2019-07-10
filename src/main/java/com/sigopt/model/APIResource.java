@@ -8,6 +8,22 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class APIResource {
+    public static <T extends APIObject> T constructFromJson(String json, Class <T> klass, String path) {
+        T instance;
+        try {
+            instance = klass.newInstance();
+        } catch (InstantiationException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        Type type = new TypeToken<Map<String, Object>>() {}.getType();
+        Map<String, Object> map = APIObject.fromJson(json, type);
+        instance.setAll(map);
+        instance.path_prefix = path;
+        return instance;
+    }
+
     public static <T extends APIObject> T constructFromJson(String json, Class <T> klass) {
         T instance;
         try {

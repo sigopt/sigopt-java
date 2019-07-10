@@ -15,6 +15,7 @@ import java.lang.reflect.Type;
 
 public abstract class APIObject {
     Map<String, Object> model;
+    public String path_prefix;
 
     public APIObject() {
         this.model = new HashMap<String, Object>();
