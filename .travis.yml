@@ -20,8 +20,8 @@ matrix:
     - name: "oraclejdk8"
       language: generic
       install:
-        - eval 'wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3a%2F%2Fwww.oracle.com%2Ftechnetwork%2Fjava%2Fjavase%2Fdownloads%2Fjdk8-downloads-2133151.html; oraclelicense=accept-securebackup-cookie;" "https://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.tar.gz"'
-        - tar -xvf jdk-8*
+        - curl -L -C - -b "oraclelicense=accept-securebackup-cookie" -O 'http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz'
+        - tar -xvf jdk-8u131-linux-x64.tar.gz
         - sudo mkdir -p /usr/lib/jvm
         - sudo mv ./jdk1.8* /usr/lib/jvm/jdk1.8.0
         - sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.8.0/bin/java" 1
