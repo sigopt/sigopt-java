@@ -1,23 +1,26 @@
 sudo: false
 language: java
 
-jdk:
-  - openjdk7
-  - openjdk8
+# jdk:
+  # - openjdk7
+  # - openjdk8
   # - openjdk9  # In the matrix
-  - openjdk10
-  - openjdk11
+  # - openjdk10
+  # - openjdk11
   # - oraclejdk7  # Unsupported
   # - oraclejdk8  # In the matrix
   # - oraclejdk9  # In the matrix
   # - oraclejdk10  # Unsupported - https://www.oracle.com/technetwork/java/javase/eol-135779.html
-  - oraclejdk11
+  # - oraclejdk11
 
 matrix:
   allow_failures:
     - jdk: openjdk7  # powermock fails in Java 7, which causes the tests that mock static methods to fail
   include:
-    - name: "test"
+    - jdk: oraclejdk11
+    - jdk: openjdk11
+    - jdk: openjdk10
+    - name: "oraclejdk8"
       language: generic
       install:
         - curl -L -C - -b "oraclelicense=accept-securebackup-cookie" -O 'http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz'
@@ -39,6 +42,7 @@ matrix:
       before_install:
         - rm "${JAVA_HOME}/lib/security/cacerts"
         - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+
 
 install:
 - echo $JAVA_HOME
