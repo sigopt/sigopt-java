@@ -31,14 +31,14 @@ matrix:
         - sudo chmod a+x /usr/bin/javac
         - sudo chmod a+x /usr/bin/javaws
         - sudo chown -R root:root /usr/lib/jvm/jdk1.8.0
-    # - jdk: openjdk9
-    #   before_install:
-    #     - rm "${JAVA_HOME}/lib/security/cacerts"
-    #     - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
-    # - jdk: oraclejdk9
-    #   before_install:
-    #     - rm "${JAVA_HOME}/lib/security/cacerts"
-    #     - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    - jdk: openjdk9
+      before_install:
+        - rm "${JAVA_HOME}/lib/security/cacerts"
+        - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    - jdk: oraclejdk9
+      before_install:
+        - rm "${JAVA_HOME}/lib/security/cacerts"
+        - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
 
 install:
 - echo $JAVA_HOME
