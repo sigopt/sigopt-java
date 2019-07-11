@@ -20,7 +20,7 @@ public final class APIResource {
         Type type = new TypeToken<Map<String, Object>>() {}.getType();
         Map<String, Object> map = APIObject.fromJson(json, type);
         instance.setAll(map);
-        instance.path_prefix = path;
+        instance.pathPrefix = path;
         return instance;
     }
 

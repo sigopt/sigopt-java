@@ -51,7 +51,7 @@ public class TrainingRun extends StructObject {
     }
 
     public Subresource<Checkpoint> checkpoints() {
-        return new Subresource<Checkpoint>(this.path_prefix + "/" + this.getId(), "checkpoints", Checkpoint.class);
+        return new Subresource<Checkpoint>(this.pathPrefix + "/" + this.getId(), "checkpoints", Checkpoint.class);
     }
 
     public static class Builder extends APIObjectBuilder<TrainingRun> {
