@@ -25,6 +25,9 @@ public class Metric extends StructObject {
 
     public String getObjective() {
         return (String) this.get("objective");
+
+    public Double getThreshold() {
+        return (Double) this.get("threshold");
     }
 
     public static class Builder extends APIObjectBuilder<Metric> {
@@ -44,6 +47,11 @@ public class Metric extends StructObject {
 
         public Builder objective(String objective) {
             this.obj.set("objective", objective);
+            return this;
+        }
+        
+        public Builder threshold(Double threshold) {
+            this.obj.set("threshold", threshold);
             return this;
         }
     }

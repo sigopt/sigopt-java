@@ -1,21 +1,40 @@
 sudo: false
 language: java
 
-jdk:
-  - openjdk7
-  - openjdk8
-  - openjdk9
-  - openjdk10
-  - openjdk11
-  # - oraclejdk7  # Unsupported
-  - oraclejdk8
-  - oraclejdk9
-  # - oraclejdk10  # Unsupported - https://www.oracle.com/technetwork/java/javase/eol-135779.html
-  - oraclejdk11
 
 matrix:
   allow_failures:
     - jdk: openjdk7  # powermock fails in Java 7, which causes the tests that mock static methods to fail
+  include:
+    - jdk: openjdk11
+    - jdk: oraclejdk11
+    - jdk: openjdk10
+  # - jdk: oraclejdk10  # Unsupported - https://www.oracle.com/technetwork/java/javase/eol-135779.html
+    - jdk: openjdk9
+      before_install:
+        - rm "${JAVA_HOME}/lib/security/cacerts"
+        - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    - jdk: oraclejdk9
+      before_install:
+        - rm "${JAVA_HOME}/lib/security/cacerts"
+        - ln -sf /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    - jdk: openjdk8
+    - name: "JDK: oraclejdk8 Java"
+      language: generic
+      install:
+        - curl -L -C - -b "oraclelicense=accept-securebackup-cookie" -O 'http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jdk-8u131-linux-x64.tar.gz'
+        - tar -xvf jdk-8u131-linux-x64.tar.gz
+        - sudo mkdir -p /usr/lib/jvm
+        - sudo mv ./jdk1.8* /usr/lib/jvm/jdk1.8.0
+        - sudo update-alternatives --install "/usr/bin/java" "java" "/usr/lib/jvm/jdk1.8.0/bin/java" 1
+        - sudo update-alternatives --install "/usr/bin/javac" "javac" "/usr/lib/jvm/jdk1.8.0/bin/javac" 1
+        - sudo update-alternatives --install "/usr/bin/javaws" "javaws" "/usr/lib/jvm/jdk1.8.0/bin/javaws" 1
+        - sudo chmod a+x /usr/bin/java
+        - sudo chmod a+x /usr/bin/javac
+        - sudo chmod a+x /usr/bin/javaws
+        - sudo chown -R root:root /usr/lib/jvm/jdk1.8.0
+    - jdk: openjdk7
+
 
 install:
 - echo $JAVA_HOME
