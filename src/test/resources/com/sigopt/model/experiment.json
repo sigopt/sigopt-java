@@ -37,12 +37,14 @@
     {
       "object": "metric",
       "name": "Revenue",
-      "value_baseline": 200.0
+      "value_baseline": 200.0,
+      "threshold": null
     },
     {
       "object": "metric",
       "name": "Sales",
-      "value_baseline": null
+      "value_baseline": null,
+      "threshold": -3.7
     }
   ],
   "progress": {

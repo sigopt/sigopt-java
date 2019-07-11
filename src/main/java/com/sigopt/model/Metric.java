@@ -18,6 +18,10 @@ public class Metric extends StructObject {
         return (Double) this.get("value_baseline");
     }
 
+    public Double getThreshold() {
+        return (Double) this.get("threshold");
+    }
+
     public static class Builder extends APIObjectBuilder<Metric> {
         public Builder() {
             this.obj = new Metric();
@@ -30,6 +34,11 @@ public class Metric extends StructObject {
 
         public Builder valueBaseline(Double valueBaseline) {
             this.obj.set("value_baseline", valueBaseline);
+            return this;
+        }
+
+        public Builder threshold(Double threshold) {
+            this.obj.set("threshold", threshold);
             return this;
         }
     }
