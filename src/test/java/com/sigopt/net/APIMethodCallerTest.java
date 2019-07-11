@@ -56,7 +56,12 @@ public class APIMethodCallerTest {
 
         MockResource expected = new MockResource("exp-id", "exp-name");
         PowerMockito.mockStatic(APIResource.class);
-        PowerMockito.when(APIResource.constructFromJson(Mockito.anyString(), Mockito.any(Class.class), Mockito.anyString())).thenReturn(expected);
+        PowerMockito.when(
+            APIResource.constructFromJson(Mockito.anyString(), 
+            Mockito.any(Class.class), 
+            Mockito.anyString())
+        )
+        .thenReturn(expected);
 
         assertEquals(expected, caller.call());
     }
