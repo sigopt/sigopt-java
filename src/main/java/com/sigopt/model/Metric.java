@@ -10,11 +10,6 @@ public class Metric extends StructObject {
         this.set("name", name);
     }
 
-    public Metric(String name, String objective) {
-        super();
-        this.set("objective", objective);
-    }
-
     public String getName() {
         return (String) this.get("name");
     }
