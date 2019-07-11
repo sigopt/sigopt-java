@@ -44,6 +44,7 @@
       "object": "metric",
       "name": "Sales",
       "value_baseline": null,
+      "objective": "maximize",
       "threshold": -3.7
     }
   ],
