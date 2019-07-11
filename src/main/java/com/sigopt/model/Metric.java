@@ -25,6 +25,7 @@ public class Metric extends StructObject {
 
     public String getObjective() {
         return (String) this.get("objective");
+    }
 
     public Double getThreshold() {
         return (Double) this.get("threshold");
