@@ -28,10 +28,6 @@ public class Checkpoint extends StructObject {
         return (Boolean) this.get("should_stop");
     }
 
-    public Boolean shouldStop() {
-        return (Boolean) this.get("should_stop");
-    }
-
     public RichMapObject getStoppingReasons() {
         return Utils.mergeInto(new RichMapObject(), this.get("stopping_reasons"));
     }

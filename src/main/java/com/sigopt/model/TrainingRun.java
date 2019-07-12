@@ -14,20 +14,12 @@ public class TrainingRun extends StructObject {
         return (String) this.get("id");
     }
 
-    public String getBestCheckpoint() {
-        return (String) this.get("best_checkpoint"); 
-    }
-
     public Double getCheckpointCount() {
         return (Double) this.get("checkpoint_count");
     }
 
     public Integer getCreated() {
         return Utils.asInteger(this.get("created"));
-    }
-
-    public Boolean isFinished() {
-        return (Boolean) this.get("finished");
     }
 
     public Boolean getFinished() {
