@@ -33,7 +33,7 @@ public class Checkpoint extends StructObject {
     }
 
     public RichMapObject getStoppingReasons() {
-        return Utils.mergeInto(new RichMapObject(), this.get("stoppping_reasons"));
+        return Utils.mergeInto(new RichMapObject(), this.get("stopping_reasons"));
     }
 
     public String getTrainingRun() {

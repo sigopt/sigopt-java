@@ -166,6 +166,12 @@ public class Experiment extends StructObject {
         }
     }
 
+    public static class Subresource<T extends APIObject> extends com.sigopt.model.Subresource<T> {
+        public Subresource(String prefix, String name, Class<T> klass) {
+            super(prefix, name, klass);
+        }
+    }
+
     public Subresource<Observation> observations() {
         return new Subresource<Observation>("/experiments/" + this.getId(), "observations", Observation.class);
     }

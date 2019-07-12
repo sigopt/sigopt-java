@@ -18,8 +18,8 @@ public class TrainingRun extends StructObject {
         return (String) this.get("best_checkpoint"); 
     }
 
-    public String getCheckpointCount() {
-        return (String) this.get("checkpoint_count");
+    public Double getCheckpointCount() {
+        return (Double) this.get("checkpoint_count");
     }
 
     public Integer getCreated() {

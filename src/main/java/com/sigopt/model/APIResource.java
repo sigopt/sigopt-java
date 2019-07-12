@@ -25,18 +25,7 @@ public final class APIResource {
     }
 
     public static <T extends APIObject> T constructFromJson(String json, Class <T> klass) {
-        T instance;
-        try {
-            instance = klass.newInstance();
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-        Type type = new TypeToken<Map<String, Object>>() {}.getType();
-        Map<String, Object> map = APIObject.fromJson(json, type);
-        instance.setAll(map);
-        return instance;
+        return constructFromJson(json, klass, "");
     }
 
     public static <T extends APIObject> Pagination<T> constructPaginationFromJson(

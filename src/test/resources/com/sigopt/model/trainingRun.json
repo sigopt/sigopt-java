@@ -1,0 +1,12 @@
+{
+  "best_checkpoint": null, 
+  "checkpoint_count": 0, 
+  "created": 1562883201, 
+  "finished": false, 
+  "id": "1247", 
+  "metadata": null, 
+  "object": "training_run", 
+  "observation": null, 
+  "suggestion": "24801162", 
+  "updated": 1562883201
+}

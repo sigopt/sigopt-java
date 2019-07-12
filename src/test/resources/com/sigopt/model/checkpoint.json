@@ -1,0 +1,12 @@
+{
+  "created": 1562883203, 
+  "id": "12053", 
+  "metadata": null, 
+  "object": "checkpoint", 
+  "should_stop": false, 
+  "stopping_reasons": {"test": false}, 
+  "training_run": "1247", 
+  "values": [
+    {"name": "Validation Accuracy","object": "metric_evaluation", "value": 1.0, "value_stddev": null}
+  ]
+}
