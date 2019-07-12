@@ -1,6 +1,6 @@
 package com.sigopt.model;
 
-public class ConvergenceCriteria extends TrainingEarlyStoppingCriteria {
+public class ConvergenceCriteria extends StructObject {
     public ConvergenceCriteria() {
         super();
     }
@@ -13,6 +13,17 @@ public class ConvergenceCriteria extends TrainingEarlyStoppingCriteria {
         return (Integer) this.get("min_checkpoints");
     }
 
+    public String getName() {
+        return (String) this.get("name");
+    }
+
+    public String getMetric() {
+        return (String) this.get("metric");
+    }
+
+    public String getType() {
+        return (String) this.get("type");
+    }
 
     public static class Builder extends APIObjectBuilder<ConvergenceCriteria> {
         public Builder() {
