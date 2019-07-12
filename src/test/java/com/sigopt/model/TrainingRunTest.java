@@ -34,7 +34,7 @@ public class TrainingRunTest extends APIResourceTestBase {
         assertEquals(1562883201, (Object) tr.getUpdated());
         assertNull(tr.getMetadata());
         assertFalse(tr.getFinished());
-        assertEquals(0.0, (Object) tr.getCheckpointCount());
+        assertEquals(0, (Object) tr.getCheckpointCount());
         assertNull(tr.getObservation());
         assertEquals("24801162", tr.getSuggestion());
     }
