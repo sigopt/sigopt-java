@@ -1,5 +1,7 @@
 package com.sigopt.model;
 
+import java.util.*;
+
 public class TrainingRun extends StructObject {
     public TrainingRun() {
         super();
@@ -56,7 +58,7 @@ public class TrainingRun extends StructObject {
             return this;
         }
 
-        public Builder metadata(Metadata metadata) {
+        public Builder metadata(Map<String, String> metadata) {
             this.obj.set("metadata", metadata);
             return this;
         }
