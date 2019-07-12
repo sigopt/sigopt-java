@@ -4,8 +4,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public final class APIResource {
     public static <T extends APIObject> T constructFromJson(String json, Class <T> klass, String path) {
