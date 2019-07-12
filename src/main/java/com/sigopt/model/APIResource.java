@@ -22,10 +22,6 @@ public final class APIResource {
         return instance;
     }
 
-    public static <T extends APIObject> T constructFromJson(String json, Class <T> klass) {
-        return constructFromJson(json, klass, "");
-    }
-
     public static <T extends APIObject> Pagination<T> constructPaginationFromJson(
         String json,
         Class<T> subklass
