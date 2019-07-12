@@ -16,8 +16,8 @@ public class TrainingRun extends StructObject {
         return (String) this.get("id");
     }
 
-    public Double getCheckpointCount() {
-        return (Double) this.get("checkpoint_count");
+    public Integer getCheckpointCount() {
+        return Utils.asInteger(this.get("checkpoint_count"));
     }
 
     public Integer getCreated() {
