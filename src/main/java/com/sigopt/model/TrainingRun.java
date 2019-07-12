@@ -56,5 +56,10 @@ public class TrainingRun extends StructObject {
             return this;
         }
 
+        public Builder metadata(Metadata metadata) {
+            this.obj.set("metadata", metadata);
+            return this;
+        }
+
     }
 }
