@@ -57,14 +57,14 @@ public class TrainingRun extends StructObject {
             this.obj.set("id", id);
             return this;
         }
-        
-        public Builder created(int created) {
-            this.obj.set("created", created);
-            return this;
-        }
 
         public Builder checkpointCount(int checkpointCount) {
             this.obj.set("checkpointCount", checkpointCount);
+            return this;
+        }
+
+        public Builder created(int created) {
+            this.obj.set("created", created);
             return this;
         }
 
