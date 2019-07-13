@@ -53,6 +53,11 @@ public class TrainingRun extends StructObject {
             this.obj = new TrainingRun();
         }
 
+        public Builder id(String id) {
+            this.obj.set("id", id);
+            return this;
+        }
+
         public Builder suggestion(String suggestion) {
             this.obj.set("suggestion", suggestion);
             return this;
