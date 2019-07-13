@@ -45,6 +45,31 @@ public class Checkpoint extends StructObject {
             this.obj = new Checkpoint();
         }
 
+        public Builder id(String id) {
+            this.obj.set("id", id);
+            return this;
+        }
+
+        public Builder created(int created) {
+            this.obj.set("created", created);
+            return this;
+        }
+
+        public Builder shouldStop(boolean shouldStop) {
+            this.obj.set("shouldStop", shouldStop);
+            return this;
+        }
+
+        public Builder stoppingReasons(RichMapObject stoppingReasons) {
+            this.obj.set("stopping_reasons", stoppingReasons);
+            return this;
+        }
+
+        public Builder trainingRun(String trainingRun){
+            this.obj.set("training_run", trainingRun);
+            return this;
+        }
+
         public Builder values(List<MetricEvaluation> values) {
             this.obj.set("values", values);
             return this;
