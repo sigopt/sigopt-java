@@ -55,6 +55,11 @@ public class Checkpoint extends StructObject {
             return this;
         }
 
+        public Builder metadata(Map<String, String> metadata) {
+            this.obj.set("metadata", metadata);
+            return this;
+        }
+
         public Builder shouldStop(boolean shouldStop) {
             this.obj.set("shouldStop", shouldStop);
             return this;
@@ -74,11 +79,5 @@ public class Checkpoint extends StructObject {
             this.obj.set("values", values);
             return this;
         }
-
-        public Builder metadata(Map<String, String> metadata) {
-            this.obj.set("metadata", metadata);
-            return this;
-        }
-
     }
 }

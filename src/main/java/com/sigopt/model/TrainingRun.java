@@ -57,17 +57,7 @@ public class TrainingRun extends StructObject {
             this.obj.set("id", id);
             return this;
         }
-
-        public Builder suggestion(String suggestion) {
-            this.obj.set("suggestion", suggestion);
-            return this;
-        }
-
-        public Builder metadata(Map<String, String> metadata) {
-            this.obj.set("metadata", metadata);
-            return this;
-        }
-
+        
         public Builder created(int created) {
             this.obj.set("created", created);
             return this;
@@ -83,8 +73,18 @@ public class TrainingRun extends StructObject {
             return this;
         }
 
+        public Builder metadata(Map<String, String> metadata) {
+            this.obj.set("metadata", metadata);
+            return this;
+        }
+
         public Builder observation(String observation) {
             this.obj.set("observation", observation);
+            return this;
+        }
+
+        public Builder suggestion(String suggestion) {
+            this.obj.set("suggestion", suggestion);
             return this;
         }
 
