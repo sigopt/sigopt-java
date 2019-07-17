@@ -41,12 +41,12 @@ public class ConvergenceCriteria extends StructObject {
             return this;
         }
 
-        public Builder lookbackCheckpoints(Integer lookbackCheckpoints) {
+        public Builder lookbackCheckpoints(int lookbackCheckpoints) {
             this.obj.set("lookback_checkpoints", lookbackCheckpoints);
             return this;
         }
 
-        public Builder minCheckpoints(Integer minCheckpoints) {
+        public Builder minCheckpoints(int minCheckpoints) {
             this.obj.set("min_checkpoints", minCheckpoints);
             return this;
         }
