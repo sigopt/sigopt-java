@@ -102,6 +102,10 @@ public class Experiment extends StructObject {
         return Utils.mergeIntoList(new ArrayList<Task>(), this.get("tasks"), Task.class);
     }
 
+    public TrainingMonitor getTrainingMonitor() {
+        return Utils.mergeInto(new TrainingMonitor(), this.get("training_monitor"));
+    }
+
     public static APIMethodCaller<Experiment> fetch() {
         return new APIMethodCaller<Experiment>("get", "/experiments/:id", Experiment.class);
     }
@@ -162,58 +166,9 @@ public class Experiment extends StructObject {
         }
     }
 
-    public static class Subresource<T extends APIObject> extends BoundObject {
-        String name;
-        Class<T> klass;
-
+    public static class Subresource<T extends APIObject> extends com.sigopt.model.Subresource<T> {
         public Subresource(String prefix, String name, Class<T> klass) {
-            super(prefix);
-            this.name = name;
-            this.klass = klass;
-        }
-
-        public APIMethodCaller<T> fetch() {
-            return new APIMethodCaller<T>("get", this.prefix() + "/" + this.name + "/:id", klass);
-        }
-
-        public APIMethodCaller<T> fetch(String id) {
-            return this.fetch().addPathComponent("id", id);
-        }
-
-        public PaginatedAPIMethodCaller<T> list() {
-            return new PaginatedAPIMethodCaller<T>("get", this.prefix() + "/" + this.name, klass);
-        }
-
-        public APIMethodCaller<T> create() {
-            return new APIMethodCaller<T>("post", this.prefix() + "/" + this.name, klass);
-        }
-
-        public APIMethodCaller<T> create(T o) {
-            return this.create().data(o);
-        }
-
-        public APIMethodCaller<T> update() {
-            return new APIMethodCaller<T>("put", this.prefix() + "/" + this.name + "/:id", klass);
-        }
-
-        public APIMethodCaller<T> update(String id) {
-            return this.update().addPathComponent("id", id);
-        }
-
-        public APIMethodCaller<T> update(String id, T o) {
-            return this.update(id).data(o);
-        }
-
-        public APIMethodCaller<VoidObject> deleteList() {
-            return new APIMethodCaller<VoidObject>("delete", this.prefix() + "/" + this.name, VoidObject.class);
-        }
-
-        public APIMethodCaller<VoidObject> delete() {
-            return new APIMethodCaller<VoidObject>("delete", this.prefix() + "/" + this.name + "/:id", VoidObject.class);
-        }
-
-        public APIMethodCaller<VoidObject> delete(String id) {
-            return this.delete().addPathComponent("id", id);
+            super(prefix, name, klass);
         }
     }
 
@@ -227,6 +182,10 @@ public class Experiment extends StructObject {
 
     public Subresource<Suggestion> suggestions() {
         return new Subresource<Suggestion>("/experiments/" + this.getId(), "suggestions", Suggestion.class);
+    }
+
+    public Subresource<TrainingRun> trainingRuns() {
+        return new Subresource<TrainingRun>("/experiments/" + this.getId(), "training_runs", TrainingRun.class);
     }
 
     public Subresource<Token> tokens() {
@@ -334,6 +293,11 @@ public class Experiment extends StructObject {
 
         public Builder tasks(List<Task> tasks) {
             this.obj.set("tasks", tasks);
+            return this;
+        }
+
+        public Builder trainingMonitor(TrainingMonitor trainingMonitor) {
+            this.obj.set("training_monitor", trainingMonitor);
             return this;
         }
     }

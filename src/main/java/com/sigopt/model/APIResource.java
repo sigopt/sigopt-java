@@ -4,11 +4,9 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public final class APIResource {
-    public static <T extends APIObject> T constructFromJson(String json, Class <T> klass) {
+    public static <T extends APIObject> T constructFromJson(String json, Class <T> klass, String path) {
         T instance;
         try {
             instance = klass.newInstance();
@@ -20,7 +18,12 @@ public final class APIResource {
         Type type = new TypeToken<Map<String, Object>>() {}.getType();
         Map<String, Object> map = APIObject.fromJson(json, type);
         instance.setAll(map);
+        instance.pathPrefix = path;
         return instance;
+    }
+
+    public static <T extends APIObject> T constructFromJson(String json, Class <T> klass) {
+        return constructFromJson(json, klass, "");
     }
 
     public static <T extends APIObject> Pagination<T> constructPaginationFromJson(
