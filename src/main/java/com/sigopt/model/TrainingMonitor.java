@@ -11,8 +11,12 @@ public class TrainingMonitor extends StructObject {
         return Utils.asInteger(this.get("max_checkpoints"));
     }
 
-    public List<APIObject> getEarlyStoppingCriteria() {
-        return Utils.mergeIntoList(new ArrayList<APIObject>(), this.get("early_stopping_criteria"), APIObject.class);
+    public List<TrainingMonitorStoppingCriteria> getEarlyStoppingCriteria() {
+        return Utils.mergeIntoList(
+            new ArrayList<TrainingMonitorStoppingCriteria>(), 
+            this.get("early_stopping_criteria"), 
+            TrainingMonitorStoppingCriteria.class
+        );
     }
 
     public static class Builder extends APIObjectBuilder<TrainingMonitor> {
@@ -25,7 +29,7 @@ public class TrainingMonitor extends StructObject {
             return this;
         }
 
-        public Builder earlyStoppingCriteria(List<APIObject> earlyStoppingCriteria) {
+        public Builder earlyStoppingCriteria(List<TrainingMonitorStoppingCriteria> earlyStoppingCriteria) {
             this.obj.set("early_stopping_criteria", earlyStoppingCriteria);
             return this;
         }

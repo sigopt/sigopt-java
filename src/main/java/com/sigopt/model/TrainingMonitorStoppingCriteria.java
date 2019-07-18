@@ -1,7 +1,7 @@
 package com.sigopt.model;
 
-public class ConvergenceCriteria extends StructObject {
-    public ConvergenceCriteria() {
+public class TrainingMonitorStoppingCriteria extends StructObject {
+    public TrainingMonitorStoppingCriteria() {
         super();
     }
 
@@ -25,10 +25,9 @@ public class ConvergenceCriteria extends StructObject {
         return (String) this.get("type");
     }
 
-    public static class Builder extends APIObjectBuilder<ConvergenceCriteria> {
+    public static class Builder extends APIObjectBuilder<TrainingMonitorStoppingCriteria> {
         public Builder() {
-            this.obj = new ConvergenceCriteria();
-            this.obj.set("type", "convergence");
+            this.obj = new TrainingMonitorStoppingCriteria();
         }
 
         public Builder name(String name) {
@@ -48,6 +47,11 @@ public class ConvergenceCriteria extends StructObject {
 
         public Builder minCheckpoints(int minCheckpoints) {
             this.obj.set("min_checkpoints", minCheckpoints);
+            return this;
+        }
+
+        public Builder type(String type) {
+            this.obj.set("type", type);
             return this;
         }
 
