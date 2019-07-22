@@ -56,6 +56,10 @@ public class Observation extends StructObject {
         return Utils.mergeInto(new Task(), this.get("task"));
     }
 
+    public String getTrainingRun(){
+        return (String) this.get("training_run");
+    }
+
     public static class Builder extends APIObjectBuilder<Observation> {
         public Builder() {
             this.obj = new Observation();
