@@ -116,5 +116,10 @@ public class Observation extends StructObject {
             return this;
         }
 
+        public Builder trainingRun(String trainingRun) {
+            this.obj.set("training_run", trainingRun);
+            return this;
+        }
+
     }
 }
