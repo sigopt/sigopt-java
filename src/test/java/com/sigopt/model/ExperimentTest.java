@@ -69,11 +69,9 @@ public class ExperimentTest extends APIResourceTestBase {
         assertNotNull(exp.getMetrics());
         assertEquals(2, exp.getMetrics().size());
         assertEquals("Revenue", exp.getMetrics().get(0).getName());
-        assertEquals(200.0, exp.getMetrics().get(0).getValueBaseline(), 1e-9);
         assertNull(exp.getMetrics().get(0).getThreshold());
         assertEquals("Sales", exp.getMetrics().get(1).getName());
         assertEquals(exp.getMetrics().get(1).getObjective(), "maximize");
-        assertNull(exp.getMetrics().get(1).getValueBaseline());
         assertEquals(-3.7, exp.getMetrics().get(1).getThreshold(), 1e-9);
 
         assertNotNull(exp.getProgress());
