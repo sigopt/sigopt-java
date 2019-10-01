@@ -18,6 +18,10 @@ public class Metric extends StructObject {
         return (String) this.get("objective");
     }
 
+    public String getStrategy() {
+        return (String) this.get("strategy");
+    }
+
     public Double getThreshold() {
         return (Double) this.get("threshold");
     }
@@ -36,7 +40,12 @@ public class Metric extends StructObject {
             this.obj.set("objective", objective);
             return this;
         }
-        
+
+        public Builder strategy(String strategy) {
+            this.obj.set("strategy", strategy);
+            return this;
+        }
+
         public Builder threshold(Double threshold) {
             this.obj.set("threshold", threshold);
             return this;
