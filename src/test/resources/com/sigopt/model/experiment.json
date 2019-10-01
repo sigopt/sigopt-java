@@ -43,6 +43,7 @@
       "object": "metric",
       "name": "Sales",
       "objective": "maximize",
+      "strategy": "optimize",
       "threshold": -3.7
     }
   ],
