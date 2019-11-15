@@ -184,6 +184,10 @@ public class Experiment extends StructObject {
         return new Subresource<Suggestion>("/experiments/" + this.getId(), "suggestions", Suggestion.class);
     }
 
+    public Subresource<QueuedSuggestion> queuedSuggestions() {
+        return new Subresource<QueuedSuggestion>("/experiments/" + this.getId(), "queued_suggestions", QueuedSuggestion.class);
+    }
+
     public Subresource<TrainingRun> trainingRuns() {
         return new Subresource<TrainingRun>("/experiments/" + this.getId(), "training_runs", TrainingRun.class);
     }
