@@ -133,6 +133,7 @@ public class ExperimentTest extends APIResourceTestBase {
         assertEquals(2, exp.getParameters().size());
         assertEquals("a", exp.getParameters().get(0).getName());
         assertEquals("double", exp.getParameters().get(0).getType());
+        assertEquals("log", exp.getParameters().get(0).getTransformation());
         assertEquals(1, exp.getParameters().get(0).getBounds().getMin(), 1e-9);
         assertEquals(2, exp.getParameters().get(0).getBounds().getMax(), 1e-9);
         assertNull(exp.getParameters().get(0).getCategoricalValues());
