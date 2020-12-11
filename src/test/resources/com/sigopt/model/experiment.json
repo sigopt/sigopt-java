@@ -152,7 +152,8 @@
       "default_value": 2,
       "conditions": {
         "num_hidden_layers": []
-      }
+      },
+      "transformation": "log"
     },
     {
       "object": "parameter",

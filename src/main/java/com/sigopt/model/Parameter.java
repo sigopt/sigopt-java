@@ -29,6 +29,10 @@ public class Parameter extends StructObject {
         return Utils.mergeInto(new Conditions(), this.get("conditions"));
     }
 
+    public String getTransformation() {
+        return (String) this.get("transformation");
+    }
+
     public static class Builder extends APIObjectBuilder<Parameter> {
         public Builder() {
             this.obj = new Parameter();
@@ -56,6 +60,11 @@ public class Parameter extends StructObject {
 
         public Builder conditions(Map<String, List<String>> conditions) {
             this.obj.set("conditions", conditions);
+            return this;
+        }
+
+        public Builder transformation(String transformation) {
+            this.obj.set("transformation", transformation);
             return this;
         }
     }
