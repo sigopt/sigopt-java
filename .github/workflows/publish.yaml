@@ -8,9 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Setup GPG
-          run: |
-            cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
-            gpg --list-secret-keys --keyid-format LONG
+        run: |
+          cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
+          gpg --list-secret-keys --keyid-format LONG
       - name: Set up Maven Central Repository
         uses: actions/setup-java@v2
         with:
