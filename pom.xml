@@ -15,12 +15,20 @@
     </licenses>
     <developers>
         <developer>
-            <name>Patrick Hayes</name>
-            <email>patrick@sigopt.com</email>
+            <name>Dan Anderson</name>
+            <email>dan@sigopt.com</email>
             <organization>SigOpt</organization>
             <organizationUrl>https://sigopt.com</organizationUrl>
         </developer>
     </developers>
+    <contributors>
+        <contributor>
+            <name>Patrick Hayes</name>
+            <email>patrick@sigopt.com</email>
+            <organization>SigOpt</organization>
+            <organizationUrl>https://sigopt.com</organizationUrl>
+        </contributor>
+    </contributors>
     <dependencies>
         <dependency>
             <groupId>com.google.code.gson</groupId>
