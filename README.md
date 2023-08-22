@@ -176,3 +176,7 @@ Testing
 =======
 
 You must have Maven installed. To run the tests, simply run `mvn test`. You can run particular tests by passing `-D test=Class#method` -- for example, `-D test=APIResourceTest#constructResourceFromJson`.
+
+General Information
+=======
+Repository: 2015-2023
